@@ -1,0 +1,73 @@
+1. What is the correct starting point of every C++ program?
+
+    A. start()
+    B. main() ---
+    C. run()
+    D. begin()
+
+2. Is C++ case-sensitive?
+    Explain what happens if you write:
+
+    int Number; 
+    int number;
+
+    // Answer: C++ is case sensitive since Number and number are 2 completely different variables because of their first letters.
+
+3. What is the difference between:
+
+    int x; and int x = 5;
+
+    // Answer: int x; has 0 data or 0 value, int x = 5 sets the x var to 5
+    // Correct Answer: int x; = declares variable but does NOT initialize it.
+    //                  int x = 5; = declares variable and initializes it to 5.
+
+4. What will this print?
+    int x = 5;
+    cout << sizeof(x);
+
+    // Answer: it outputs 4 bytes because sizeof shows the size of the container type
+
+5. Which of the following is a valid identifier?
+
+    A. 2number
+    B. total-value
+    C. _count ---correct
+    D. float ---
+
+6. What is the output?
+
+    int a = 3;
+    int b = 4;
+    cout << a + b;
+
+    // Answer: it outputs 7 
+
+7. What is the difference between:
+
+    const int x = 10; and int x = 10;
+
+    // Answer: const makes the value unchangeable while int x = 10; can be changed depending on the program's logics
+
+8. What is wrong with this code?
+    int main()
+    {
+        int x;
+        cout << x;
+    }
+
+    // Answer: Nothing is wrong with the code but it will output a data for being not initialized. 
+    // Correct Answer: The variable x is declared but not initialized, 
+    // so it contains an indeterminate value (garbage value). 
+    // Printing it will lead to undefined behavior.
+
+9. What is the size (usually) of:
+
+    char = 1 byte
+    int = 2 bytes --correct: 4 bytes
+    double = 8 bytes
+
+10. Explain in your own words:
+    What is Object-Oriented Programming (OOP)?
+
+    // Answer = OOP is a programming fundamentals that sets the programmer to be oriented with their programming structures to ensure that the code is error free and easily understood.
+    // Correct Answer: Object-Oriented Programming (OOP) is a programming paradigm that organizes software design around data, or objects, rather than functions and logic.
