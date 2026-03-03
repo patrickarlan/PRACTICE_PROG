@@ -1,0 +1,104 @@
+PART 1 — Multiple Choice (Concept Check)
+1️ What is a function prototype used for?
+
+A. To execute a function
+B. To tell the compiler the function's name, return type, and parametersc ---
+C. To define the function body
+D. To allocate memory
+
+2️ What does this mean?
+double pow(double, double);
+
+A. It returns an int
+B. It returns nothing
+C. It returns a double and needs two double arguments ---
+D. It returns two doubles
+
+3️ Which statement about void is TRUE?
+
+A. A void function must return 0
+B. A void function returns no value ---
+C. A void function cannot have parameters
+D. A void function returns an integer
+
+4️ What does this line create?
+string line(40, '-');
+
+A. A string with 40 random characters
+B. A string with 40 '-' characters ---
+C. A string with length 1
+D. An array of characters
+
+5️ What is wrong with this?
+a = srand(12);
+
+A. srand takes no parameters ---
+B. srand returns nothing --- correct answer: srand returns nothing
+C. srand returns double
+D. srand must use float
+
+PART 2 — True or False
+6️ rand() requires an argument.
+
+(True) --- FALSE: rand() does not require an argument, but srand() does.
+
+7️ A function declared as int must return a value.
+
+(True) --- TRUE: A function declared as int must return an integer value.
+
+8️ length(message) is correct syntax for getting string length.
+
+(False) --- FALSE: The correct syntax for getting the length of a string is message.length() or message.size().
+
+PART 3 — Fix the Error
+9️ What is wrong with this code? --- correct answer: missing '=' sign
+string name "Patrick";
+-----------------
+string name = "Patrick";
+
+Correct it.
+
+🔟 Fix this function: --- partially correct: int doesn't return anything in terms of this function
+int greet()
+{
+    cout << "Hello!";
+}
+-----------------
+int greet() // can be replace with void
+{
+    cout << "Hello!" << endl;
+    return 0;
+}
+
+PART 4 — Short Coding Questions
+1️ Write a function prototype for a function that:
+
+Returns a char
+Takes one int parameter
+Function name: getGrade
+
+2️ Write a line of code that concatenates:
+string first = "Hello ";
+string second = "World";
+Store result in combined.
+
+3️ Write a statement that generates a random number between 0 and 49.
+
+4️ What header file is required to use sqrt()?
+-- include <cmath>
+
+5️ What does this line do?
+getline(cin, name);
+-- it reads user's inputted line and stores it in the variable "name"
+Explain in one sentence.
+
+🚀 Bonus (Thinking Question)
+
+Why is this better design?
+
+bool generateRandom();
+Instead of:
+void generateRandom();
+When using it inside a loop?
+
+-- since bool can return a true or false value, while void cannot return anything.
