@@ -1,0 +1,205 @@
+🧩 PROBLEM 1 — Fix the Code
+Topic Combination
+
+Variables + Streams + Strings
+
+🎯 Objective
+Fix the program so it correctly reads a full name and prints it with its length.
+🧠 Logic
+The program should:
+Ask the user for their full name
+Read the full line
+Print the name
+Print how many characters the name has
+❌ Broken Code
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+string name;
+cout << "Enter your full name: ";
+cin >> name;
+cout << "Hello " << name << endl;
+int len = length(name);
+cout << "Your name has " << len << " characters." << endl;
+return 0;
+}
+
+💡 Hint
+cin >> only reads one word
+length() belongs to the string object
+
+------
+🧩 PROBLEM 2 — Fix the Code
+Topic Combination
+Functions + Prototypes + Streams
+🎯 Objective
+Fix the program so the function correctly returns the square of a number.
+🧠 Logic
+User enters a number
+Function computes the square
+Program prints the result
+❌ Broken Code
+
+#include <iostream>
+using namespace std;
+
+square(int x);
+
+int main()
+{
+int n;
+cout << "Enter a number: ";
+cin >> n;
+
+cout << "Square = " << square << endl;
+
+return 0;
+}
+
+int square(int x)
+{
+x * x;
+}
+
+💡 Hint
+Three mistakes exist:
+missing return type
+function not called correctly
+missing return statement
+
+------
+
+🧩 PROBLEM 3 — Fix the Code
+Topic Combination
+Formatting + Manipulators + Streams
+🎯 Objective
+Fix the program so it prints numbers in aligned columns.
+🧠 Logic
+Output should look like:
+Number    Square
+----------------
+5        25
+8        64
+❌ Broken Code
+#include <iostream>
+using namespace std;
+
+int main()
+{
+int a = 5;
+int b = 8;
+cout << setw(10) << "Number" << "Square" << endl;
+cout << "----------------" << endl;
+cout << setw(10) << a << a * a << endl;
+cout << setw(10) << b << b * b << endl;
+return 0;
+}
+
+💡 Hint
+Missing a header file
+Use setw() for both columns
+
+-------
+
+💻 PROBLEM 4 — Write a Program
+Topic Combination
+Functions + Constants + Input/Output
+
+🎯 Objective
+Create a program that calculates the area of a circle.
+🧠 Logic
+Ask user for radius
+Use a constant for PI
+Use a function to compute area
+Print the result with 2 decimal places
+Formula:
+Area = π × r²
+
+📋 Requirements
+Use const double PI
+Use a function:
+double circleArea(double radius);
+Format output using:
+fixed
+setprecision(2)
+
+💡 Hint
+You already used something similar in Chapter 2 exercises.
+--------
+
+💻 PROBLEM 5 — Write a Program
+Topic Combination
+Strings + Formatting + Streams
+🎯 Objective
+Create a small user profile formatter.
+🧠 Logic
+Program asks:
+
+Enter your name:
+Enter your age:
+Enter your height:
+
+Then prints:
+User Profile
+-------------------------
+Name:      Patrick
+Age:       20
+Height:    5.80
+
+📋 Requirements
+Use:
+getline() for name
+setw() for alignment
+setprecision(2) for height
+
+💡 Hint
+Use:
+left
+setw()
+
+---------
+
+💻 PROBLEM 6 — Write a Program
+Topic Combination
+
+Random Numbers + Functions + Loops
+
+🎯 Objective
+
+Create a random number generator program that runs until the user exits.
+
+🧠 Logic
+
+Program should:
+Ask for a seed value
+Generate 3 random numbers
+
+Ask user:
+Generate again? (y/n)
+If y → repeat
+If n → exit
+
+Example output:
+
+Random numbers: 34 81 12
+Generate again? y
+Random numbers: 45 90 17
+Generate again? n
+Program ended.
+📋 Requirements
+Use:
+srand()
+rand()
+while loop
+a function
+Example function idea:
+void generateRandom();
+💡 Hint
+
+Use:
+rand() % 100
+to keep numbers 0–99.

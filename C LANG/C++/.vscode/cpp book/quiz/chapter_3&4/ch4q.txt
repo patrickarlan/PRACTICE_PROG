@@ -1,0 +1,102 @@
+📘 Chapter 4 Quiz — Input and Output with Streams
+PART 1 — Multiple Choice
+
+1️⃣ What is a stream in C++?
+B. A flow of data between a program and an input/output device
+
+2️⃣ Which object is used for standard output?
+B. cout
+
+3️⃣ What header file is required for formatting manipulators like setw() and setprecision()?
+A. <iomanip>
+
+4️⃣ What does this do?
+
+cout << boolalpha << true;
+B. Prints true
+
+5️⃣ What does setw(5) do?
+B. Sets the output field width to 5 characters
+
+----------
+
+PART 2 — True or False
+
+6️⃣ cin >> stops reading input at whitespace.
+
+(true)
+
+7️⃣ getline() can read spaces in a sentence.
+
+(true)
+
+8️⃣ cout.put('A') outputs the character A.
+
+(True)
+
+9️⃣ setprecision(2) affects floating-point output formatting.
+
+(True)
+
+🔟 cin.get(ch) ignores whitespace characters.
+
+(True)
+
+---------
+
+PART 3 — Output Prediction
+
+1️⃣ What will this print?
+
+cout << setw(5) << 10;
+
+= -----10-----(the - is a blank space in this logic)
+
+2️⃣ What will this print?
+
+bool ok = true;
+cout << ok << endl;
+cout << boolalpha << ok;
+
+= true (since boolalpha was used, not noboolalpha)
+
+3️⃣ What will this print?
+
+cout << setprecision(2) << 3.14159;
+
+-----------
+
+PART 4 — Fix the Error
+
+1️⃣ What is wrong with this code?
+
+cin << name;
+
+Correct it.
+
+= cin >> name
+
+2️⃣ Fix this program
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+string name;
+cout << "Enter name:";
+getline(name);
+cout << name;
+}
+
+
+= the line getline(name); should be: getline(cin, name)
+-----------
+Bonus (Thinking Question)
+
+Why is getline(cin, text) often preferred over:
+
+cin >> text;
+
+when reading user input?
+= for more prpoer string getter syntax and getline will read all the users input until pressed ENTER or <return>
