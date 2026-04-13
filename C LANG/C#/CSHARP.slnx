@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="IntroLib/IntroLib.csproj" />
+  <Project Path="IntroUI/IntroUI.csproj" />
+</Solution>
