@@ -1,0 +1,15 @@
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\bin\Debug\net10.0\TESTC#.exe
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\bin\Debug\net10.0\TESTC#.deps.json
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\bin\Debug\net10.0\TESTC#.runtimeconfig.json
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\bin\Debug\net10.0\TESTC#.dll
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\bin\Debug\net10.0\TESTC#.pdb
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\obj\Debug\net10.0\TESTC#.GeneratedMSBuildEditorConfig.editorconfig
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\obj\Debug\net10.0\TESTC#.AssemblyInfoInputs.cache
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\obj\Debug\net10.0\TESTC#.AssemblyInfo.cs
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\obj\Debug\net10.0\TESTC#.csproj.CoreCompileInputs.cache
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\obj\Debug\net10.0\TESTC#.sourcelink.json
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\obj\Debug\net10.0\TESTC#.dll
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\obj\Debug\net10.0\refint\TESTC#.dll
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\obj\Debug\net10.0\TESTC#.pdb
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\obj\Debug\net10.0\TESTC#.genruntimeconfig.cache
+c:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\CSHARP\TEST-PROGS\TESTC#\obj\Debug\net10.0\ref\TESTC#.dll

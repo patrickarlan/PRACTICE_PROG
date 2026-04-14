@@ -1,0 +1,13 @@
+- Based on the book: C#: The C Player's Guide (5th Edition)
+
+Challenge 1: Completed = 25xp
+Challenge 2: Completed = 75xp
+Challenge 3: Completed = 50xp
+Challenge 4: Completed = 50xp
+Challenge 5: Completed = 50xp
+Challenge 6: Completed = 100xp
+Challenge 7: Completed = 25xp
+
+
+---------------
+Total XP: 375xp
