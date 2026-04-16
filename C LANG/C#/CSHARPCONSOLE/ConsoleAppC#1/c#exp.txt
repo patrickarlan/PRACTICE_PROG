@@ -7,7 +7,8 @@ Challenge 4: Completed = 50xp
 Challenge 5: Completed = 50xp
 Challenge 6: Completed = 100xp
 Challenge 7: Completed = 25xp
-
-
+Challenge 8: Completed = 100xp
+Challemge 9: Completed = 50xp
+Challenge 10: Completed = 25xp
 ---------------
-Total XP: 375xp
+Total XP: 550xp
