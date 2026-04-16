@@ -8,11 +8,12 @@ namespace MainProgram
     {
         public static void Main(string[]? args)
         {
-            Console.WriteLine("Choose folder: 1. Subjects 2. quizfiles 3. samplecodes 0. Exit");
+            Console.WriteLine("Choose folder: \n 1. Subjects \n 2. quizfiles \n 3. samplecodes \n 4. Math \n 0. Exit");
             var choice = Console.ReadLine();
             if (choice == "1") CSharpDataTypes.Run();
             else if (choice == "2") CSharpQuiz.Run();
             else if (choice == "3") SampleProgram.Run();
+            else if (choice == "4") CSharpMath.Run();
             else if (choice == "0") return;
         }
     }
