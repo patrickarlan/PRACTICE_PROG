@@ -1,0 +1,245 @@
+C# Fundamentals Review for ConsoleAppC#1
+=======================================
+
+This project is a great start for learning C# fundamentals from The C# Player's Guide (5th edition), Part 1.
+It shows how to build a simple console program, use variables and types, work with input/output, and do basic control flow.
+
+1. Entry Point and Program Structure
+------------------------------------
+- `Program.Main(string[]? args)` is the application entry point.
+- The program uses a `namespace` (`MainProgram`) and `public static class Program`.
+- `static` means methods can run without creating an object.
+- `Main` displays a menu and chooses another class based on user input.
+
+2. Console Input and Output
+---------------------------
+- `Console.WriteLine(...)` prints text to the screen.
+- `Console.ReadLine()` reads user input as text.
+- Example: `var choice = Console.ReadLine();`
+- This is fundamental for console applications and interactive programs.
+
+3. Variables and Data Types
+---------------------------
+- Your code uses many built-in C# types:
+  - `string` and `string?` for text and nullable text input.
+  - `int` for whole numbers.
+  - `double`, `float`, `decimal` for decimal numbers.
+  - `bool` for true/false values.
+  - `char` for a single character.
+  - `long`, `ulong`, `short`, `ushort`, `byte`, `sbyte` for different numeric ranges.
+- Example from `SampleProgram.typeSystem()`:
+  - `int a = 42;`
+  - `double e2 = 3.14;`
+  - `decimal e3 = 3.14m;`
+  - `bool g = true;`
+  - `string f = "Alice";`
+
+4. Literals and Type Suffixes
+-----------------------------
+- Suffix `f` makes a `float`, `m` makes a `decimal`, `U` makes `uint`, `L` makes `long`.
+- Example: `float e = 3.14f;` and `decimal e3 = 3.14m;`
+- There are also binary and hexadecimal literals:
+  - `0b101010` is binary.
+  - `0x2A` is hexadecimal.
+
+5. String Operations
+--------------------
+- String concatenation: `"Hi " + name + "!"`
+- String interpolation: `$"Hello {name2}, nice to meet you!"`
+- Interpolation is easier to read and is a good fundamental skill.
+
+6. Control Flow and Conditionals
+--------------------------------
+- `if`, `else if`, and `else` are used in `Program.Main`.
+- Example:
+  - `if (choice == "1") CSharpDataTypes.Run();`
+  - `else if (choice == "4") CSharpMath.Run();`
+- In `CSharpMath`, `if (choice == "Y" || choice == "y") Area();` shows boolean logic with `||`.
+
+7. Methods and Local Methods
+-----------------------------
+- The project defines several methods:
+  - `public static void Run()` in each class.
+  - `static void Area()` inside `CSharpMath.Run()`.
+  - `static void recall()` inside `CSharpMath.Run()`.
+- A method is a named block of code that performs a task.
+- `void` means the method does not return a value; it only does work.
+- Local methods are helper methods defined inside another method and can only be used there.
+- Example: `Area(); recall();`
+- If you want a method to return a value, use a return type instead of `void`.
+
+Example of a returnable method:
+```
+public static double CalculateArea(double width, double height)
+{
+    return width * height / 2;
+}
+```
+Then you can call it like this:
+```
+double area = CalculateArea(rectBase, rectHeight);
+```
+
+8. Parsing and Conversion
+-------------------------
+- User input is always a string from `Console.ReadLine()`.
+- To use that input as a number, the code converts it.
+- `Convert.ToInt32(userInp)` converts a valid numeric string to an `int`.
+- `double.TryParse(input, out rectBase)` safely converts text to a `double`.
+- The pattern:
+  - `is string input` checks the input is not null.
+  - `TryParse` returns `true` for valid numbers.
+  - `out rectBase` stores the parsed value.
+- Example ternary expression:
+  - `condition ? rectBase : 0` returns the parsed value if valid, otherwise 0.
+
+9. Ternary Operator
+--------------------
+- The `? :` operator is a compact form of `if/else`.
+- Example:
+  - `double rectBase = ... ? rectBase : 0;`
+- It means: if the condition is true, use `rectBase`; otherwise use `0`.
+
+10. Comments and Documentation
+------------------------------
+- Your code includes comments that explain what sections do.
+- Comments are useful, especially when learning, but keep them accurate.
+
+11. Recommended Improvements
+----------------------------
+- `CSharpDataTypes.Run()` is mostly a placeholder now. Add more type examples or remove it if unused.
+- In `SampleProgram.Run()`, the `return;` after `typeSystem();` stops the rest of the method from running.
+  - If you want to use the later code, remove the `return;` or move the method call.
+- `Program.Main(null)` is used to return to the menu, but a loop is more standard than calling `Main` again.
+  - Example: use a `while(true)` loop and break when the user chooses `0`.
+- In `CSharpMath`, prompt the user before `Console.ReadLine()` so they know what to enter.
+  - Example: `Console.Write("Enter base: ");`
+- Use `Console.WriteLine` before `Console.ReadLine()` in math input to make the program friendlier.
+
+12. What this project teaches well
+----------------------------------
+- Basic program structure and the entry point.
+- Console input/output.
+- How data types work.
+- Converting text input into numbers.
+- Using conditionals and simple menu choices.
+- Defining and calling methods.
+- String interpolation and formatting.
+
+13. Detailed examples with explanation
+--------------------------------------
+Example 1: basic input/output
+
+```
+Console.WriteLine("What is your name?");
+string? name = Console.ReadLine();
+Console.WriteLine($"Hello, {name}!");
+```
+
+- `Console.WriteLine` prints text.
+- `Console.ReadLine()` reads what the user types and returns it as a `string`.
+- The result is stored in a variable named `name`.
+- String interpolation `$"Hello, {name}!"` inserts the value into the output.
+
+Example 2: converting text to a number safely
+
+```
+Console.Write("Enter a number: ");
+string? input = Console.ReadLine();
+if (double.TryParse(input, out double value))
+{
+    Console.WriteLine($"You entered {value}");
+}
+else
+{
+    Console.WriteLine("That is not a valid number.");
+}
+```
+
+- `Console.ReadLine()` returns text.
+- `double.TryParse` checks whether the text can be converted to a `double`.
+- If conversion succeeds, `value` contains the numeric result.
+- If it fails, the program can handle the error without crashing.
+
+Example 3: the ternary operator `? :`
+
+```
+double result = condition ? valueIfTrue : valueIfFalse;
+```
+
+In your code:
+
+```
+double rectBase = Console.ReadLine() is string input &&
+                  double.TryParse(input, out rectBase)
+                  ? rectBase
+                  : 0;
+```
+
+- The part before `?` is the condition.
+- If it is true, the expression returns the value before `:`.
+- If it is false, it returns the value after `:`.
+- This is a short way to write `if/else`.
+
+Example 4: using `if` and `else if` for a menu
+
+```
+if (choice == "1")
+    CSharpDataTypes.Run();
+else if (choice == "2")
+    CSharpQuiz.Run();
+else
+    Console.WriteLine("Invalid choice.");
+```
+
+- `if` checks one condition.
+- `else if` checks another condition when the first is false.
+- `else` runs when none of the previous conditions are true.
+
+Example 5: defining and calling methods
+
+```
+public static void Run()
+{
+    ShowMenu();
+}
+
+static void ShowMenu()
+{
+    Console.WriteLine("Menu");
+}
+```
+
+- `public static void Run()` is a method that can be called from other classes.
+- `static void ShowMenu()` is a local method inside the same class.
+- `void` means the method does not return a value.
+
+Example 6: a loop to repeat a task
+
+```
+while (true)
+{
+    Console.Write("Enter a number (or 0 to exit): ");
+    if (!int.TryParse(Console.ReadLine(), out int x))
+        break;
+    if (x == 0)
+        break;
+    Console.WriteLine($"You entered {x}");
+}
+```
+
+- `while (true)` repeats until `break` is reached.
+- Loops are one of the next fundamentals to practice.
+
+14. Next fundamentals to practice
+---------------------------------
+- Loops: `for`, `while`, `do-while`.
+- Arrays and collections.
+- `switch` statements.
+- Better error handling for invalid input.
+- Methods with return values.
+- `enum` types.
+
+Keep building from here: practice small programs, name variables clearly, and add prompts/comments that tell the user what to type.
+
+Good work so far — your project already covers many Part 1 fundamentals from the book.
