@@ -1,0 +1,15 @@
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\bin\Debug\net10.0\msC#.exe
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\bin\Debug\net10.0\msC#.deps.json
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\bin\Debug\net10.0\msC#.runtimeconfig.json
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\bin\Debug\net10.0\msC#.dll
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\bin\Debug\net10.0\msC#.pdb
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\obj\Debug\net10.0\msC#.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\obj\Debug\net10.0\msC#.AssemblyInfoInputs.cache
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\obj\Debug\net10.0\msC#.AssemblyInfo.cs
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\obj\Debug\net10.0\msC#.csproj.CoreCompileInputs.cache
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\obj\Debug\net10.0\msC#.sourcelink.json
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\obj\Debug\net10.0\msC#.dll
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\obj\Debug\net10.0\refint\msC#.dll
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\obj\Debug\net10.0\msC#.pdb
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\obj\Debug\net10.0\msC#.genruntimeconfig.cache
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\msC#\obj\Debug\net10.0\ref\msC#.dll
