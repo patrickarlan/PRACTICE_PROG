@@ -6,6 +6,8 @@ internal class Program
 {
     static void Main()
     {
-        Lesson01.Run();
+        // Lesson01.Les1_1();
+        Lesson01.Les1_2();
+        return;
     }
 }
