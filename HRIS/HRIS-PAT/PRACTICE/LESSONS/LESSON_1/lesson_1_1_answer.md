@@ -10,4 +10,12 @@ To complete this lesson, you must perform these activities. Create a file called
 
 -----
 
-1. 
+1. [x] - It doesn't show something although it is running in the backend. The response was  null (404) because it doesn't have UI, but it is working properly.
+2. [x] - i got main.tsx, ARReview.tsx, layout.tsx and much more
+3. [x] - Client = in terms of web dev, CLIENT is the one that is asking/sender that will be received by the SERVER and will do the WORK to serve the CLIENT. 
+    - ANALOGY: MCDONALDS
+        - CUSTOMER: CLIENTS THAT ASKED FOR ORDER (FRIES AND COKE)
+        - CASHIER: API, WILL TAKE THE ORDERS AND WILL SEND IT TO THE KITCHEN (SERVER)
+        - SERVER: FOOD ASSEMBLERS/MAKERS, THEY WILL MAKE THE FOOD AND GIVE IT TO THE CUSTOMER
+4. [x] - by typing http://localhost:3000/this-page-is-fake, the page redirect me to the default dashboard where in it was already a built it in the project to redirect users if the page is non-existing 
+5. [x] - HTTP is only a plain text, not secured, whereas HTTPS uses an encryption that protects user's data— that is why S is a term of HTTPS for Security or Secure
