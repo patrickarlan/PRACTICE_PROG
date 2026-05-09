@@ -1,0 +1,214 @@
+[21:03:42 INF] Starting web host...
+[21:03:46 INF] Executed DbCommand (139ms) [Parameters=[@normalizedName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedName
+LIMIT 1
+[21:03:46 INF] Executed DbCommand (2ms) [Parameters=[@normalizedName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedName
+LIMIT 1
+[21:03:46 INF] Executed DbCommand (1ms) [Parameters=[@normalizedName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedName
+LIMIT 1
+[21:03:46 INF] Executed DbCommand (1ms) [Parameters=[@normalizedName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedName
+LIMIT 1
+[21:03:46 INF] Executed DbCommand (7ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Departments" AS d
+    WHERE d."IsSystem")
+[21:03:46 INF] User profile is available. Using 'C:\Users\HP\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+[21:03:46 INF] Executed DbCommand (8ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ApprovalTeamId", a."ConcurrencyStamp", a."Department", a."DepartmentId", a."Email", a."EmailConfirmed", a."EmployeeID", a."FullName", a."IsActive", a."IsDeleted", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Position", a."SecurityStamp", a."SubstituteId", a."SupervisorId", a."TwoFactorEnabled", a."UserName", a."ViewerId"
+FROM "AspNetUsers" AS a
+[21:03:46 INF] Executed DbCommand (2ms) [Parameters=[@normalizedEmail='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ApprovalTeamId", a."ConcurrencyStamp", a."Department", a."DepartmentId", a."Email", a."EmailConfirmed", a."EmployeeID", a."FullName", a."IsActive", a."IsDeleted", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Position", a."SecurityStamp", a."SubstituteId", a."SupervisorId", a."TwoFactorEnabled", a."UserName", a."ViewerId"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @normalizedEmail
+LIMIT 2
+[21:03:46 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT d."Id", d."Code", d."CreatedAt", d."CreatedBy", d."IsActive", d."IsSystem", d."Name", d."UpdatedAt", d."UpdatedBy"
+FROM "Departments" AS d
+WHERE d."Code" = 'DEV'
+LIMIT 1
+[21:03:47 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT d."Id", d."Code", d."CreatedAt", d."CreatedBy", d."IsActive", d."IsSystem", d."Name", d."UpdatedAt", d."UpdatedBy"
+FROM "Departments" AS d
+WHERE d."Code" = 'PM'
+LIMIT 1
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedEmail='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ApprovalTeamId", a."ConcurrencyStamp", a."Department", a."DepartmentId", a."Email", a."EmailConfirmed", a."EmployeeID", a."FullName", a."IsActive", a."IsDeleted", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Position", a."SecurityStamp", a."SubstituteId", a."SupervisorId", a."TwoFactorEnabled", a."UserName", a."ViewerId"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @normalizedEmail
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (5ms) [Parameters=[@p='?', @p1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @p AND a."RoleId" = @p1
+LIMIT 1
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedEmail='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ApprovalTeamId", a."ConcurrencyStamp", a."Department", a."DepartmentId", a."Email", a."EmailConfirmed", a."EmployeeID", a."FullName", a."IsActive", a."IsDeleted", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Position", a."SecurityStamp", a."SubstituteId", a."SupervisorId", a."TwoFactorEnabled", a."UserName", a."ViewerId"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @normalizedEmail
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@p='?', @p1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @p AND a."RoleId" = @p1
+LIMIT 1
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedEmail='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ApprovalTeamId", a."ConcurrencyStamp", a."Department", a."DepartmentId", a."Email", a."EmailConfirmed", a."EmployeeID", a."FullName", a."IsActive", a."IsDeleted", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Position", a."SecurityStamp", a."SubstituteId", a."SupervisorId", a."TwoFactorEnabled", a."UserName", a."ViewerId"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @normalizedEmail
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@p='?', @p1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @p AND a."RoleId" = @p1
+LIMIT 1
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedEmail='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ApprovalTeamId", a."ConcurrencyStamp", a."Department", a."DepartmentId", a."Email", a."EmailConfirmed", a."EmployeeID", a."FullName", a."IsActive", a."IsDeleted", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Position", a."SecurityStamp", a."SubstituteId", a."SupervisorId", a."TwoFactorEnabled", a."UserName", a."ViewerId"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @normalizedEmail
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (2ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@p='?', @p1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @p AND a."RoleId" = @p1
+LIMIT 1
+[21:03:47 INF] Executed DbCommand (2ms) [Parameters=[@normalizedEmail='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ApprovalTeamId", a."ConcurrencyStamp", a."Department", a."DepartmentId", a."Email", a."EmailConfirmed", a."EmployeeID", a."FullName", a."IsActive", a."IsDeleted", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Position", a."SecurityStamp", a."SubstituteId", a."SupervisorId", a."TwoFactorEnabled", a."UserName", a."ViewerId"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @normalizedEmail
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@p='?', @p1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @p AND a."RoleId" = @p1
+LIMIT 1
+[21:03:47 INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "ApprovalTeams" AS a)
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (2ms) [Parameters=[@role_Id='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Id", a0."AccessFailedCount", a0."ApprovalTeamId", a0."ConcurrencyStamp", a0."Department", a0."DepartmentId", a0."Email", a0."EmailConfirmed", a0."EmployeeID", a0."FullName", a0."IsActive", a0."IsDeleted", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."Position", a0."SecurityStamp", a0."SubstituteId", a0."SupervisorId", a0."TwoFactorEnabled", a0."UserName", a0."ViewerId"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetUsers" AS a0 ON a."UserId" = a0."Id"
+WHERE a."RoleId" = @role_Id
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (2ms) [Parameters=[@role_Id='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Id", a0."AccessFailedCount", a0."ApprovalTeamId", a0."ConcurrencyStamp", a0."Department", a0."DepartmentId", a0."Email", a0."EmailConfirmed", a0."EmployeeID", a0."FullName", a0."IsActive", a0."IsDeleted", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."Position", a0."SecurityStamp", a0."SubstituteId", a0."SupervisorId", a0."TwoFactorEnabled", a0."UserName", a0."ViewerId"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetUsers" AS a0 ON a."UserId" = a0."Id"
+WHERE a."RoleId" = @role_Id
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@role_Id='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Id", a0."AccessFailedCount", a0."ApprovalTeamId", a0."ConcurrencyStamp", a0."Department", a0."DepartmentId", a0."Email", a0."EmailConfirmed", a0."EmployeeID", a0."FullName", a0."IsActive", a0."IsDeleted", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."Position", a0."SecurityStamp", a0."SubstituteId", a0."SupervisorId", a0."TwoFactorEnabled", a0."UserName", a0."ViewerId"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetUsers" AS a0 ON a."UserId" = a0."Id"
+WHERE a."RoleId" = @role_Id
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ApprovalTeamId", a."ConcurrencyStamp", a."Department", a."DepartmentId", a."Email", a."EmailConfirmed", a."EmployeeID", a."FullName", a."IsActive", a."IsDeleted", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."Position", a."SecurityStamp", a."SubstituteId", a."SupervisorId", a."TwoFactorEnabled", a."UserName", a."ViewerId"
+FROM "AspNetUsers" AS a
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT d."Id", d."Code", d."CreatedAt", d."CreatedBy", d."IsActive", d."IsSystem", d."Name", d."UpdatedAt", d."UpdatedBy"
+FROM "Departments" AS d
+[21:03:47 INF] Executed DbCommand (2ms) [Parameters=[@userId='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @userId
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (2ms) [Parameters=[@role_Id='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Id", a0."AccessFailedCount", a0."ApprovalTeamId", a0."ConcurrencyStamp", a0."Department", a0."DepartmentId", a0."Email", a0."EmailConfirmed", a0."EmployeeID", a0."FullName", a0."IsActive", a0."IsDeleted", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."Position", a0."SecurityStamp", a0."SubstituteId", a0."SupervisorId", a0."TwoFactorEnabled", a0."UserName", a0."ViewerId"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetUsers" AS a0 ON a."UserId" = a0."Id"
+WHERE a."RoleId" = @role_Id
+[21:03:47 INF] Executed DbCommand (3ms) [Parameters=[@u_Id='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "AspNetUserRoles" AS a
+    WHERE a."UserId" = @u_Id AND EXISTS (
+        SELECT 1
+        FROM "AspNetRoles" AS a0
+        WHERE a0."Id" = a."RoleId" AND a0."Name" = 'Viewer'))
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@u_Id='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "AspNetUserRoles" AS a
+    WHERE a."UserId" = @u_Id AND EXISTS (
+        SELECT 1
+        FROM "AspNetRoles" AS a0
+        WHERE a0."Id" = a."RoleId" AND a0."Name" = 'Viewer'))
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@normalizedRoleName='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @normalizedRoleName
+LIMIT 2
+[21:03:47 INF] Executed DbCommand (1ms) [Parameters=[@role_Id='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Id", a0."AccessFailedCount", a0."ApprovalTeamId", a0."ConcurrencyStamp", a0."Department", a0."DepartmentId", a0."Email", a0."EmailConfirmed", a0."EmployeeID", a0."FullName", a0."IsActive", a0."IsDeleted", a0."LockoutEnabled", a0."LockoutEnd", a0."NormalizedEmail", a0."NormalizedUserName", a0."PasswordHash", a0."PhoneNumber", a0."PhoneNumberConfirmed", a0."Position", a0."SecurityStamp", a0."SubstituteId", a0."SupervisorId", a0."TwoFactorEnabled", a0."UserName", a0."ViewerId"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetUsers" AS a0 ON a."UserId" = a0."Id"
+WHERE a."RoleId" = @role_Id
+[21:03:48 INF] Now listening on: http://localhost:5107
+[21:03:48 INF] Application started. Press Ctrl+C to shut down.
+[21:03:48 INF] Hosting environment: Development
+[21:03:48 INF] Content root path: C:\Users\HP\Documents\PRACTICE_PROG\HRIS\HRIS-PAT\backend
+[21:06:41 INF] Request starting HTTP/1.1 GET http://localhost:5107/ - null null
+[21:06:41 INF] Request finished HTTP/1.1 GET http://localhost:5107/ - 404 0 null 207.2907ms
+[21:06:41 INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5107/, Response status code: 404
+[21:07:58 INF] Request starting HTTP/1.1 GET http://localhost:5107/ - null null
+[21:07:58 INF] Request finished HTTP/1.1 GET http://localhost:5107/ - 404 0 null 63.9575ms
+[21:07:58 INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5107/, Response status code: 404
+[21:08:16 INF] Request starting HTTP/1.1 GET http://localhost:5107/ - null null
+[21:08:16 INF] Request finished HTTP/1.1 GET http://localhost:5107/ - 404 0 null 16.421ms
+[21:08:16 INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5107/, Response status code: 404
