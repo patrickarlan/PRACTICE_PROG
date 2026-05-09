@@ -55,15 +55,16 @@
 ### Lesson 1.3: What is an API and How Does It Work?
 - What is an **API**? (Application Programming Interface — the bridge between frontend and backend).
 - **How does it work?** (The frontend sends a request to a specific URL called an "endpoint", the backend processes it, and returns data, usually as JSON).
+- **Visualizing APIs with Swagger:** Swagger is a tool that reads the backend code and creates a webpage where you can see all available endpoints and even test them!
 - **Where do we create it?** (We create APIs in the **Backend** project using Controllers).
-- **How is it used?** (The frontend uses it to load data or send user inputs to the backend).
 
 **📝 Activities:**
 1. In `web-notes.md`, write a simple explanation of what an API is using an analogy (e.g., a waiter, a postman, or a translator).
 2. Look at the HRIS frontend network tab again. Find a request that returns a list of employees. Note the URL (this is the API endpoint).
 3. Open a new tab in your browser and go to `https://jsonplaceholder.typicode.com/todos/1`. This is a free public API. Describe what you see on the screen.
 4. In your notes, explain the difference between a regular website URL (that returns HTML) and an API URL (that returns raw data/JSON).
-5. Identify where in the HRIS-PAT project the API controllers are located.
+5. **Explore Swagger:** Open your browser and go to `http://localhost:5107/swagger` (or your backend port). Look at the list of endpoints and try to "Execute" one to see the JSON response.
+6. Identify where in the HRIS-PAT project the API controllers are located.
 
 ---
 
@@ -79,6 +80,20 @@
 3. Make your first commit with the current state of your practice files.
 4. Create a repository on GitHub and push your code there.
 5. Create a new branch called `feature/unit-1`, make a change to `web-notes.md`, and merge it back to `main`.
+
+---
+
+### Lesson 1.5: Terminal Automation with PowerShell (.ps1)
+- What is a script and why do we use it?
+- Running `.ps1` files on Windows (Understanding Execution Policies).
+- Basic PowerShell commands for navigation and running tasks.
+- How to read a setup script.
+
+**📝 Activities:**
+1. In your `PRACTICE/` folder, create a file called `hello.ps1`. Write a script that prints `"Hello, Patrick! Ready to code?"` to the console using `Write-Host`.
+2. Try to run it in your terminal using `.\hello.ps1`. If you get an error about execution policies, research how to bypass it or set it to `RemoteSigned`.
+3. In `web-notes.md`, explain in your own words why having a setup script is better than manually typing 10 commands every time you start work.
+4. Look at the `setup-frontend` or `setup-backend` scripts you are currently running (if they are open). Try to find one command in them and guess what it does based on what you've learned.
 
 ---
 
@@ -324,6 +339,7 @@
 - What is a Controller? (How it handles requests)
 - HTTP Verbs in C#: `[HttpGet]`, `[HttpPost]`, `[HttpPut]`, `[HttpDelete]`
 - Route parameters: `[HttpGet("{id}")]`
+- **Swagger Documentation:** How ASP.NET Core automatically generates documentation for your endpoints.
 - Returning `Ok()`, `NotFound()`, `BadRequest()`
 
 **📝 Activities:**
@@ -331,8 +347,9 @@
 2. Create a new `EmployeeController.cs`. Write a `[HttpGet]` method that returns the list of 3 fake employees from Lesson 6.1.
 3. Write a `[HttpGet("{id}")]` method that returns a single employee by their ID.
 4. Write a `[HttpPost]` method that accepts a new employee and adds it to the list.
-5. Test all your endpoints using your browser or a tool like Postman / the built-in Swagger UI (`/swagger`).
-6. Add proper routing by decorating the controller with `[Route("api/[controller]")]`.
+5. Test all your endpoints using the built-in Swagger UI (`/swagger`).
+6. **Advanced:** Try to add XML comments to your controller methods and see if they appear in Swagger (you may need to enable XML documentation in the project file).
+7. Add proper routing by decorating the controller with `[Route("api/[controller]")]`.
 
 ---
 
