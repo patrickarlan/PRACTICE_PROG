@@ -184,8 +184,32 @@ public class Lesson01
 
     public static void Les1_3()
     {
-        //Perform basic operations on numbers in C# | Training module by MICROSOFT
-        //UNIT 1: Exercise - Perform addition with implicit data conversion
+        // 1. FINANCIAL SYSTEMS (Money, Coupons, and Bill Splitting)
+        // Concepts: decimal, +=, -=, /=, :C format
+        decimal bill = 150.00m;
+        bill -= 10.00m; // Applied coupon
+        bill *= 0.90m;  // 10% discount
+        bill /= 3;      // Split among 3 friends
+        Console.WriteLine($"FINANCIAL: Each person owes {bill:C}\n");
 
+        // 2. GAMING & TRACKING (Health, XP, and Levels)
+        // Concepts: int, ++, --, Compound assignment
+        int health = 100;
+        int xp = 500;
+        health -= 25;   // Damage
+        xp += 150;      // Finished quest
+        xp++;           // Tiny bonus
+        Console.WriteLine($"GAMING: Health: {health} | XP: {xp}\n");
+
+        // 3. DATA ANALYSIS (Averages and Unit Conversion)
+        // Concepts: casting (decimal), :F1 format, Formula logic
+        int totalScore = 453;
+        int count = 5;
+        decimal average = (decimal)totalScore / count; // Casting to avoid data loss
+        
+        decimal fahrenheit = 94m;
+        decimal celsius = (fahrenheit - 32m) * 5m / 9m;
+
+        Console.WriteLine($"DATA: Avg Score: {average} | Temp: {celsius:F1}°C");
     }
 }

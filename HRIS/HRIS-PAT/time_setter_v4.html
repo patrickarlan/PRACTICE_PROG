@@ -1,0 +1,113 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  .wrap { display: flex; justify-content: center; padding: 2.5rem 1rem; }
+  .card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1.25rem 1.5rem; display: inline-flex; align-items: center; gap: 8px; }
+  .col { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .tri-btn { width: 52px; height: 20px; background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; opacity: 0.3; transition: opacity 0.1s; user-select: none; }
+  .tri-btn:hover { opacity: 0.8; }
+  .tri-btn:active { opacity: 0.5; }
+  .tri-btn svg { width: 14px; height: 8px; pointer-events: none; }
+  .field { display: flex; align-items: center; gap: 6px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); padding: 6px 10px; }
+  .num-input { font-size: 28px; font-weight: 500; color: var(--color-text-primary); width: 46px; text-align: center; background: transparent; border: none; outline: none; caret-color: var(--color-text-primary); line-height: 1; }
+  .field-label { font-size: 12px; color: var(--color-text-tertiary); white-space: nowrap; }
+  .sep { font-size: 26px; font-weight: 400; color: var(--color-text-tertiary); line-height: 1; }
+  .period-col { display: flex; flex-direction: column; gap: 4px; }
+  .period-btn { padding: 5px 12px; font-size: 13px; font-weight: 500; color: var(--color-text-secondary); background: transparent; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); cursor: pointer; transition: all 0.1s; }
+  .period-btn.on { background: var(--color-text-primary); color: var(--color-background-primary); border-color: transparent; }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">Compact inline time setter with hold-to-repeat triangle buttons</h2>
+  <div class="card">
+
+    <div class="col">
+      <button class="tri-btn" id="hu" onmousedown="startHold('h',1)" onmouseup="stopHold()" onmouseleave="stopHold()" ontouchstart="startHold('h',1)" ontouchend="stopHold()">
+        <svg viewBox="0 0 14 8"><polygon points="7,0 14,8 0,8" fill="var(--color-text-primary)"/></svg>
+      </button>
+      <div class="field">
+        <input class="num-input" id="ih" value="08" maxlength="2"
+          oninput="onType(this)" onblur="commitH(this)" onkeydown="onKey(event,'h')">
+        <span class="field-label">hour</span>
+      </div>
+      <button class="tri-btn" onmousedown="startHold('h',-1)" onmouseup="stopHold()" onmouseleave="stopHold()" ontouchstart="startHold('h',-1)" ontouchend="stopHold()">
+        <svg viewBox="0 0 14 8"><polygon points="7,8 14,0 0,0" fill="var(--color-text-primary)"/></svg>
+      </button>
+    </div>
+
+    <div class="sep">:</div>
+
+    <div class="col">
+      <button class="tri-btn" onmousedown="startHold('m',1)" onmouseup="stopHold()" onmouseleave="stopHold()" ontouchstart="startHold('m',1)" ontouchend="stopHold()">
+        <svg viewBox="0 0 14 8"><polygon points="7,0 14,8 0,8" fill="var(--color-text-primary)"/></svg>
+      </button>
+      <div class="field">
+        <input class="num-input" id="im" value="00" maxlength="2"
+          oninput="onType(this)" onblur="commitM(this)" onkeydown="onKey(event,'m')">
+        <span class="field-label">min</span>
+      </div>
+      <button class="tri-btn" onmousedown="startHold('m',-1)" onmouseup="stopHold()" onmouseleave="stopHold()" ontouchstart="startHold('m',-1)" ontouchend="stopHold()">
+        <svg viewBox="0 0 14 8"><polygon points="7,8 14,0 0,0" fill="var(--color-text-primary)"/></svg>
+      </button>
+    </div>
+
+    <div class="period-col">
+      <button class="period-btn on" id="bam" onclick="setPeriod('AM')">AM</button>
+      <button class="period-btn" id="bpm" onclick="setPeriod('PM')">PM</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  let h = 8, m = 0, p = 'AM';
+  let holdTimer = null, holdInterval = null;
+  const pad = n => String(n).padStart(2,'0');
+
+  function renderH() { document.getElementById('ih').value = pad(h); }
+  function renderM() { document.getElementById('im').value = pad(m); }
+  function renderPeriod() {
+    document.getElementById('bam').className = 'period-btn' + (p==='AM'?' on':'');
+    document.getElementById('bpm').className = 'period-btn' + (p==='PM'?' on':'');
+  }
+
+  function step(unit, dir) {
+    if (unit === 'h') { h = ((h - 1 + dir + 12) % 12) + 1; renderH(); }
+    else { m = (m + dir + 60) % 60; renderM(); }
+  }
+
+  function startHold(unit, dir) {
+    step(unit, dir);
+    holdTimer = setTimeout(() => {
+      holdInterval = setInterval(() => step(unit, dir), 80);
+    }, 400);
+  }
+
+  function stopHold() {
+    clearTimeout(holdTimer);
+    clearInterval(holdInterval);
+    holdTimer = null; holdInterval = null;
+  }
+
+  function onType(el) { el.value = el.value.replace(/\D/g,''); }
+
+  function commitH(el) {
+    let v = parseInt(el.value) || 1;
+    h = Math.min(12, Math.max(1, v));
+    renderH();
+  }
+
+  function commitM(el) {
+    let v = parseInt(el.value);
+    m = Math.min(59, Math.max(0, isNaN(v) ? 0 : v));
+    renderM();
+  }
+
+  function onKey(e, unit) {
+    if (e.key === 'ArrowUp') { e.preventDefault(); step(unit, 1); }
+    if (e.key === 'ArrowDown') { e.preventDefault(); step(unit, -1); }
+    if (e.key === 'Enter') { unit === 'h' ? commitH(e.target) : commitM(e.target); e.target.blur(); }
+  }
+
+  function setPeriod(val) { p = val; renderPeriod(); }
+</script>

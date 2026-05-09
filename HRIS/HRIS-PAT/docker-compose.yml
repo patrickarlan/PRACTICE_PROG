@@ -1,0 +1,29 @@
+services:
+  frontend:
+    build: ./hris
+    ports:
+      - "3000:3000"
+    env_file:
+      - ./hris/.env
+    depends_on:
+      - backend
+  backend:
+    build: ./backend
+    ports:
+      - "5107:5107"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:5107
+    env_file:
+      - ./backend/.env
+  database:
+    image: postgres:18
+    container_name: hris_databaseW
+    environment:
+      - POSTGRES_USER=postgresW
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=hris_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./DOCU/setup/setup-backend/sql/setup-database.sql:/docker-entrypoint-initdb.d/setup-database.sqlW

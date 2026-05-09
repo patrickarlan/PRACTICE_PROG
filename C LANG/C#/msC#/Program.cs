@@ -7,7 +7,7 @@ internal class Program
     static void Main()
     {
         // Lesson01.Les1_1();
-        Lesson01.Les1_2();
+        Lesson01.Les1_3();
         return;
     }
 }
