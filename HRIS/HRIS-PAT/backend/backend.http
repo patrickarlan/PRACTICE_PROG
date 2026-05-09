@@ -1,0 +1,32 @@
+@backend_HostAddress = http://localhost:5107
+
+GET {{backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+GET {{backend_HostAddress}}/get
+Accept: application/json
+
+###
+
+GET {{backend_HostAddress}}/health
+Accept: application/json
+
+###
+
+# NOTE: For API testing, use environment variables configured in .env file:
+# - USER_SAMPLE_EMAIL / USER_SAMPLE_PASSWORD (standard user)
+# - APPROVER_EMAIL / APPROVER_PASSWORD (approver user)
+# - VIEWER_EMAIL / VIEWER_PASSWORD (viewer user)
+# Replace the email/password values below with actual environment variable values
+
+POST {{backend_HostAddress}}/login?useCookies=false&useSessionCookies=false
+Content-Type: application/json
+
+{
+  "email": "YOUR_TEST_EMAIL_HERE",
+  "password": "YOUR_TEST_PASSWORD_HERE"
+}
+
+###

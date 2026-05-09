@@ -1,0 +1,266 @@
+{
+  "accomplishmentreports": [
+    {
+      "id": 1,
+      "date": "Mar 25, 2026",
+      "submitted": "Mar 25, 2026, 5:30 PM",
+      "items": "3 items (8 hrs)",
+      "status": "submitted",
+      "tasks": [
+        {
+          "project": "HRIS Redesign",
+          "desc": "Frontend development",
+          "hrs": 4
+        },
+        {
+          "project": "Internal Tools",
+          "desc": "API integration",
+          "hrs": 3
+        },
+        {
+          "project": "Meetings",
+          "desc": "Daily standup & planning",
+          "hrs": 1
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "date": "Mar 24, 2026",
+      "submitted": "Mar 24, 2026, 5:15 PM",
+      "items": "5 items (8 hrs)",
+      "status": "approved",
+      "tasks": [
+        {
+          "project": "HRIS Redesign",
+          "desc": "UI polish",
+          "hrs": 5
+        },
+        {
+          "project": "Meetings",
+          "desc": "Client sync",
+          "hrs": 3
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "date": "Mar 23, 2026",
+      "submitted": "Mar 23, 2026, 6:00 PM",
+      "items": "4 items (8 hrs)",
+      "status": "approved",
+      "tasks": [
+        {
+          "project": "HRIS Redesign",
+          "desc": "Initial setup",
+          "hrs": 8
+        }
+      ]
+    }
+  ],
+  "ar-reviews": [
+    {
+      "id": "1",
+      "employee": "Jose Reyes",
+      "role": "Software Engineer",
+      "department": "Engineering",
+      "position": "Software Engineer",
+      "reportDate": "Mar 25, 2026",
+      "items": "3 items (8 hrs)",
+      "submitted": "Mar 25, 2026",
+      "status": "submitted",
+      "accomplishments": [
+        {
+          "project": "Project Alpha",
+          "task": "Auth Migration",
+          "notes": "Led OAuth 2.0 migration.",
+          "start": "09:00",
+          "end": "13:00",
+          "hours": 4
+        },
+        {
+          "project": "Client Beta",
+          "task": "Code Review",
+          "notes": "Reviewed dashboard PRs.",
+          "start": "14:00",
+          "end": "16:00",
+          "hours": 2
+        },
+        {
+          "project": "Internal",
+          "task": "CI/CD Dashboard",
+          "notes": "Built internal monitoring.",
+          "start": "16:00",
+          "end": "18:00",
+          "hours": 2
+        }
+      ]
+    },
+    {
+      "id": "2",
+      "employee": "Ana Cruz",
+      "role": "UX Designer",
+      "department": "Design",
+      "position": "UX Designer",
+      "reportDate": "Mar 25, 2026",
+      "items": "5 items (7.5 hrs)",
+      "submitted": "Mar 25, 2026",
+      "status": "submitted",
+      "accomplishments": [
+        {
+          "project": "Design System",
+          "task": "Color Palette",
+          "notes": "Refined primary/secondary colors.",
+          "start": "08:00",
+          "end": "12:00",
+          "hours": 4
+        },
+        {
+          "project": "User Testing",
+          "task": "Onboarding",
+          "notes": "Tested new user flow.",
+          "start": "13:00",
+          "end": "16:30",
+          "hours": 3.5
+        }
+      ]
+    },
+    {
+      "id": "3",
+      "employee": "Marco Basa",
+      "role": "Data Analyst",
+      "department": "Analytics",
+      "position": "Data Analyst",
+      "reportDate": "Mar 25, 2026",
+      "items": "4 items (8 hrs)",
+      "submitted": "Mar 26, 2026",
+      "status": "submitted",
+      "accomplishments": [
+        {
+          "project": "Reporting",
+          "task": "Q1 Metrics",
+          "notes": "Finalized Q1 KPI report.",
+          "start": "09:00",
+          "end": "17:00",
+          "hours": 8
+        }
+      ]
+    },
+    {
+      "id": "4",
+      "employee": "Lea Santos",
+      "role": "Backend Engineer",
+      "department": "Engineering",
+      "position": "Backend Engineer",
+      "reportDate": "Mar 24, 2026",
+      "items": "4 items (8 hrs)",
+      "submitted": "Mar 24, 2026",
+      "status": "approved",
+      "accomplishments": [
+        {
+          "project": "API",
+          "task": "Endpoint Refactor",
+          "notes": "Refactored user routes.",
+          "start": "10:00",
+          "end": "18:00",
+          "hours": 8
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "Maria Santos",
+      "email": "maria@company.com",
+      "claims": [
+        "report.review",
+        "report.approve",
+        "user.manage"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "Jose Reyes",
+      "email": "jose@company.com",
+      "claims": [
+        "report.submit"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "System Admin",
+      "email": "admin@company.com",
+      "claims": [
+        "report.archive"
+      ]
+    }
+  ],
+  "messages": [
+    {
+      "id": "1",
+      "title": "AR Mar 26 - Jose Reyes",
+      "date": "2026-03-26T10:00:00",
+      "text": "Jose Reyes submitted an accomplishment report for Mar 26. Click \"Open Report\" to review and take action.",
+      "read": false,
+      "tags": [
+        "inbox"
+      ],
+      "sender": "Jose Reyes",
+      "type": "report",
+      "linkTo": "/employer/reviews?id=1"
+    },
+    {
+      "id": "2",
+      "title": "Report Approved",
+      "date": "2026-03-26T12:00:00",
+      "text": "Your accomplishment report for Mar 26 has been approved by Maria Santos.",
+      "read": false,
+      "tags": [
+        "inbox"
+      ],
+      "sender": "Maria Santos",
+      "type": "system",
+      "linkTo": "/ar-list?id=1"
+    },
+    {
+      "id": "3",
+      "title": "Welcome to HRIS",
+      "date": "2026-03-20T08:00:00",
+      "text": "Welcome to the platform. Visit your dashboard to get started.",
+      "read": true,
+      "tags": [
+        "archive"
+      ],
+      "sender": "System Admin",
+      "type": "system",
+      "linkTo": null
+    },
+    {
+      "id": "4",
+      "title": "AR Mar 25 - Ana Cruz",
+      "date": "2026-03-25T14:30:00",
+      "text": "Ana Cruz submitted an accomplishment report for Mar 25 with 5 items (7.5 hrs). Click \"Open Report\" to review.",
+      "read": false,
+      "tags": [
+        "inbox"
+      ],
+      "sender": "Ana Cruz",
+      "type": "report",
+      "linkTo": "/employer/reviews?id=2"
+    },
+    {
+      "id": "5",
+      "title": "Leave Request Pending",
+      "date": "2026-03-24T09:00:00",
+      "text": "You have a pending leave request from Marco Basa for Apr 1-3.",
+      "read": true,
+      "tags": [
+        "inbox"
+      ],
+      "sender": "Marco Basa",
+      "type": "system",
+      "linkTo": null
+    }
+  ]
+}

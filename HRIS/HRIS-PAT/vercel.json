@@ -1,0 +1,12 @@
+{
+  "buildCommand": "cd hris && npm run build",
+  "installCommand": "cd hris && npm install",
+  "outputDirectory": "hris/dist",
+  "framework": "vite",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
