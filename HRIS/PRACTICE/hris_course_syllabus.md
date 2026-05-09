@@ -67,6 +67,21 @@
 
 ---
 
+### Lesson 1.4: Version Control with Git
+- What is Git and why do we use it?
+- Basic commands: `git init`, `git add`, `git commit`, `git status`
+- Creating a repository on GitHub and pushing code
+- Concept of branches (`main` vs feature branches)
+
+**📝 Activities:**
+1. Initialize a git repository in your `PRACTICE/` folder.
+2. Create a `.gitignore` file to ignore `node_modules` and `.env` files.
+3. Make your first commit with the current state of your practice files.
+4. Create a repository on GitHub and push your code there.
+5. Create a new branch called `feature/unit-1`, make a change to `web-notes.md`, and merge it back to `main`.
+
+---
+
 ## ══════════════════════════════════════
 ## 🟡 UNIT 2: HTML — THE SKELETON
 ## ══════════════════════════════════════
@@ -269,6 +284,19 @@
 
 ---
 
+### Lesson 5.4: React Routing (Single Page Apps)
+- What is React Router and Single Page Application (SPA) architecture?
+- Setting up routes for Login, Dashboard, and Employees
+- Navigating between pages using `<Link>` and `useNavigate`
+
+**📝 Activities:**
+1. Install `react-router-dom` in your practice frontend.
+2. Set up a simple routing system with two pages: "Home" and "Employees".
+3. Create a Navigation component with links to both pages.
+4. Use `useNavigate` to redirect the user to the Employees page after a button click.
+
+---
+
 ## ══════════════════════════════════════════
 ## 🔵 UNIT 6: ASP.NET CORE & C# BASICS
 ## ══════════════════════════════════════════
@@ -319,6 +347,18 @@
 3. Register your service in `Program.cs` using `builder.Services.AddScoped<IEmployeeService, EmployeeService>()`.
 4. Inject `IEmployeeService` into your `EmployeeController` using the constructor.
 5. Verify your endpoints still work the same way after the refactor.
+
+---
+
+### Lesson 6.4: Data Transfer Objects (DTOs)
+- Why we don't return Database Entities directly to the client (Security, Over-fetching)
+- Creating DTOs in C#
+- Mapping Entities to DTOs manually or using simple mapping methods
+
+**📝 Activities:**
+1. Create an `EmployeeDto.cs` that only exposes `Id`, `Name`, and `Department` (hiding sensitive or unnecessary fields).
+2. Update your `EmployeeController` or Service to return `EmployeeDto` instead of the raw `Employee` model.
+3. Verify that the API still works but only returns the specified fields.
 
 ---
 
@@ -444,6 +484,19 @@
 3. Add a "View Details" button on each row. When clicked, open a Shadcn `<Dialog>` with the employee's details.
 4. Add a `<Select>` dropdown to filter the table by department.
 5. Connect your table to the real API from your practice backend and display live data.
+
+---
+
+### Lesson 9.3: Advanced Forms and Validation
+- React Hook Form for managing form state efficiently
+- Zod for schema validation
+- Connecting Zod to Shadcn UI forms
+
+**📝 Activities:**
+1. Install React Hook Form and Zod in your practice frontend.
+2. Build a registration form using Shadcn UI's `<Form>` components.
+3. Add validation rules: Name must be at least 3 characters, email must be valid.
+4. Try to submit the form with invalid data and verify that error messages appear.
 
 ---
 
