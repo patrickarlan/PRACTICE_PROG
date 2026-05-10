@@ -195,7 +195,46 @@ You must open the file, delete the arrows (`<<<<<<<`, `=======`, `>>>>>>>`), cho
  ```
  Git remembers that `main` points to `origin`, and it just works!
  
- ---
+---
+
+### 10. The `.gitignore` Masterclass & The "Already Tracked" Trap 🕳️
+
+In Lesson 1.4, we briefly mentioned that `.gitignore` tells Git which files to ignore. But there is a **giant trap** that catches almost every beginner:
+
+> ⚠️ **The Trap:** Adding a file or folder to `.gitignore` **does not** stop Git from tracking it if Git was *already* tracking it before. You have to actively tell Git to "stop tracking" it.
+
+Here is how to set up a perfect `.gitignore` for a full-stack project and how to fix files that got in by mistake.
+
+#### A. The Standard Full-Stack `.gitignore`
+Create a file named exactly `.gitignore` in the root of your project and add these lines:
+
+```text
+# --- Frontend (React / Node) ---
+node_modules/
+dist/
+.env
+
+# --- Backend (.NET) ---
+[Bb]in/
+[Ob]j/
+*.user
+*.suo
+
+# --- Database & OS ---
+.DS_Store
+Thumbs.db
+```
+
+#### B. How to fix files that are already tracked
+If you accidentally committed `bin/` or `node_modules/` before adding them to `.gitignore`, Git will keep tracking them. You need to run these commands in Git Bash to remove them from the "Time Machine" without deleting them from your computer:
+
+*   **Untrack bin folders:** `git rm -r --cached **/bin/`
+*   **Untrack obj folders:** `git rm -r --cached **/obj/`
+*   **Untrack node_modules:** `git rm -r --cached **/node_modules/`
+
+*The `--cached` flag is the magic word here. It tells Git: "Delete this from the repository, but do NOT delete the file from my hard drive."*
+
+---
  
  ## 🎯 Practice Activities (Hardcore Mode)
  
@@ -215,6 +254,7 @@ You must open the file, delete the arrows (`<<<<<<<`, `=======`, `>>>>>>>`), cho
      *   Commit the change.
  5. [ ] - **Simulate a Conflict (Mental or Physical):** In your notes, describe the steps you would take if you tried to merge a branch and got a `Merge Conflict` error. What does the file look like, and how do you fix it?
  6. [ ] - **Pushing Commands:** Write down the 3 commands you would use to connect and push your code to a new GitHub repository for the very first time.
+ 7. [ ] - **The Gitignore Fix:** Write down the command you would use to stop Git from tracking a folder named `bin/` that was accidentally committed in the past.
 
 ---
 *Let me know when you are ready to review these activities!*
