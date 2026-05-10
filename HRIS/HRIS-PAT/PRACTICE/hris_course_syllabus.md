@@ -76,17 +76,18 @@
 - **Unix/Bash commands** you'll use daily: `ls`, `cd`, `mkdir`, `touch`, `cat`, `clear`, `pwd`
 - Basic Git commands: `git init`, `git add`, `git commit`, `git status`, `git log`, `git diff`
 - Advanced Git: `git stash`, `git stash pop`, `git reset`, `git commit --amend`
-- Creating a repository on GitHub and pushing code (`git remote add origin`, `git push`)
+- Creating a repository on GitHub and pushing code (`git remote add origin`, `git push -u origin main`)
 - Concept of branches (`main` vs feature branches) — `git checkout -b`, `git merge`
-- Understanding and resolving Merge Conflicts
+- Understanding and resolving Merge Conflicts (conflict markers: `<<<<<<<`, `=======`, `>>>>>>>`)
 
 **📝 Activities:**
-1. Open **Git Bash** (from your terminal options). Run `pwd` to see where you are, then navigate to your `PRACTICE/` folder using `cd`.
-2. Initialize a git repository using Git Bash: `git init`.
-3. Create a `.gitignore` file using `touch .gitignore`. Add `node_modules/` and `.env` inside it.
-4. Make your first commit with a proper message: `git add . && git commit -m "feat: initial commit"`.
-5. Create a repository on GitHub and push your code there using `git remote add origin <url>` and `git push -u origin main`.
-6. Create a new branch called `feature/unit-1`, make a change to `web-notes.md`, commit it, and merge it back to `main`.
+1. **Initialize & Ignore:** Initialize a git repo (if not done). Create a `.gitignore` and ignore `node_modules/` and `.env`. Commit these files.
+2. **History Check:** Run `git log --oneline`. Copy the output into your notes. How many commits do you see?
+3. **The Stash Trick:** Make a small change to a file (don't commit it). Run `git status`. Run `git stash` and check status again. Run `git stash pop`. Explain what happened.
+4. **Branching and Diff:** Create a new branch: `git checkout -b feature/advanced-git`. Modify a file. Run `git diff` to see the output. Commit the change.
+5. **Simulate a Conflict:** In your notes, describe the merge conflict markers (`<<<<<<<`, `=======`, `>>>>>>>`), what they mean, and the steps to resolve a merge conflict.
+6. **Pushing to GitHub:** Write the 3 commands needed to connect and push your code to a new GitHub repository for the first time. (Hint: `git remote add origin`, `git add/commit`, `git push -u origin main`)
+7. **The Gitignore Fix:** Write the command to stop Git from tracking a folder named `bin/` that was accidentally committed. Include the steps to update `.gitignore` and commit.
 
 ---
 
