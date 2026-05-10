@@ -80,7 +80,21 @@
     c04012032 first comm
     (END)
 3. when whe use "git stash", the changes was saved in a storage that git uses to store the changes temporarily making it safe to switch branch. although when we use this, the "git status" doesnt include the hidden saved changes making it look like its not updated. now to bring the modified files back, we need to use "git stash pop" to include them again.
-4. 
+    4. PS C:\Users\HP\Documents\PRACTICE_PROG\HRIS\HRIS-PAT> git diff                              
+    diff --git a/HRIS/HRIS-PAT/PRACTICE/LESSONS/LESSON_1/lesson_1_4_answer.md b/HRIS/HRIS-PAT/PRACTICE/LESSONS/LESSON_1/lesson_1_4_answer.md
+    index fc04785e7..27f55b8a9 100644
+    --- a/HRIS/HRIS-PAT/PRACTICE/LESSONS/LESSON_1/lesson_1_4_answer.md
+    +++ b/HRIS/HRIS-PAT/PRACTICE/LESSONS/LESSON_1/lesson_1_4_answer.md
+    @@ -83,4 +83,5 @@
+    4. 
+    5. 
+    6. 
+    -7. 
+    \ No newline at end of file
+    +7. 
+    +8. 
+    \ No newline at end of file
 5. 
 6. 
 7. 
+8. 
