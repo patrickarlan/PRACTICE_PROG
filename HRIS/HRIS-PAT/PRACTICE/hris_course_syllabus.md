@@ -42,6 +42,8 @@
 - What is the **Backend**? (The brain — processes logic)
 - What is the **Database**? (Where data is stored permanently)
 - How do they connect? (API calls and SQL queries)
+- The concept of **Separation of Concerns**: why we split these into 3 distinct layers instead of one big blob of code.
+- What is a **Full-Stack Developer**? (Someone who can work on all three layers)
 
 **📝 Activities:**
 1. Look at your HRIS project folder and identify which folder is the frontend, which is the backend.
@@ -68,32 +70,84 @@
 
 ---
 
-### Lesson 1.4: Version Control with Git
+### Lesson 1.4: Version Control with Git & Git Bash
 - What is Git and why do we use it?
-- Basic commands: `git init`, `git add`, `git commit`, `git status`
-- Creating a repository on GitHub and pushing code
-- Concept of branches (`main` vs feature branches)
+- **Git Bash:** What it is, why it's better than PowerShell for Git on Windows, and how to use it.
+- **Unix/Bash commands** you'll use daily: `ls`, `cd`, `mkdir`, `touch`, `cat`, `clear`, `pwd`
+- Basic Git commands: `git init`, `git add`, `git commit`, `git status`, `git log`, `git diff`
+- Advanced Git: `git stash`, `git stash pop`, `git reset`, `git commit --amend`
+- Creating a repository on GitHub and pushing code (`git remote add origin`, `git push`)
+- Concept of branches (`main` vs feature branches) — `git checkout -b`, `git merge`
+- Understanding and resolving Merge Conflicts
 
 **📝 Activities:**
-1. Initialize a git repository in your `PRACTICE/` folder.
-2. Create a `.gitignore` file to ignore `node_modules` and `.env` files.
-3. Make your first commit with the current state of your practice files.
-4. Create a repository on GitHub and push your code there.
-5. Create a new branch called `feature/unit-1`, make a change to `web-notes.md`, and merge it back to `main`.
+1. Open **Git Bash** (from your terminal options). Run `pwd` to see where you are, then navigate to your `PRACTICE/` folder using `cd`.
+2. Initialize a git repository using Git Bash: `git init`.
+3. Create a `.gitignore` file using `touch .gitignore`. Add `node_modules/` and `.env` inside it.
+4. Make your first commit with a proper message: `git add . && git commit -m "feat: initial commit"`.
+5. Create a repository on GitHub and push your code there using `git remote add origin <url>` and `git push -u origin main`.
+6. Create a new branch called `feature/unit-1`, make a change to `web-notes.md`, commit it, and merge it back to `main`.
 
 ---
 
 ### Lesson 1.5: Terminal Automation with PowerShell (.ps1)
 - What is a script and why do we use it?
 - Running `.ps1` files on Windows (Understanding Execution Policies).
-- Basic PowerShell commands for navigation and running tasks.
+- Basic PowerShell commands: `Write-Host`, `Set-Location`, `Start-Process`, `if/else`, variables with `$`.
 - How to read a setup script.
+- Writing scripts that automate multi-step startup tasks.
 
 **📝 Activities:**
 1. In your `PRACTICE/` folder, create a file called `hello.ps1`. Write a script that prints `"Hello, Patrick! Ready to code?"` to the console using `Write-Host`.
 2. Try to run it in your terminal using `.\hello.ps1`. If you get an error about execution policies, research how to bypass it or set it to `RemoteSigned`.
 3. In `web-notes.md`, explain in your own words why having a setup script is better than manually typing 10 commands every time you start work.
 4. Look at the `setup-frontend` or `setup-backend` scripts you are currently running (if they are open). Try to find one command in them and guess what it does based on what you've learned.
+5. Write a `start-hris.ps1` that navigates to the `backend` folder and runs `dotnet watch run`, then navigates to the `hris` folder and runs `npm run dev`. (Hint: you will need to open each in a new terminal window using `Start-Process`.)
+
+---
+
+### Lesson 1.6: The Art of Debugging & Error Handling
+*Every developer spends a significant portion of their time debugging. This is not a sign of weakness — it is the core skill that separates good developers from great ones. This lesson teaches you how to think like a detective when things go wrong.*
+
+- **The Three Types of Errors:**
+  - **Syntax Errors:** Caught before the program even runs. The compiler or browser says "I can't understand this code." (e.g., a missing bracket `}` or a typo in a keyword).
+  - **Runtime Errors:** The code starts running, but crashes mid-way. (e.g., trying to read a property on `null`, or calling an API that is down).
+  - **Logic Errors:** The hardest kind. The code runs perfectly without crashing, but produces the wrong result. (e.g., calculating a salary but forgetting to multiply by 12 for the annual figure).
+- **The Developer's Mindset: Think Like a Detective 🔍**
+  - Step 1: **Observe the symptom** — What is the actual wrong behavior?
+  - Step 2: **Read the error message fully** — Don't panic! Error messages are helpful. Read the file name, line number, and the message.
+  - Step 3: **Isolate the layer** — Is it a Frontend issue? A Backend issue? A Database issue? Or a connection issue between them?
+  - Step 4: **Form a hypothesis** — "I think the problem might be X."
+  - Step 5: **Test the hypothesis** — Make one change and test again.
+  - Step 6: **Document the fix** — Write it in your `troubleshooting.md` so you never forget it.
+- **Frontend Debugging Tools:**
+  - The Browser **Console** tab: Your first stop. All `console.log`, warnings, and errors appear here.
+  - `console.log`, `console.warn`, `console.error`, `console.table` — different log levels for different situations.
+  - The Browser **Sources** tab: Set **breakpoints** to pause code execution at a specific line and inspect variables.
+  - **React DevTools Extension:** Inspect the component tree, props, and state visually in the browser.
+  - **React Error Boundaries:** A special React component that catches errors in its child components and displays a fallback UI instead of crashing the whole app.
+- **Backend Debugging Tools:**
+  - Reading **Stack Traces** in the terminal — How to trace the error back to its origin.
+  - **Structured Logging with Serilog:** A professional logging library that writes structured, searchable logs (used in the HRIS project).
+  - `try-catch` blocks in C#: For handling specific, expected failures gracefully.
+  - **Global Exception Handling Middleware:** A centralized place in `Program.cs` that catches ALL unhandled errors and returns a clean, safe response — instead of exposing raw stack traces to users.
+  - `app.UseDeveloperExceptionPage()` (Development) vs `app.UseExceptionHandler()` (Production) — Why showing full errors in production is a security risk.
+  - **ProblemDetails format:** The RFC-standard JSON format for returning API errors in a consistent, machine-readable way.
+- **Troubleshooting Common Full-Stack Issues:**
+  - `CORS Error`: The backend is blocking requests from the frontend. How to fix it.
+  - `401 Unauthorized`: Your JWT token is missing, expired, or invalid.
+  - `404 Not Found`: You have the wrong endpoint URL or the backend is not running.
+  - `500 Internal Server Error`: Something crashed on the backend. Check the terminal logs.
+  - `ERR_CONNECTION_REFUSED`: The backend server is not running at all.
+- **The `troubleshooting.md` File:** A developer's personal journal of bugs they have encountered and how they fixed them. You will build yours throughout this course.
+
+**📝 Activities:**
+1. In your `PRACTICE/` folder, create a file called `troubleshooting.md`. Write a template with sections: **Error**, **Where it happened**, **Cause**, **Fix**. Then, fill in the very first entry with the 404 error you saw in Lesson 1.1 when visiting `http://localhost:5107`.
+2. Open your HRIS frontend in the browser. Open DevTools (F12) → Console. Do you see any warnings or errors? Screenshot or write down what you see and try to interpret one.
+3. **Simulate a Runtime Error:** In your browser console, type: `null.toString()`. Read the error that appears. Write down the error type and message in your notes.
+4. **Backend Error Hunt:** In your HRIS backend terminal, look at the log output. Find a log line that is tagged `[WRN]` (Warning) or `[ERR]` (Error). What does it say? Write it in your `troubleshooting.md`.
+5. **Research:** Look up what a `CORS` error is. Write in your notes: what causes it, and what the fix is in an ASP.NET Core backend (hint: look for `builder.Services.AddCors`).
+6. **Break it on purpose:** Temporarily change your HRIS frontend's API base URL to a wrong port (e.g., `5999`). Observe the error that appears in the browser console and the Network tab. Write down what you see. Then fix it back.
 
 ---
 
@@ -227,11 +281,12 @@
 ---
 
 ### Lesson 4.2: TypeScript Basics
-- What is TypeScript and why does it exist?
-- Declaring types: `: string`, `: number`, `: boolean`
+- What is TypeScript and why does it exist? (The compiler as your safety net)
+- Declaring types: `: string`, `: number`, `: boolean`, `: void`, `: never`
 - Interfaces: defining the shape of an object
-- Type vs Interface
-- Optional properties with `?`
+- `type` alias vs `interface` — when to use which
+- Optional properties with `?` and default values
+- `readonly` properties (immutable fields)
 
 **📝 Activities:**
 1. In `PRACTICE/ts/`, create `basics.ts`. Re-write your JavaScript basics from Lesson 4.1 with proper TypeScript types.
@@ -243,10 +298,136 @@
 
 ---
 
+### Lesson 4.3: Advanced TypeScript — Types, Generics & Nullables
+*This is where TypeScript goes from "nice to have" to a superpower. Understanding these concepts is what separates a TypeScript beginner from a TypeScript developer.*
+
+- **Union Types (`|`):** A variable that can be one of several types.
+  - `let status: "active" | "inactive" | "pending"` — only those exact string values are allowed.
+  - `let id: string | number` — can be either.
+- **Intersection Types (`&`):** Combining multiple types into one.
+- **Nullable Types & the problem of `null`:**
+  - In TypeScript, `null` and `undefined` are their own types.
+  - `let name: string | null = null` — explicitly allowing null.
+  - The `strictNullChecks` compiler option and why it saves you from `Cannot read property of null` crashes.
+- **Handling Nullables Safely:**
+  - **Optional Chaining (`?.`):** `employee?.department?.name` — if any part is null/undefined, it stops and returns `undefined` instead of crashing.
+  - **Nullish Coalescing (`??`):** `const name = employee.name ?? "Unknown"` — uses the right side only if the left is `null` or `undefined`.
+  - **Non-null Assertion (`!`):** `employee!.name` — telling TypeScript "I guarantee this is not null." Use sparingly!
+- **Generics (`<T>`):** Writing code that works with any type while remaining type-safe.
+  - `function getFirst<T>(arr: T[]): T` — a function that works on any array.
+  - `Promise<Employee[]>` — a Promise that resolves to an Employee array.
+  - `useState<Employee[]>([])` — React's useState typed to hold an Employee array.
+- **Utility Types (built into TypeScript):**
+  - `Partial<T>` — makes all fields optional (great for update DTOs).
+  - `Pick<T, 'id' | 'name'>` — creates a type with only selected fields.
+  - `Omit<T, 'password'>` — creates a type with a field removed.
+  - `Record<string, number>` — an object where all keys are strings and all values are numbers.
+- **Type Guards:** Narrowing down a union type at runtime.
+  - `typeof`, `instanceof`, and custom `is` guards.
+
+**📝 Activities:**
+1. Create `advanced-types.ts`. Write a variable `status` typed as `"active" | "inactive" | "pending"`. Try to assign it `"deleted"` and read the TypeScript error.
+2. Write a nullable variable: `let supervisor: string | null = null`. Use `?.` to safely access a `.length` property on it without crashing.
+3. Use `??` to provide a fallback: If `supervisor` is null, display `"No Supervisor Assigned"`.
+4. Write a generic function `wrapInArray<T>(item: T): T[]` that takes any value and returns it in an array. Test it with a string, a number, and an Employee object.
+5. Create an interface `FullEmployee`. Use `Omit<FullEmployee, 'passwordHash'>` to create a safe `PublicEmployee` type.
+6. Open any TypeScript file in the HRIS frontend. Find at least one usage of `?.` or `??`. Copy it into your notes and explain why it is there.
+
+---
+
+### Lesson 4.4: Advanced Functions — Arguments, Arrow Functions, Callbacks & Closures
+*Functions are the building blocks of all code. Understanding every facet of how functions work — how arguments flow in, how values flow out, and how functions can be stored inside other functions — is critical.*
+
+- **Function Signatures in TypeScript:**
+  - Named function: `function greet(name: string): string { ... }`
+  - Arrow function: `const greet = (name: string): string => ...`
+  - When to use which (arrow functions in React components and callbacks, named functions for hoisting).
+- **Arguments deep-dive:**
+  - Required vs Optional arguments: `function send(to: string, cc?: string)`
+  - Default argument values: `function paginate(page: number = 1, size: number = 10)`
+  - Rest parameters (`...args`): `function log(...messages: string[]): void` — accepts any number of arguments.
+- **Return types and `void`:**
+  - `void` — the function does something but returns nothing.
+  - `never` — the function never returns (it throws an error or runs forever).
+- **Higher-Order Functions:** Functions that take other functions as arguments or return functions.
+  - `.map()`, `.filter()`, `.reduce()` are all higher-order functions.
+  - `const filtered = employees.filter(emp => emp.isActive)` — `isActive` callback is passed in.
+- **Closures:** A function that "remembers" the variables from its outer scope.
+  - This is how React hooks work under the hood. `useState` uses closures to remember state between renders.
+- **Immediately Invoked Function Expressions (IIFE):** `(() => { ... })()` — a function that runs immediately.
+- **Async Functions:** `async function fetchEmployees(): Promise<Employee[]>` — always returns a Promise.
+  - `await` pauses execution inside an async function until the Promise resolves.
+  - Error handling with `try/catch` inside async functions.
+
+**📝 Activities:**
+1. Write a function `formatEmployee(name: string, department?: string, role: string = "Employee"): string` that returns a formatted description. Call it 3 times with different combinations of arguments.
+2. Write a `rest parameter` function: `function logAll(...items: string[]): void` that logs each item. Call it with 1, 3, and 5 arguments.
+3. Use `.filter()` on an `Employee[]` array to get only active employees. Use `.map()` to get only their names. Chain them together in one line.
+4. Write a closure: Create a function `makeCounter()` that returns another function. Every time the returned function is called, it increments and returns a count. Demonstrate that two separate counters don't share state.
+5. Write an `async` function `fetchUser(id: number): Promise<Employee>` that uses `await` and a `try/catch`. Simulate success with a resolved Promise and simulate failure with a rejected one.
+6. Find a real async function in the HRIS frontend service files. Copy the function signature into your notes and explain what it does line by line.
+
+---
+
+### Lesson 4.5: JavaScript/TypeScript in Practice — Arrays, Objects & Patterns Used in HRIS
+*This lesson bridges the gap between theory and what you will actually see in the HRIS codebase. These are the patterns you will encounter every single day.*
+
+- **Destructuring:**
+  - Array destructuring: `const [first, second] = myArray`
+  - Object destructuring: `const { name, department } = employee`
+  - Destructuring with renaming: `const { name: employeeName } = employee`
+  - Destructuring function arguments: `function greet({ name, department }: Employee)`
+- **Spread Operator (`...`):**
+  - Copying arrays: `const copy = [...original]`
+  - Merging objects: `const updated = { ...employee, department: "HR" }` — this is how you update state in React without mutating it.
+- **Short-circuit evaluation:**
+  - `&&` — `isLoggedIn && <Dashboard />` — renders the component only if logged in (used everywhere in React).
+  - `||` — `name || "Anonymous"` — fallback value.
+- **Template Literals:** `` `Hello, ${name}!` `` — building strings with embedded expressions.
+- **`Array.reduce()` deep dive:** The most powerful array method — used to sum, group, or transform arrays into any shape.
+- **Object methods:** `Object.keys()`, `Object.values()`, `Object.entries()` — iterating over objects.
+
+**📝 Activities:**
+1. Given an `employee` object, use destructuring to extract `name` and `department` into separate variables in a single line.
+2. Create a copy of an employee object but with a different `department` using the spread operator. Verify the original is unchanged.
+3. Write a `reduce()` function that counts how many employees are in each department and returns an object like `{ "HR": 3, "Dev": 5 }`.
+4. Find a real usage of the spread operator (`...`) in the HRIS frontend (hint: look in form handlers or state updates). Copy it into your notes and explain why the spread was necessary.
+5. Write a template literal that generates a full employee description: `"John Doe is a Software Engineer in the Development department."` from an object.
+
+---
+
 ## ══════════════════════════════════════
 ## 🟠 UNIT 5: REACT.JS — THE FRAMEWORK
 ## ══════════════════════════════════════
 *React is the JavaScript library used to build the HRIS frontend. It turns code into a living, interactive user interface.*
+
+---
+
+### Lesson 5.0: Frontend File & Folder Structure (The Blueprint)
+*Before you write a single React component, you need to understand how to organize your code properly. A messy project is a broken project.*
+
+- Why does folder structure matter? (Maintainability, scalability, onboarding new developers)
+- The standard frontend structure used in professional React + TypeScript projects:
+  - `src/components/` — Reusable UI components (buttons, cards, modals).
+  - `src/components/ui/` — Base design system components (usually from Shadcn).
+  - `src/features/` — Feature-based folders that group related components, hooks, and utils together (e.g., `features/employee/`, `features/auth/`).
+  - `src/pages/` or `src/app/` — Top-level page components that represent a route.
+  - `src/hooks/` — Custom React hooks (`useEmployees.ts`, `useAuth.ts`).
+  - `src/lib/` — Utility functions, helpers (`utils.ts`, `cn.ts`).
+  - `src/context/` — React Context providers for global state.
+  - `src/types/` or inline interfaces — TypeScript type definitions.
+  - `src/services/` or `src/api/` — Functions that call the backend API.
+- When to use `.tsx` vs `.ts`:
+  - `.tsx` — When the file contains JSX (returns HTML-like UI).
+  - `.ts` — When the file is pure TypeScript logic with no visual output (hooks, utils, types, services).
+- The **Feature Folder Pattern** (how HRIS does it): Each feature (Employee, Auth, Dashboard) has its own folder containing its own components, utils, and types. This means everything related to employees lives inside `features/employee/`.
+
+**📝 Activities:**
+1. Look at your HRIS project's `hris/src/` folder. Draw a text-based map of all its subdirectories and describe what each folder is for.
+2. Open any `.tsx` file and any `.ts` file in the project. Explain in your notes why one has JSX and the other doesn't.
+3. Find the `features/` folder in HRIS. Pick one feature folder (e.g., `employee`). List the files inside it and guess what each one does based on its name.
+4. Look at `hris/src/lib/utils.ts`. What does the `cn()` function do? Why is it in `lib/` and not in `components/`?
+5. In `web-notes.md`, write your own description of when you would use a `hooks/` folder vs a `utils/` folder.
 
 ---
 
@@ -256,14 +437,17 @@
 - Functional components
 - Exporting and importing components
 - Passing data using `props`
+- **Named exports vs Default exports** and when to use each.
+- **Component file naming conventions**: PascalCase for components (`EmployeeCard.tsx`), camelCase for hooks and utils (`useEmployee.ts`, `formatDate.ts`).
 
 **📝 Activities:**
-1. In your `PRACTICE/frontend/` React app, create a component called `EmployeeCard.tsx`. It should display a name and a department.
-2. Render 3 `<EmployeeCard />` components in your `App.tsx`, each with different data passed as `props`.
-3. Create a `Navbar.tsx` component with a logo text and 3 navigation links.
-4. Create a `Footer.tsx` component with your name and the current year.
-5. Style all 3 components using Tailwind CSS.
-6. Add a TypeScript `interface` called `EmployeeCardProps` to properly type the `props` of your `EmployeeCard`.
+1. In your `PRACTICE/frontend/` React app, set up the proper folder structure: `src/components/`, `src/features/`, `src/hooks/`, `src/lib/`.
+2. Create a component called `EmployeeCard.tsx` inside `src/components/`. It should display a name and a department.
+3. Render 3 `<EmployeeCard />` components in your `App.tsx`, each with different data passed as `props`.
+4. Create a `Navbar.tsx` component with a logo text and 3 navigation links.
+5. Create a `Footer.tsx` component with your name and the current year.
+6. Style all 3 components using Tailwind CSS.
+7. Add a TypeScript `interface` called `EmployeeCardProps` to properly type the `props` of your `EmployeeCard`.
 
 ---
 
@@ -272,6 +456,8 @@
 - `useState`: Reading and updating state
 - `useEffect`: Running code when the component loads
 - Re-renders and how React updates the UI
+- **Custom Hooks**: Extracting logic out of components into reusable hook functions (e.g., `useEmployees.ts` that handles fetching and loading state).
+- When to put logic in a **component** vs a **hook** vs a **utility function**.
 
 **📝 Activities:**
 1. Add a `useState` counter to your `App.tsx`. Show the count and add a button to increment it.
@@ -280,6 +466,7 @@
 4. Add a button that adds a new fake name to the list and watch the UI update.
 5. Use `useEffect` to run a `console.log("Component loaded!")` message when the page first loads.
 6. Use `useEffect` to run code every time the counter changes and log the new value.
+7. **Extract a custom hook:** Move the employee list `useState` and any related logic into a new file `src/hooks/useEmployeeList.ts`. Import and use it in your component. Verify it still works.
 
 ---
 
@@ -288,12 +475,14 @@
 - `async` and `await` syntax
 - Connecting React to your backend API
 - Handling loading and error states
+- **The `services/` or `api/` layer**: Why we don't call `fetch()` directly inside components. We create dedicated service files (e.g., `src/services/employeeService.ts`) that centralize all API calls.
+- What is `axios` and how does it differ from `fetch()`?
 
 **📝 Activities:**
 1. In your practice backend, create a simple GET endpoint that returns a list of 3 fake employees as JSON.
-2. In your React frontend, use `fetch()` inside a `useEffect` to call that endpoint.
-3. Store the returned employees in a `useState` variable.
-4. Display the list of employees on screen using `.map()`.
+2. Create a `src/services/employeeService.ts` file. Write a function `getEmployees()` inside it that uses `fetch()` to call the backend endpoint.
+3. In your React frontend, use `useEffect` to call `getEmployees()` from the service file.
+4. Store the returned employees in a `useState` variable and display them using `.map()`.
 5. Add a loading message that shows while the data is being fetched.
 6. Add an error message that shows if the fetch fails (test it by temporarily breaking the backend URL).
 
@@ -303,12 +492,15 @@
 - What is React Router and Single Page Application (SPA) architecture?
 - Setting up routes for Login, Dashboard, and Employees
 - Navigating between pages using `<Link>` and `useNavigate`
+- **Protected Routes**: How to prevent unauthenticated users from accessing certain pages.
+- The `src/app/` or `src/pages/` pattern: Where your top-level page components live.
 
 **📝 Activities:**
 1. Install `react-router-dom` in your practice frontend.
-2. Set up a simple routing system with two pages: "Home" and "Employees".
+2. Set up a simple routing system with two pages: "Home" and "Employees". Put these pages inside `src/pages/`.
 3. Create a Navigation component with links to both pages.
 4. Use `useNavigate` to redirect the user to the Employees page after a button click.
+5. Create a simple `ProtectedRoute.tsx` component that checks if a `isLoggedIn` state is true. If not, redirect to a Login page.
 
 ---
 
@@ -319,63 +511,209 @@
 
 ---
 
-### Lesson 6.1: C# Fundamentals
-- Variables and types: `string`, `int`, `bool`, `List<>`, `Dictionary<>`
-- Classes, Methods, Constructors
-- `public` vs `private` access modifiers
-- `null` and nullable types with `?`
+### Lesson 6.0: Backend File & Folder Structure (The Blueprint)
+*Just like the frontend, a well-organized backend is a maintainable backend. The HRIS project follows a professional layered architecture. Understanding this structure before writing code is critical.*
+
+- The **Layered Architecture** of a professional .NET backend:
+  - `Controllers/` — The entry point. Receives HTTP requests and sends back HTTP responses. **It does NOT contain business logic.**
+  - `Services/` — The brain. Contains all the business logic. The Controller calls the Service.
+  - `Repositories/` (optional) — The data layer. Handles direct database queries. The Service calls the Repository.
+  - `Models/` — The C# classes that represent your database tables (also called Entities).
+  - `DTOs/` — Data Transfer Objects. Simplified versions of Models designed to be sent to the client safely.
+  - `Interfaces/` — Contracts that define what a Service or Repository must do (enables Dependency Injection).
+  - `Migrations/` — Auto-generated files that track changes to your database schema.
+  - `Program.cs` — The app's entry point. Configures services, middleware, and starts the server.
+- **The Request Journey:** `HTTP Request → Controller → Service → Repository → Database → back up the chain`
+- **Why this separation?** If your business logic is in the Controller, it becomes untestable and unmaintainable. The Service pattern ensures the Controller only handles HTTP concerns (input/output) and nothing else.
+- **Naming conventions in C#:** Classes are `PascalCase`, methods are `PascalCase`, variables are `camelCase`, interfaces are prefixed with `I` (e.g., `IEmployeeService`).
 
 **📝 Activities:**
-1. In `PRACTICE/backend/`, create a new .NET Console App. Write a class called `Employee` with `Id`, `Name`, and `Department` properties.
-2. Create an instance of `Employee`, set its properties, and print them with `Console.WriteLine`.
-3. Write a method `GetFullInfo()` inside the class that returns a formatted string.
-4. Create a `List<Employee>` with 3 employees and loop through them with `foreach`.
-5. Practice making a property nullable (e.g., `string? Supervisor`) and check if it's null before printing.
+1. Look at the `backend/` folder in HRIS-PAT. List all the subfolders and write one sentence describing what each one contains.
+2. Open `EmployeesController.cs`. Find a method that calls a service. Trace the call — find the service it calls and what that service does.
+3. Open any service file in HRIS-PAT. Read through it. Try to identify the database call (the line that talks to `_context` or `_repository`).
+4. Find one `DTO` file in the project. Compare it to its corresponding `Model` file. Write down 3 differences (e.g., missing fields, renamed properties).
+5. Open `Program.cs` in the HRIS backend. Find the section where services are registered (`builder.Services.Add...`). List 5 services you see registered there.
 
 ---
+
+### Lesson 6.1: C# Fundamentals — Variables, Types & Syntax
+*C# is a strongly-typed, object-oriented language. Every variable must have a declared type, every method must declare what it returns, and every class must declare its responsibilities. Let's learn the language from the ground up.*
+
+- **Basic Types & Variable Declaration:**
+  - `string name = "Patrick";` — text.
+  - `int age = 25;` — whole numbers.
+  - `double salary = 50000.50;` — decimal numbers.
+  - `bool isActive = true;` — true or false.
+  - `var` keyword: Let the compiler infer the type (`var name = "Patrick"` — C# knows it's a string).
+  - Constants: `const int MaxRetries = 3;` — can never be changed after declaration.
+- **Nullable Types — The `?` Operator:**
+  - By default, value types in C# cannot be null. `int id = null` is a compile error!
+  - `int? id = null;` — the `?` makes any type nullable.
+  - `string? supervisor = null;` — reference types can also be explicitly nullable with `strictNullCheck` settings.
+  - **Null-conditional operator (`?.`):** `employee?.Supervisor?.Name` — stops the chain if any part is null.
+  - **Null-coalescing operator (`??`):** `string display = name ?? "Unknown";` — fallback if null.
+  - **Null-coalescing assignment (`??=`):** `name ??= "Default";` — only assigns if the variable IS null.
+  - `if (value is null)` vs `if (value == null)` — the modern C# pattern-based null check.
+- **Collections:**
+  - `List<string> names = new List<string>();` — a resizable array.
+  - `Dictionary<string, int>` — a key-value pair store (like a lookup table).
+  - `IEnumerable<T>` — the base interface for anything you can loop over.
+  - Array: `string[] roles = { "Admin", "Viewer", "Creator" };`
+- **Control Flow:**
+  - `if/else if/else`, `switch`, `switch expressions` (modern C#).
+  - `for`, `foreach`, `while` loops.
+  - `break`, `continue`, `return`.
+- **String Manipulation:**
+  - String interpolation: `$"Hello, {name}!"` — the C# equivalent of JS template literals.
+  - `string.IsNullOrEmpty(value)` and `string.IsNullOrWhiteSpace(value)` — the safe null checks.
+  - `.ToLower()`, `.Trim()`, `.Contains()`, `.StartsWith()`, `.Split()`.
+
+**📝 Activities:**
+1. In `PRACTICE/backend/`, create a new .NET Console App. Declare 5 variables of different types. Print them using `$"..."` string interpolation.
+2. Declare a `string? supervisor = null`. Use `?.` and `??` to safely print either the supervisor's length or `"No Supervisor"`.
+3. Create a `List<string>` of 5 department names. Loop through them with `foreach`. Filter the list to only print names that start with "D".
+4. Write an `if/else` that checks if an employee's salary is above 50,000 and prints different messages.
+5. Write a `switch` expression (modern C# style) that maps a string role to an integer access level: `"SuperAdmin" => 1`, `"Admin" => 2`, `"Viewer" => 3`.
+
+---
+
+### Lesson 6.1b: C# Classes, Methods & Object-Oriented Programming
+*Object-Oriented Programming (OOP) is the heart of C#. Everything in C# is a class. Understanding classes, constructors, methods, and inheritance is non-negotiable.*
+
+- **Classes & Objects:**
+  - A `class` is a blueprint. An `object` is an instance of that blueprint.
+  - `public class Employee { ... }` — defines the blueprint.
+  - `var emp = new Employee();` — creates an instance (object) from the blueprint.
+- **Properties vs Fields:**
+  - A **field** is a raw variable: `private string _name;` (private, internal storage).
+  - A **property** is a controlled accessor with `get` and `set`: `public string Name { get; set; }`.
+  - **Auto-properties:** `public string Name { get; set; }` — shorthand.
+  - **Init-only properties:** `public string Name { get; init; }` — can only be set during construction. Immutable after that.
+  - **Computed property:** `public string FullName => $"{FirstName} {LastName}";` — no setter, calculated on demand.
+- **Access Modifiers:**
+  - `public` — accessible from anywhere.
+  - `private` — accessible only inside this class. Fields that store internal state should always be private.
+  - `protected` — accessible inside this class and any class that inherits from it.
+  - `internal` — accessible only within the same project/assembly.
+  - `private readonly` — the most common pattern for injected dependencies: can only be set in the constructor, never changed again.
+- **Constructors:**
+  - A special method that runs when you `new` up an object.
+  - `public EmployeeService(AppDbContext context) { _context = context; }` — this is how Dependency Injection works!
+  - Primary constructors (C# 12): `public class EmployeeService(AppDbContext context)` — shorthand.
+- **Methods:**
+  - `public string GetFullName() { return $"{FirstName} {LastName}"; }` — a method with a return type.
+  - `public void Deactivate() { IsActive = false; }` — a `void` method returns nothing.
+  - **Method overloading:** Having two methods with the same name but different parameters.
+- **Inheritance & Interfaces:**
+  - `class Manager : Employee` — Manager inherits from Employee.
+  - `interface IEmployeeService { Task<List<Employee>> GetAllAsync(); }` — a contract with no implementation.
+  - A class implements an interface: `class EmployeeService : IEmployeeService`.
+  - **Why interfaces?** They allow you to swap implementations without changing the code that uses them (Dependency Injection depends on this).
+
+**📝 Activities:**
+1. Write a `class Employee` with properties: `Id`, `FullName`, `Department`, `IsActive`. Add a computed property `StatusLabel` that returns `"Active"` or `"Inactive"` based on `IsActive`.
+2. Add a constructor that requires `Id` and `FullName`. Make `Department` optional in the constructor with a default of `"Unassigned"`.
+3. Add a method `Deactivate()` that sets `IsActive = false` and prints a message. Call it on an instance.
+4. Create an `interface IGreetable` with one method `string Greet()`. Make your `Employee` class implement it.
+5. Create a `Manager` class that inherits from `Employee`. Add a `TeamSize` property specific to `Manager`. Create an instance of it.
+6. Open any `*Service.cs` file in HRIS-PAT. Identify: the constructor, the injected dependencies (`private readonly`), and one method. Write an explanation of what each part does.
+
+---
+
+### Lesson 6.1c: Async/Await, Task<T> & LINQ — The Power Tools of C#
+*These are the three most commonly misunderstood but most important concepts in modern C# backend development. HRIS uses all three of them heavily.*
+
+- **Why Async Matters:**
+  - When your backend queries a database, it has to wait. If your code is synchronous, the entire thread is blocked — no other requests can be served.
+  - `async` and `await` let the thread go do other work while waiting for the database to respond.
+  - Rule: If a method calls `await` inside it, it must be marked `async`. And it must return `Task` (void) or `Task<T>` (with a return value).
+- **`Task<T>` — The Promise of C#:**
+  - `Task<List<Employee>>` means "I promise to return a list of employees... eventually."
+  - It is the C# equivalent of `Promise<Employee[]>` in TypeScript.
+- **The Async Pattern in HRIS:**
+  - Controller calls: `var employees = await _employeeService.GetAllAsync();`
+  - Service calls: `var result = await _context.Employees.ToListAsync();`
+  - Every method in the chain must be `async` and `await` the one below it.
+- **LINQ (Language Integrated Query):**
+  - LINQ lets you query collections using readable, SQL-like syntax directly in C#.
+  - **Method syntax (most common in HRIS):**
+    - `.Where(e => e.IsActive)` — filter: like SQL `WHERE`.
+    - `.Select(e => e.Name)` — project: like SQL `SELECT`.
+    - `.FirstOrDefault(e => e.Id == id)` — find one or return null.
+    - `.OrderBy(e => e.Name)` / `.OrderByDescending(e => e.Salary)`.
+    - `.Any(e => e.IsAdmin)` — returns `true` if at least one matches.
+    - `.Count(e => e.IsActive)` — count matching items.
+    - `.ToList()` / `.ToListAsync()` — materialize the query into a real list.
+  - **LINQ on EF Core (Database queries):** When you use LINQ on a `DbSet<T>`, EF Core translates it into actual SQL under the hood!
+  - `_context.Employees.Where(e => e.Department == "Dev").ToListAsync()` → generates `SELECT * FROM Employees WHERE Department = 'Dev'`.
+
+**📝 Activities:**
+1. Write an `async Task<string> GetGreetingAsync(string name)` method that uses `await Task.Delay(500)` to simulate a wait, then returns a greeting string. Call it from `Main` using `await`.
+2. Create a `List<Employee>` with 5 employees (mix of active/inactive, different departments). Use LINQ to:
+   - Get only active employees.
+   - Get only the names of employees in "Development".
+   - Check if any employee is an admin.
+   - Count how many employees are inactive.
+3. Chain LINQ: In one expression, get all active employees in "Development", ordered by name, and select only their names as a `List<string>`.
+4. Open any `*Service.cs` in HRIS-PAT. Find one LINQ query. Copy it into your notes and translate it into plain English: *"Find all employees where..."*
+5. Look at a service method that is `async`. Trace every `await` keyword in it. What is it waiting for? Write it in your notes.
+
+---
+
 
 ### Lesson 6.2: ASP.NET Core Controllers & Routing
 - Creating a Web API project with `dotnet new webapi`
 - What is a Controller? (How it handles requests)
 - HTTP Verbs in C#: `[HttpGet]`, `[HttpPost]`, `[HttpPut]`, `[HttpDelete]`
-- Route parameters: `[HttpGet("{id}")]`
+- Route parameters: `[HttpGet("{id}")]` and `[FromBody]` for request bodies
+- **The Controller's only job:** Receive the request, validate it, call the appropriate Service method, and return the result. Nothing more.
+- **`[ApiController]` attribute**: What it does and why it's always at the top of a Controller.
 - **Swagger Documentation:** How ASP.NET Core automatically generates documentation for your endpoints.
-- Returning `Ok()`, `NotFound()`, `BadRequest()`
+- Returning `Ok()`, `NotFound()`, `BadRequest()`, `CreatedAtAction()`
 
 **📝 Activities:**
 1. Create a new Web API project inside `PRACTICE/backend/`. Run it and see the default weather API.
-2. Create a new `EmployeeController.cs`. Write a `[HttpGet]` method that returns the list of 3 fake employees from Lesson 6.1.
-3. Write a `[HttpGet("{id}")]` method that returns a single employee by their ID.
-4. Write a `[HttpPost]` method that accepts a new employee and adds it to the list.
+2. Create a new `EmployeeController.cs` in a `Controllers/` folder. Write a `[HttpGet]` method that returns the list of 3 fake employees.
+3. Write a `[HttpGet("{id}")]` method that returns a single employee by their ID. Return `NotFound()` if the ID doesn't exist.
+4. Write a `[HttpPost]` method that accepts a new employee via `[FromBody]` and adds it to the list.
 5. Test all your endpoints using the built-in Swagger UI (`/swagger`).
-6. **Advanced:** Try to add XML comments to your controller methods and see if they appear in Swagger (you may need to enable XML documentation in the project file).
+6. **Advanced:** Try to add XML comments (`///`) to your controller methods and see if they appear in Swagger.
 7. Add proper routing by decorating the controller with `[Route("api/[controller]")]`.
 
 ---
 
-### Lesson 6.3: The Service Pattern (How HRIS does it)
-- Why we move logic OUT of Controllers and into Services
-- Creating an `EmployeeService.cs`
-- Dependency Injection in ASP.NET Core
+### Lesson 6.3: The Service Pattern — The Brain of the Backend
+- **Why Controllers must be thin:** A Controller that contains business logic is a code smell. It becomes unmaintainable, untestable, and violates the Single Responsibility Principle.
+- **What goes in a Service?** All the "thinking" — validation logic, calculations, rules, data transformation.
+- Creating an `EmployeeService.cs` in a `Services/` folder.
+- **Interfaces (`IEmployeeService`):** Why we define a contract (interface) before writing the implementation. This allows for easy testing and swapping of implementations.
+- **Dependency Injection (DI):** ASP.NET Core's built-in system for giving a class the dependencies it needs without it having to create them itself. The service is "injected" into the constructor.
+- **Lifetime scopes:** `AddSingleton` (one for the whole app), `AddScoped` (one per HTTP request), `AddTransient` (new one every time). Why does it matter?
 
 **📝 Activities:**
-1. Create `EmployeeService.cs`. Move your fake employee list and all logic from the controller into this service.
-2. Create an interface `IEmployeeService.cs` that defines what your service can do.
+1. Create a `Services/` folder. Create `IEmployeeService.cs` interface with method signatures for: `GetAll()`, `GetById(int id)`, `Create(Employee employee)`.
+2. Create `EmployeeService.cs` that implements `IEmployeeService`. Move all the logic from your controller here.
 3. Register your service in `Program.cs` using `builder.Services.AddScoped<IEmployeeService, EmployeeService>()`.
-4. Inject `IEmployeeService` into your `EmployeeController` using the constructor.
+4. Inject `IEmployeeService` into your `EmployeeController` via the constructor (`private readonly IEmployeeService _employeeService;`).
 5. Verify your endpoints still work the same way after the refactor.
+6. Open HRIS-PAT's `backend/` folder. Find a real service file. Compare its structure to what you built. What is it doing that yours isn't?
 
 ---
 
-### Lesson 6.4: Data Transfer Objects (DTOs)
-- Why we don't return Database Entities directly to the client (Security, Over-fetching)
-- Creating DTOs in C#
-- Mapping Entities to DTOs manually or using simple mapping methods
+### Lesson 6.4: Data Transfer Objects (DTOs) — The Secure Messengers
+- **Why we don't return raw Database Entities to the client:** Security (exposing password hashes, internal IDs), Over-fetching (sending 30 fields when the frontend only needs 3), and Breaking Changes (your database model might change but your API contract should stay stable).
+- Creating `DTOs/` folder and DTO classes in C#.
+- **Request DTOs vs Response DTOs:** A `CreateEmployeeRequest.cs` (what the client sends in) vs an `EmployeeResponse.cs` (what we send back out).
+- Manually mapping an Entity to a DTO.
+- Introduction to **AutoMapper** as a tool to automate this mapping.
 
 **📝 Activities:**
-1. Create an `EmployeeDto.cs` that only exposes `Id`, `Name`, and `Department` (hiding sensitive or unnecessary fields).
-2. Update your `EmployeeController` or Service to return `EmployeeDto` instead of the raw `Employee` model.
-3. Verify that the API still works but only returns the specified fields.
+1. Create a `DTOs/` folder. Create `EmployeeResponseDto.cs` that only exposes `Id`, `Name`, and `Department`.
+2. Create `CreateEmployeeRequestDto.cs` that defines what fields a client must send to create a new employee.
+3. Update your `EmployeeService` to return `EmployeeResponseDto` instead of the raw `Employee` model.
+4. Update your `EmployeeController`'s POST method to accept `CreateEmployeeRequestDto` instead of the raw model.
+5. Verify that your Swagger UI now shows the correct request and response shapes.
+6. Look at the HRIS-PAT project. Find a real DTO file. Does it match a model file exactly? What fields are missing and why do you think they were removed?
 
 ---
 
