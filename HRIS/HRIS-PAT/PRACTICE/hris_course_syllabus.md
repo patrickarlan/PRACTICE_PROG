@@ -878,3 +878,401 @@
 5. A delete button that removes an employee from the database.
 6. A `.env` file for the backend and `.env` for the frontend (not committed to GitHub).
 7. A `README.md` file explaining how to set up and run your mini project.
+
+---
+
+## ══════════════════════════════════════════════════════════════════
+## 🟢 UNIT 11: TESTING — ENSURING YOUR CODE ACTUALLY WORKS
+## ══════════════════════════════════════════════════════════════════
+*Anyone can write code that works once. Professional developers write code that still works after changes, refactors, and bug fixes. Tests are the safety net.*
+
+---
+
+### Lesson 11.1: Frontend Testing with Jest & React Testing Library
+- **What is a Unit Test?** (Testing one small piece of code in isolation)
+- **What is Integration Testing?** (Testing multiple pieces working together)
+- **Test structure:** Arrange (set up), Act (do something), Assert (verify the result)
+- Installing Jest and React Testing Library in a React project
+- Testing React components without rendering them in a browser
+- **Mocking:** Replacing real functions with fake versions during testing (e.g., fake API calls)
+
+**📝 Activities:**
+1. In your practice frontend, install Jest and React Testing Library.
+2. Write a test for a simple utility function (e.g., `formatCurrency(100)` should return `"$100.00"`).
+3. Write a test for your `EmployeeCard` component. Assert that it displays the employee's name on screen.
+4. Mock an API call in a test. Create a test that verifies your component shows a loading state, then displays data.
+5. Write a test that verifies clicking a button calls a mock function (testing component interaction).
+6. Run your tests and see them pass: `npm test`.
+
+---
+
+### Lesson 11.2: Backend Testing with xUnit & Moq
+- **Unit testing C# code:** Creating a test project alongside your main project
+- **Naming conventions:** `EmployeeServiceTests.cs` for testing `EmployeeService.cs`
+- **Mocking dependencies:** Using `Moq` to fake the database/repository
+- **Test fixtures:** Reusable setup code (`[SetUp]` or `[Fact]`)
+- **Assertions in xUnit:** `Assert.Equal()`, `Assert.True()`, `Assert.Throws()`
+
+**📝 Activities:**
+1. Create a new `EmployeeServiceTests` project in `PRACTICE/backend/`.
+2. Write a test: `GetAllAsync_ReturnsActiveEmployees()` that mocks the repository and tests that the service filters correctly.
+3. Write a test for your `CreateAsync` method. Mock the repository's `Add()` call and verify it was called.
+4. Write a test that verifies an exception is thrown when creating a duplicate employee.
+5. Run your tests: `dotnet test` and see them pass.
+
+---
+
+### Lesson 11.3: End-to-End Testing (E2E)
+- **What is E2E Testing?** (Testing the entire application flow from frontend to backend to database)
+- **Tools:** Playwright or Cypress
+- **When to write E2E tests:** Critical user flows (login, create employee, submit form)
+- **Why E2E tests are slower:** They start the whole app and interact with it like a real user would.
+
+**📝 Activities:**
+1. Install Playwright (or Cypress) in your frontend.
+2. Write an E2E test that:
+   - Logs into the application
+   - Navigates to the employee list
+   - Creates a new employee
+   - Verifies the employee appears in the list
+3. Run the test and watch it execute the entire flow in a real browser.
+4. Add a test for error handling: try to create an employee with invalid data and verify the error message appears.
+
+---
+
+### Lesson 11.4: Test-Driven Development (TDD) & Coverage
+- **What is Test-Driven Development?** (Write tests FIRST, then write code to pass them)
+- **Red-Green-Refactor cycle:** Write a failing test (Red) → Write code to pass it (Green) → Clean up (Refactor)
+- **Code Coverage:** What percentage of your code is tested? Tools: `nyc` for JavaScript, `coverlet` for C#.
+- **Coverage goals:** Aim for 80%+ coverage on critical paths, not 100% (some code doesn't need tests).
+
+**📝 Activities:**
+1. Pick a new feature you want to build. Write 3 tests FIRST for that feature (they will fail).
+2. Write the minimum code needed to make those tests pass.
+3. Refactor your code to make it cleaner while keeping the tests passing.
+4. Run coverage reports: `npm test -- --coverage` (frontend) and `dotnet test /p:CollectCoverage=true` (backend).
+5. Identify a function in your code with 0% coverage. Write a test for it.
+
+---
+
+## ══════════════════════════════════════════════════════════════════════
+## 🟠 UNIT 12: DEPLOYMENT & CONTAINERIZATION WITH DOCKER
+## ══════════════════════════════════════════════════════════════════════
+*Your app running on your machine is one thing. Your app running reliably on a server for thousands of users is a different challenge. Containers solve this.*
+
+---
+
+### Lesson 12.1: Docker Fundamentals
+- **What is Docker?** (A container — a lightweight, isolated environment that packages your app and all its dependencies)
+- **Images vs Containers:** An image is a blueprint; a container is a running instance.
+- **Dockerfile:** The recipe that tells Docker how to build an image.
+- **Basic Dockerfile commands:** `FROM`, `COPY`, `RUN`, `EXPOSE`, `CMD`
+
+**📝 Activities:**
+1. Install Docker Desktop for your operating system.
+2. Create a `Dockerfile` for your practice frontend React app:
+   - Start from `node:20-alpine` image
+   - Copy your source code in
+   - Run `npm install` and `npm run build`
+   - Use `nginx` as the web server
+3. Build the image: `docker build -t my-frontend .`
+4. Run a container from that image: `docker run -p 3000:80 my-frontend`
+5. Visit `http://localhost:3000` and verify your app is running inside a container.
+
+---
+
+### Lesson 12.2: Containerizing the Backend
+- Creating a `.NET` Dockerfile
+- Multi-stage builds (build in one stage, run in another for a smaller image)
+- Exposing ports from a container
+
+**📝 Activities:**
+1. Create a `Dockerfile` for your practice .NET backend:
+   - Start from `mcr.microsoft.com/dotnet/sdk:10.0` for building
+   - Publish the app with `dotnet publish`
+   - Use `mcr.microsoft.com/dotnet/aspnet:10.0` as the runtime image
+   - Expose port `5107`
+2. Build the image: `docker build -t my-backend .`
+3. Run it: `docker run -p 5107:5107 my-backend`
+4. Verify your backend API is accessible from outside the container.
+
+---
+
+### Lesson 12.3: Docker Compose (Multi-Container Orchestration)
+- **What is Docker Compose?** (A tool to run multiple containers together as a service)
+- `docker-compose.yml` syntax
+- **Services:** Frontend, Backend, Database
+- **Networks:** How containers talk to each other (all containers in a compose are on the same network)
+- **Volumes:** Persisting data (e.g., the database doesn't lose data when the container stops)
+- **Environment variables:** `.env` file for compose
+
+**📝 Activities:**
+1. Create a `docker-compose.yml` file with 3 services:
+   - `frontend`: Your React app (expose port 3000)
+   - `backend`: Your .NET API (expose port 5107)
+   - `postgres`: A PostgreSQL database (expose port 5432)
+2. Link the backend to the database using `depends_on` and environment variables.
+3. Run the whole stack: `docker-compose up`
+4. Verify all 3 containers are running: `docker ps`
+5. Test the entire flow: frontend → backend → database.
+6. Stop everything: `docker-compose down`
+
+---
+
+### Lesson 12.4: Pushing to a Docker Registry (Hub/Container Registry)
+- What is Docker Hub?
+- Tagging images: `docker tag my-backend username/my-backend:latest`
+- Pushing images: `docker push username/my-backend`
+- Using images from a registry: `docker pull username/my-backend`
+
+**📝 Activities:**
+1. Create a Docker Hub account (free).
+2. Tag your backend image: `docker tag my-backend yourusername/my-backend:1.0`
+3. Push it: `docker push yourusername/my-backend:1.0`
+4. Verify it appears on Docker Hub in your account.
+5. From a different folder, pull it back: `docker pull yourusername/my-backend:1.0` and run it.
+
+---
+
+## ══════════════════════════════════════════════════════════════════════
+## 🔵 UNIT 13: SECURITY BEST PRACTICES
+## ══════════════════════════════════════════════════════════════════════
+*Users trust you with their data. Security is not optional. It is the foundation of every feature.*
+
+---
+
+### Lesson 13.1: Password Security & Hashing
+- **Why storing passwords in plain text is catastrophic:** If the database is leaked, every user's password is compromised.
+- **Password hashing:** Converting a password into a one-way string using an algorithm (`bcrypt`, `Argon2`, `PBKDF2`).
+- **Salting:** Adding randomness to make dictionary attacks impossible.
+- **Implementing password hashing in C#:** Using `BCrypt.Net` NuGet package.
+
+**📝 Activities:**
+1. Install `BCrypt.Net-Next` NuGet package in your backend.
+2. In your `User` model, replace `Password` with `PasswordHash`.
+3. When a user registers, hash the password: `string hash = BCrypt.Net.BCrypt.HashPassword(password);`
+4. When a user logs in, verify: `bool isValid = BCrypt.Net.BCrypt.Verify(incomingPassword, storedHash);`
+5. Try to view the database. Confirm the passwords are hashed, not plaintext.
+
+---
+
+### Lesson 13.2: Input Validation & SQL Injection Prevention
+- **What is SQL Injection?** (An attacker types SQL code into an input field to bypass security)
+- **Example:** Login form: Username: `admin' --` password: (anything) — this might let them in without a password!
+- **Prevention:** Never concatenate user input into SQL queries. Use **parameterized queries** (which Entity Framework Core does automatically).
+- **Frontend validation:** Catching basic mistakes early (email format, required fields).
+- **Backend validation:** Never trust frontend validation. Always validate on the backend.
+
+**📝 Activities:**
+1. In your `EmployeeService`, write a method that validates a new employee:
+   - Name must not be null or empty
+   - Email must be a valid email format
+   - Age must be between 18 and 80
+2. Throw `ArgumentException` with descriptive messages if validation fails.
+3. Call this validation in your `CreateAsync` method before saving.
+4. Test by trying to create an employee with invalid data from your frontend and verify the error is caught.
+5. Verify that all your LINQ queries use parameterized queries (they should, but check).
+
+---
+
+### Lesson 13.3: CORS & API Security
+- **What is CORS (Cross-Origin Resource Sharing)?** (A security policy that prevents websites from randomly accessing your API)
+- **Why it exists:** Without CORS, a malicious website could trick a user's browser into sending requests to your API.
+- **Configuring CORS in ASP.NET Core:** In `Program.cs`, add specific allowed origins (never use `*` in production).
+- **HTTP Headers:** `Authorization`, `X-API-Key`, custom headers for security.
+
+**📝 Activities:**
+1. In your backend's `Program.cs`, add CORS:
+   ```csharp
+   builder.Services.AddCors(options => options.AddPolicy("AllowFrontend", policy =>
+       policy.WithOrigins("http://localhost:3000")
+           .AllowAnyMethod()
+           .AllowAnyHeader()
+   ));
+   app.UseCors("AllowFrontend");
+   ```
+2. In your frontend, add a custom API header. Update your fetch/axios to include: `headers: { "X-Custom-Header": "MySecret" }`
+3. In your backend, verify the header is present in requests.
+4. Change the allowed origin to a wrong domain and confirm the frontend can't reach the backend.
+
+---
+
+### Lesson 13.4: Secrets Management & Environment Variables
+- **What are Secrets?** (API keys, database passwords, JWT keys — anything that grants access)
+- **Why environment variables?** (Keeping secrets out of your code, which gets committed to GitHub)
+- **`.env` files:** Not committed to version control; loaded at runtime.
+- **In production:** Using a secrets manager (AWS Secrets Manager, Azure Key Vault, HashiCorp Vault).
+
+**📝 Activities:**
+1. Create a `.env` file in your backend with: `JWT_SECRET=your-super-secret-key-min-32-chars` and `DB_PASSWORD=yourpostgrespassword`.
+2. Load these in `Program.cs` using `DotNetEnv` or `IConfiguration`.
+3. Use the JWT_SECRET when generating and validating tokens.
+4. Add `.env` to your `.gitignore` and create `.env.example` with placeholder values.
+5. Research: What does your production environment (if you deploy) use for secrets management?
+
+---
+
+### Lesson 13.5: HTTPS & Transport Security
+- **What is HTTPS?** (HTTP with encryption using SSL/TLS certificates)
+- **Why it matters:** Without HTTPS, anyone on the same network can intercept your API requests and steal data.
+- **Self-signed certificates for development** (`dotnet dev-certs https`)
+- **Let's Encrypt for production:** Free SSL certificates.
+
+**📝 Activities:**
+1. Generate a development certificate: `dotnet dev-certs https --trust`
+2. Start your backend and visit `https://localhost:5107` (notice the `https`).
+3. In your frontend, update the API base URL to `https://localhost:5107`.
+4. Verify requests work over HTTPS.
+5. Research: How do you get an SSL certificate for production? (Hint: Let's Encrypt is free.)
+
+---
+
+## ══════════════════════════════════════════════════════════════════════════
+## 🟣 UNIT 14: MONITORING, LOGGING & PERFORMANCE OPTIMIZATION
+## ══════════════════════════════════════════════════════════════════════════
+*A fast app is a good app. A slow app frustrates users and wastes money on servers. Logging helps you find problems.*
+
+---
+
+### Lesson 14.1: Structured Logging
+- **What is a Log?** (A timestamped record of what your app is doing)
+- **Log Levels:** `Debug`, `Information`, `Warning`, `Error`, `Critical`
+- **Structured Logging:** Logs with machine-readable fields (not just text blobs)
+- **Serilog in C#:** Writing structured logs that can be searched and filtered
+- **Log aggregation:** Collecting logs from all your servers in one place (tools: ELK Stack, Splunk, DataDog)
+
+**📝 Activities:**
+1. Install `Serilog` and `Serilog.Sinks.Console` NuGet packages.
+2. Configure Serilog in `Program.cs`:
+   ```csharp
+   Log.Logger = new LoggerConfiguration()
+       .MinimumLevel.Information()
+       .WriteTo.Console()
+       .CreateLogger();
+   ```
+3. Inject `ILogger<T>` into your service and log key events:
+   - `_logger.LogInformation("Fetching {count} employees", count);`
+   - `_logger.LogError(ex, "Failed to create employee");`
+4. Run your app and watch logs appear in the console with timestamps.
+5. Change the minimum level to `Debug` and see more detailed logs.
+
+---
+
+### Lesson 14.2: Exception Handling & Error Reporting
+- **Global exception handlers:** Catching ALL unhandled errors in one place (middleware)
+- **Returning safe error responses:** Never expose stack traces to users (security risk)
+- **Error tracking services:** Services like Sentry that collect and alert you to errors in production
+
+**📝 Activities:**
+1. In your `Program.cs`, add global exception handling middleware:
+   ```csharp
+   app.UseExceptionHandler(errorApp =>
+   {
+       errorApp.Run(async context =>
+       {
+           var exception = context.Features.Get<IExceptionHandlerPathFeature>()?.Error;
+           _logger.LogError(exception, "Unhandled exception");
+           context.Response.StatusCode = 500;
+           await context.Response.WriteAsJsonAsync(new { message = "Internal server error" });
+       });
+   });
+   ```
+2. Throw an unhandled exception in a controller and verify it's caught and logged.
+3. (Optional) Install `Sentry.AspNetCore` and set up error reporting to Sentry's free tier.
+
+---
+
+### Lesson 14.3: Frontend Performance — Code Splitting & Lazy Loading
+- **Bundle size:** If your JavaScript bundle is 500KB, users have to download it all before your app runs.
+- **Code splitting:** Splitting your bundle into smaller chunks that load on demand.
+- **Lazy loading:** Loading a component or route only when the user needs it.
+- **React.lazy()** and `<Suspense>` — how to lazy load components in React.
+
+**📝 Activities:**
+1. In your practice frontend, use `React.lazy()` to lazy load a component:
+   ```jsx
+   const EmployeeListPage = React.lazy(() => import('./pages/EmployeeListPage'));
+   ```
+2. Wrap it with `<Suspense fallback={<div>Loading...</div>}>` in your router.
+3. Run `npm run build` and check the bundle size with `npm run build -- --stats`.
+4. Use dynamic imports for routes: ` const route = { path: '/employees', lazy: () => import('./pages/EmployeeList') };`
+
+---
+
+### Lesson 14.4: Backend Performance — Database Queries & Caching
+- **N+1 Queries:** A common performance trap where you load a list of employees (1 query) then load each one's department (N more queries). Total: N+1 queries!
+- **Solution: Eager Loading:** Using `Include()` in EF Core to load related data in one query.
+- **Caching:** Storing frequently accessed data in memory so you don't hit the database repeatedly.
+- **Redis:** An in-memory data store for caching. (Advanced, but good to know about.)
+
+**📝 Activities:**
+1. Write a LINQ query that loads employees with their department in ONE query:
+   ```csharp
+   var employees = await _context.Employees.Include(e => e.Department).ToListAsync();
+   ```
+2. Compare it to loading without `Include()` and observe the difference in the database logs.
+3. (Optional) Install `StackExchange.Redis` and implement a simple cache decorator for your service:
+   ```csharp
+   public async Task<List<Employee>> GetAllAsync()
+   {
+       var cacheKey = "all_employees";
+       var cached = _cache.Get<List<Employee>>(cacheKey);
+       if (cached != null) return cached;
+       
+       var data = await _context.Employees.ToListAsync();
+       _cache.Set(cacheKey, data, TimeSpan.FromMinutes(5));
+       return data;
+   }
+   ```
+
+---
+
+### Lesson 14.5: Profiling & Identifying Bottlenecks
+- **Load Testing:** Simulating many users hitting your app at once to see where it breaks.
+- **Frontend profiling:** Using browser DevTools to find slow JavaScript.
+- **Backend profiling:** Using application insights or log analysis to find slow database queries.
+- **Identifying the bottleneck:** Is it slow because of frontend rendering, slow API calls, or slow database queries?
+
+**📝 Activities:**
+1. In your browser DevTools, go to Performance tab. Click record, use your app, then stop. Analyze what took the longest.
+2. Add intentional delays to your API calls and see how it affects the user experience.
+3. In your backend, add timing logs:
+   ```csharp
+   var sw = Stopwatch.StartNew();
+   var result = await _context.Employees.ToListAsync();
+   _logger.LogInformation("Query took {ms}ms", sw.ElapsedMilliseconds);
+   ```
+4. Identify which of your queries is slowest and optimize it with an index or eager loading.
+5. Use a tool like Apache JMeter or `hey` to load test your backend: `hey -n 1000 -c 10 http://localhost:5107/api/employees`
+
+---
+
+## ═══════════════════════════════════════════════════════════════════════
+## 📚 CONGRATULATIONS! YOU'VE COMPLETED THE FULL-STACK WEB DEV COURSE!
+## ═══════════════════════════════════════════════════════════════════════
+
+You now have a solid foundation in:
+- ✅ Web fundamentals and how the internet works
+- ✅ Frontend: React, TypeScript, Tailwind, Shadcn
+- ✅ Backend: ASP.NET Core, C#, services, dependency injection
+- ✅ Database: PostgreSQL, Entity Framework Core
+- ✅ Authentication: JWT tokens
+- ✅ Testing: Unit, integration, and E2E tests
+- ✅ Deployment: Docker and containers
+- ✅ Security: Hashing, validation, CORS, secrets management
+- ✅ Monitoring: Logging, performance profiling
+
+### What's Next?
+1. **Contribute to the HRIS project:** Apply these skills to the production application.
+2. **Build more projects:** Reinforce learning by building real applications.
+3. **Go deeper:** Learn about microservices, message queues, distributed systems.
+4. **Stay updated:** The web constantly evolves. Keep learning new frameworks and tools.
+
+### Career Path
+With this skill set, you're ready for:
+- **Junior Full-Stack Developer** roles
+- **Backend Developer** roles (focusing on ASP.NET Core)
+- **Frontend Developer** roles (focusing on React)
+- **DevOps Engineer** roles (containers, CI/CD, monitoring)
+
+Thank you for committing to learning. Now go build something amazing! 🚀

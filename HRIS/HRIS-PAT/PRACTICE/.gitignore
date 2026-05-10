@@ -1,0 +1,11 @@
+# THIS FILE IS FOR PRACTICE PURPOSES ONLY
+# 
+
+
+
+# PRACTICE modules
+node_modules/
+
+
+# PRACTICE environments
+.env
