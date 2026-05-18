@@ -27,7 +27,7 @@
     - Task completed successfully (finding no errors is a valid result)
 
 # [X] ACTIVITY 5: ✅ CORRECT
-    - CORS ERRORS: is a built in system of a web browsers that prevents website to request a data from different domain, unless the second domain allows it. Since the port of frontend and backend is different (5107 & 3000), it is considered ass CROSS-ORIGIN request. Basically, it helps users to prevent data leak by default when clicking different websites.
+    - CORS ERRORS: is a built in system of a web browsers that prevents website to request a data from different domain, unless the second domain allows it. Since the port of frontend and backend is different (5107 & 3000), it is considered as CROSS-ORIGIN request. Basically, it helps users to prevent data leak by default when clicking different websites.
         - CAUSED: CORS error happens when a web browser blocks a frontend application from fetching data from different domains, ports, or protocols that is not connected to the frontend that was served from.
         - VIA LINE 70 to 80 in Program.cs:
         AddCors allows `localhost:5173`,  `5174`, `3000`, and `https://hrisweb.vercel.app` bypass each other through requests. 
