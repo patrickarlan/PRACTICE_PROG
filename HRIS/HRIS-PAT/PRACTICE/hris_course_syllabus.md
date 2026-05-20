@@ -205,6 +205,273 @@
 
 ---
 
+### Lesson 2.4: Semantic HTML — Structuring Pages Like a Pro
+
+*Non-semantic HTML uses generic tags like `<div>` for everything. Semantic HTML uses **meaningful** tags that describe what content is inside them. This is crucial for search engines, accessibility, and maintainability.*
+
+**Why Semantic HTML Matters:**
+
+1. **SEO (Search Engine Optimization):** Google understands your page structure better and ranks you higher.
+2. **Accessibility:** Screen readers for blind users can navigate your site properly.
+3. **Maintainability:** Your code is clearer and easier to understand.
+4. **Better styling:** Semantic tags have built-in browser defaults you can rely on.
+
+**Semantic HTML Tags:**
+
+```
+<header>
+  - Top of the page or section
+  - Contains: site logo, main heading, navigation
+  - Use case: Top navbar of your website
+
+<nav>
+  - Navigation menu
+  - Contains: links to main pages
+  - Use case: Main menu, breadcrumbs, footer links
+
+<main>
+  - Primary content of the page
+  - Should be only ONE <main> per page
+  - Contains: the unique content that varies per page
+  - Use case: All the "meat" of the page (excluding headers, footers, sidebars)
+
+<section>
+  - Thematic grouping of related content
+  - Use when content needs a heading
+  - Use case: "Featured Products", "Team Members", "Blog Posts"
+
+<article>
+  - Self-contained, independent content
+  - Can be published elsewhere and still make sense
+  - Use case: Blog post, news article, product review, comment
+
+<aside>
+  - Sidebar or supplementary content
+  - Tangentially related to main content
+  - Use case: Related links, ads, "Did you know?", sidebar widgets
+
+<footer>
+  - Bottom of page or section
+  - Contains: copyright, links, contact info
+  - Use case: Footer with contact, social links, copyright
+```
+
+**Bad HTML Structure (Using divs everywhere):**
+
+```html
+<div class="page">
+  <div class="top-bar">
+    <div class="logo">MyCompany</div>
+    <div class="menu">
+      <div><a href="/">Home</a></div>
+      <div><a href="/about">About</a></div>
+    </div>
+  </div>
+  
+  <div class="content">
+    <div class="article">
+      <h1>My Blog Post</h1>
+      <p>Great content here...</p>
+    </div>
+  </div>
+  
+  <div class="bottom">
+    <p>&copy; 2024 MyCompany</p>
+  </div>
+</div>
+```
+
+**Good HTML Structure (Semantic):**
+
+```html
+<header>
+  <h1>MyCompany</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>
+  </nav>
+</header>
+
+<main>
+  <article>
+    <h1>My Blog Post</h1>
+    <p>Great content here...</p>
+  </article>
+</main>
+
+<footer>
+  <p>&copy; 2024 MyCompany</p>
+</footer>
+```
+
+**Complete Real-World Example:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+</head>
+<body>
+  <!-- HEADER: Logo, navigation, branding -->
+  <header>
+    <div class="logo">
+      <h1>John Developer</h1>
+      <p>Full-Stack Web Developer</p>
+    </div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#projects">Projects</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- MAIN: Primary page content -->
+  <main>
+    
+    <!-- HERO SECTION -->
+    <section id="home">
+      <h2>Welcome to my portfolio</h2>
+      <p>I build fast, scalable web applications with React and C#</p>
+      <button>View My Work</button>
+    </section>
+
+    <!-- PROJECTS SECTION -->
+    <section id="projects">
+      <h2>My Projects</h2>
+      
+      <!-- Each project is an ARTICLE -->
+      <article>
+        <h3>HRIS System</h3>
+        <p>Full-stack HR management system built with React and ASP.NET Core</p>
+        <a href="https://github.com/...">View on GitHub</a>
+      </article>
+
+      <article>
+        <h3>E-Commerce Platform</h3>
+        <p>Online store with real-time inventory tracking</p>
+        <a href="https://github.com/...">View on GitHub</a>
+      </article>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <h2>About Me</h2>
+      <p>I'm a developer passionate about building great user experiences...</p>
+      
+      <!-- ASIDE: Supplementary content -->
+      <aside>
+        <h3>Skills</h3>
+        <ul>
+          <li>React & TypeScript</li>
+          <li>C# & ASP.NET Core</li>
+          <li>PostgreSQL</li>
+          <li>Docker</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact">
+      <h2>Get In Touch</h2>
+      <form>
+        <input type="email" placeholder="Your email" required>
+        <textarea placeholder="Your message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- FOOTER: Copyright, links, contact info -->
+  <footer>
+    <p>&copy; 2024 John Developer. All rights reserved.</p>
+    <nav>
+      <a href="https://github.com/...">GitHub</a>
+      <a href="https://linkedin.com/...">LinkedIn</a>
+      <a href="https://twitter.com/...">Twitter</a>
+    </nav>
+  </footer>
+</body>
+</html>
+```
+
+**Key Principles:**
+
+1. **One `<main>` per page** — Don't use multiple `<main>` tags
+2. **Use `<section>` for groups** — When content is related and needs a heading
+3. **Use `<article>` for standalone content** — Blog posts, comments, cards
+4. **Use `<header>` and `<footer>` for metadata** — Navigation, copyright, author info
+5. **Nest semantically** — `<header>` → `<nav>`, `<main>` → `<section>` → `<article>`
+6. **Don't overuse divs** — Use semantic tags first, divs only for layout/styling
+
+**When to Use What:**
+
+| Tag | Use When |
+|-----|----------|
+| `<header>` | Top of page/section with introductory content or nav |
+| `<nav>` | Navigation links (menus, breadcrumbs) |
+| `<main>` | Primary unique content (only one per page!) |
+| `<section>` | Thematic grouping that needs a heading |
+| `<article>` | Self-contained piece (blog post, comment, product card) |
+| `<aside>` | Tangentially related info (sidebar, ads, related links) |
+| `<footer>` | Bottom of page/section with meta info |
+| `<div>` | Generic wrapper when semantic tags don't fit (layout, styling) |
+
+**📝 Activities:**
+
+1. **Restructure your `index.html`:**
+   - Wrap everything in semantic tags
+   - Add a `<header>` with a title and `<nav>`
+   - Wrap main content in `<main>`
+   - Add a `<footer>` at the bottom
+
+2. **Create a properly structured blog post page:**
+   ```html
+   <header>
+     <h1>My Blog</h1>
+     <nav><!-- links --></nav>
+   </header>
+   
+   <main>
+     <article>
+       <h2>Blog Post Title</h2>
+       <p>Posted on <time datetime="2024-05-20">May 20, 2024</time></p>
+       <p>Blog content...</p>
+     </article>
+   </main>
+   
+   <footer>
+     <p>&copy; 2024</p>
+   </footer>
+   ```
+
+3. **Restructure your table.html:**
+   - Put the table inside a `<section>` with a heading
+   - Use `<header>` for page title
+   - Use `<footer>` for any notes
+
+4. **Restructure your form.html:**
+   - Use semantic structure for a contact page
+   - Put form in `<main>` → `<section>`
+   - Include `<header>` and `<footer>`
+
+5. **Compare real websites:**
+   - Open HRIS in your browser
+   - Right-click → "Inspect" → look at the HTML structure
+   - Find `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`
+   - Screenshot and add to notes: "What semantic tags does HRIS use?"
+
+6. **Validate your HTML:**
+   - Use [W3C Validator](https://validator.w3.org/)
+   - Paste your HTML and check for structure issues
+   - Fix any errors
+
+---
+
 ## ══════════════════════════════════════
 ## 🟡 UNIT 3: CSS & TAILWIND — THE SKIN
 ## ══════════════════════════════════════
@@ -449,6 +716,317 @@
 5. Create a `Footer.tsx` component with your name and the current year.
 6. Style all 3 components using Tailwind CSS.
 7. Add a TypeScript `interface` called `EmployeeCardProps` to properly type the `props` of your `EmployeeCard`.
+
+---
+
+### Lesson 5.1b: Building Semantic React Components
+
+*Now that you understand how to write React components, it's time to build them the **RIGHT WAY** using semantic HTML. This is where Lesson 2.4 (Semantic HTML) comes alive in React.*
+
+**Why Semantic HTML in React Matters:**
+
+1. **Accessibility:** Screen readers can navigate your app properly
+2. **SEO:** If you ever use Next.js, semantic HTML helps search rankings
+3. **Professional Code:** Other developers (and future-you) will understand your code instantly
+4. **Better maintainability:** Semantic components are self-documenting
+
+**The Connection: Semantic HTML → React Components**
+
+When you build a React component, you're building reusable UI blocks. The structure you learned in Lesson 2.4 applies directly:
+
+```tsx
+// ❌ BAD: Generic divs (like bad HTML)
+function Page() {
+  return (
+    <div className="page">
+      <div className="top">
+        <h1>My App</h1>
+      </div>
+      <div className="menu">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+      </div>
+      <div className="content">
+        <p>Welcome to my app</p>
+      </div>
+      <div className="bottom">
+        <p>&copy; 2024</p>
+      </div>
+    </div>
+  );
+}
+
+// ✅ GOOD: Semantic HTML (like good HTML structure)
+function Page() {
+  return (
+    <>
+      <Header />
+      <Navigation />
+      <main>
+        <section>
+          <p>Welcome to my app</p>
+        </section>
+      </main>
+      <Footer />
+    </>
+  );
+}
+```
+
+**Building Semantic React Components:**
+
+**Component 1: Header Component** (`Header.tsx`)
+```tsx
+export function Header() {
+  return (
+    <header className="bg-blue-600 text-white p-4">
+      <h1>Employee Management System</h1>
+      <p>Manage all your employees efficiently</p>
+    </header>
+  );
+}
+```
+
+**Component 2: Navigation Component** (`Navigation.tsx`)
+```tsx
+export function Navigation() {
+  return (
+    <nav className="bg-gray-800 text-white">
+      <ul className="flex gap-4 p-4">
+        <li><a href="/" className="hover:underline">Home</a></li>
+        <li><a href="/employees" className="hover:underline">Employees</a></li>
+        <li><a href="/reports" className="hover:underline">Reports</a></li>
+        <li><a href="/settings" className="hover:underline">Settings</a></li>
+      </ul>
+    </nav>
+  );
+}
+```
+
+**Component 3: Employee Card Component** (`EmployeeCard.tsx`)
+```tsx
+interface EmployeeCardProps {
+  id: number;
+  name: string;
+  department: string;
+  position: string;
+}
+
+// Use <article> for each employee card (self-contained content)
+export function EmployeeCard({ id, name, department, position }: EmployeeCardProps) {
+  return (
+    <article className="border rounded-lg p-4 shadow-md">
+      <header>
+        <h3 className="text-xl font-bold">{name}</h3>
+        <p className="text-gray-600">{position}</p>
+      </header>
+      
+      <section className="mt-4">
+        <dl className="space-y-2">
+          <div>
+            <dt className="font-semibold text-gray-700">Department</dt>
+            <dd>{department}</dd>
+          </div>
+          <div>
+            <dt className="font-semibold text-gray-700">Employee ID</dt>
+            <dd>#{id}</dd>
+          </div>
+        </dl>
+      </section>
+      
+      <footer className="mt-4 flex gap-2">
+        <button className="bg-blue-500 text-white px-3 py-1 rounded">Edit</button>
+        <button className="bg-red-500 text-white px-3 py-1 rounded">Delete</button>
+      </footer>
+    </article>
+  );
+}
+```
+
+**Component 4: Employees List Component** (`EmployeesList.tsx`)
+```tsx
+interface EmployeeCardProps {
+  id: number;
+  name: string;
+  department: string;
+  position: string;
+}
+
+export function EmployeesList({ employees }: { employees: EmployeeCardProps[] }) {
+  return (
+    <section>
+      <header>
+        <h2 className="text-2xl font-bold mb-4">All Employees</h2>
+      </header>
+      
+      {/* Use semantic HTML: grid of <article> elements */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {employees.map((employee) => (
+          <EmployeeCard key={employee.id} {...employee} />
+        ))}
+      </div>
+    </section>
+  );
+}
+```
+
+**Component 5: Footer Component** (`Footer.tsx`)
+```tsx
+export function Footer() {
+  return (
+    <footer className="bg-gray-900 text-white mt-12">
+      <nav className="max-w-6xl mx-auto p-6">
+        <div className="grid grid-cols-3 gap-6 mb-6">
+          <section>
+            <h4 className="font-bold mb-2">Company</h4>
+            <ul className="space-y-1">
+              <li><a href="/about" className="hover:underline">About Us</a></li>
+              <li><a href="/careers" className="hover:underline">Careers</a></li>
+              <li><a href="/blog" className="hover:underline">Blog</a></li>
+            </ul>
+          </section>
+          
+          <section>
+            <h4 className="font-bold mb-2">Support</h4>
+            <ul className="space-y-1">
+              <li><a href="/help" className="hover:underline">Help Center</a></li>
+              <li><a href="/contact" className="hover:underline">Contact</a></li>
+              <li><a href="/faq" className="hover:underline">FAQ</a></li>
+            </ul>
+          </section>
+          
+          <section>
+            <h4 className="font-bold mb-2">Legal</h4>
+            <ul className="space-y-1">
+              <li><a href="/privacy" className="hover:underline">Privacy</a></li>
+              <li><a href="/terms" className="hover:underline">Terms</a></li>
+            </ul>
+          </section>
+        </div>
+      </nav>
+      
+      <div className="border-t border-gray-800 p-6 text-center text-gray-400">
+        <p>&copy; 2024 Employee Management System. All rights reserved.</p>
+      </div>
+    </footer>
+  );
+}
+```
+
+**Complete Page Using Semantic Components** (`App.tsx`)
+```tsx
+import { Header } from './components/Header';
+import { Navigation } from './components/Navigation';
+import { EmployeesList } from './components/EmployeesList';
+import { Footer } from './components/Footer';
+
+export default function App() {
+  // Mock data
+  const employees = [
+    { id: 1, name: 'Alice Johnson', department: 'Engineering', position: 'Senior Dev' },
+    { id: 2, name: 'Bob Smith', department: 'Sales', position: 'Sales Manager' },
+    { id: 3, name: 'Carol White', department: 'HR', position: 'HR Specialist' },
+  ];
+
+  return (
+    <>
+      <Header />
+      <Navigation />
+      
+      <main className="max-w-6xl mx-auto p-4">
+        <EmployeesList employees={employees} />
+      </main>
+      
+      <Footer />
+    </>
+  );
+}
+```
+
+**Key Semantic Patterns in React:**
+
+| Pattern | HTML | React Example |
+|---------|------|---------------|
+| Page layout | `<header>`, `<main>`, `<footer>` | Top-level `<Header />`, `<main>`, `<Footer />` |
+| Card | `<article>` | `<article className="card">` in card component |
+| Section grouping | `<section>` | `<section>` for major content groups |
+| Navigation | `<nav>`, `<ul>`, `<li>`, `<a>` | `<Navigation />` with proper list structure |
+| Lists | `<ul>`, `<ol>`, `<li>` | `.map()` → `<ul><li>` or grid of `<article>` |
+| Forms | `<form>`, `<label>`, `<input>` | Form component with semantic structure |
+| Data display | `<dl>`, `<dt>`, `<dd>` | Description list for key-value pairs |
+
+**Best Practices:**
+
+1. **One `<main>` per page** — Only use `<main>` once at the App level
+2. **Use `<header>` in components** — Each component can have its own `<header>` for titles
+3. **Use `<section>` to group content** — Wraps related content that has a heading
+4. **Use `<article>` for cards** — Each card is self-contained (EmployeeCard, BlogPost, etc.)
+5. **Use `<nav>` for navigation** — Links, menus, breadcrumbs
+6. **Use `<footer>` in components** — Actions, metadata, secondary info
+7. **Always use `<label>` in forms** — Connect labels to inputs with `htmlFor`
+8. **Use semantic elements over generic divs** — Only use `<div>` for layout/styling
+
+**📝 Activities:**
+
+1. **Refactor your Navbar component:**
+   ```tsx
+   export function Navbar() {
+     return (
+       <header>
+         <h1>My App Logo</h1>
+         <nav>
+           <ul>
+             <li><a href="/">Home</a></li>
+             <li><a href="/about">About</a></li>
+           </ul>
+         </nav>
+       </header>
+     );
+   }
+   ```
+
+2. **Refactor your EmployeeCard to use `<article>`:**
+   - Wrap the entire card in `<article>`
+   - Use `<header>` for name/title
+   - Use `<section>` for details
+   - Use `<footer>` for action buttons
+
+3. **Create a properly structured page:**
+   - `Header` component at top
+   - `Navigation` component below header
+   - `main` tag wrapping page content
+   - `Footer` component at bottom
+   - Make sure there's only ONE `<main>` in the entire app
+
+4. **Inspect the HRIS app semantically:**
+   - Open HRIS in browser
+   - Right-click → Inspect
+   - Look for semantic tags: `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<footer>`
+   - Find examples of each and screenshot them
+   - Note: If most of the page is generic `<div>` tags, that's the "old way" — now you know better!
+
+5. **Create a Dashboard section component using semantic HTML:**
+   ```tsx
+   export function DashboardSection() {
+     return (
+       <section className="mb-8">
+         <header className="mb-4">
+           <h2>Dashboard Overview</h2>
+         </header>
+         
+         <article className="stat-card">
+           {/* Statistics card content */}
+         </article>
+       </section>
+     );
+   }
+   ```
+
+6. **Check accessibility:**
+   - Install VS Code extension: "axe DevTools"
+   - Run it on your React app
+   - Fix any accessibility issues it finds
+   - Many of these issues are fixed by using semantic HTML!
 
 ---
 
@@ -1245,6 +1823,424 @@
    ```
 4. Identify which of your queries is slowest and optimize it with an index or eager loading.
 5. Use a tool like Apache JMeter or `hey` to load test your backend: `hey -n 1000 -c 10 http://localhost:5107/api/employees`
+
+---
+
+## ══════════════════════════════════════════════════════════════════════════
+## 🎯 UNIT 15: CAPSTONE — YOUR PROFESSIONAL PORTFOLIO
+## ══════════════════════════════════════════════════════════════════════════
+*Build your portfolio website using everything you've learned. This is your showcase — a production-ready project that demonstrates your full-stack skills to employers.*
+
+---
+
+### Why a Portfolio Project?
+- **Real Project:** You own this project. It's not a practice exercise — it's your professional brand.
+- **Deploy It:** Unlike the mini HRIS, you'll actually deploy this to the web and share it.
+- **Showcase Skills:** Employers see your code on GitHub, visit your live site, and understand your capabilities.
+- **Iterate Forever:** Unlike a course project, you'll keep building on this. Add features, improve design, optimize performance.
+
+---
+
+### Project: Your Portfolio Website
+
+**What It Is:**
+A professional portfolio website that showcases **you** — your projects, skills, testimonials, and how to contact you. Built with the full stack you've learned.
+
+**Tech Stack:**
+- **Frontend:** React + TypeScript + Tailwind CSS + Shadcn UI
+- **Backend:** ASP.NET Core + EF Core + PostgreSQL
+- **Security:** JWT tokens for admin access
+- **Deployment:** Docker + deployed to cloud (Azure, AWS, or DigitalOcean)
+
+---
+
+### Lesson 15.1: Planning Your Portfolio
+
+**What Your Portfolio Should Include:**
+
+1. **Public Pages:**
+   - **Home/Hero:** Who you are, your headline, CTA (Call To Action)
+   - **Projects Page:** Display your best work (cards with images, descriptions, live links, GitHub links)
+   - **About Page:** Your story, background, skills
+   - **Contact Page:** Contact form that sends emails or saves to database
+   - **Blog (Optional):** Articles about web development, lessons learned
+
+2. **Admin Dashboard (JWT Protected):**
+   - **Project Manager:** Add, edit, delete your projects
+   - **Contact Manager:** View messages from the contact form
+   - **Stats Dashboard:** View how many people visited, viewed projects, etc.
+
+**📝 Activities:**
+
+1. **Design your portfolio:**
+   - Sketch the pages (even simple wireframes in notes)
+   - List 3-5 projects you want to showcase
+   - Write your bio/about section
+
+2. **Identify the core features:**
+   - What makes this *YOUR* portfolio, not a template?
+   - What unique features will impress employers? (animations, dark mode, performance, unique design?)
+
+3. **Plan the database schema:**
+   ```
+   Projects:
+   - Id (PK)
+   - Title
+   - Description
+   - TechStack (comma-separated or JSON)
+   - ImageUrl
+   - GithubLink
+   - LiveLink
+   - CreatedAt
+
+   ContactMessages:
+   - Id (PK)
+   - Name
+   - Email
+   - Message
+   - CreatedAt
+
+   PortfolioStats:
+   - Id (PK)
+   - PageViews
+   - ProjectClicks
+   - MessageCount
+   ```
+
+4. **Create the GitHub repository:**
+   - Initialize a new repo: `portfolio` (or `yourname-portfolio`)
+   - Add `.gitignore` for C# and Node
+   - Create `README.md` with your project description
+
+---
+
+### Lesson 15.2: Building the Frontend
+
+**Key Components:**
+
+1. **Navigation Bar**
+   - Logo/name
+   - Links: Home, Projects, About, Contact
+   - (Optional) Dark mode toggle
+   - (Optional) Admin login button
+
+2. **Hero Section**
+   - Your photo or avatar (Shadcn Avatar)
+   - Headline: e.g., "Full-Stack Developer | React & C# Engineer"
+   - CTA button: "View My Work" or "Contact Me"
+   - Social links: GitHub, LinkedIn, Twitter
+
+3. **Projects Showcase (Fetches from Backend API)**
+   - Grid of project cards
+   - Each card shows: image, title, description, tech stack tags, buttons (View Live, GitHub)
+   - Filter by tech stack (React, C#, TypeScript, etc.)
+   - (Optional) Search functionality
+
+4. **About Section**
+   - Your bio
+   - Skills: Show as a list or visual bars
+   - Timeline of experience (roles, companies, dates)
+
+5. **Contact Form**
+   - Name, Email, Subject, Message fields
+   - Validation
+   - Submit to backend API
+   - Success message: "Thanks for reaching out! I'll get back to you soon."
+
+6. **Admin Pages (Protected by JWT)**
+   - Admin Login
+   - Project Manager (CRUD operations)
+   - Contact Messages Viewer
+   - Stats Dashboard
+
+**📝 Activities:**
+
+1. **Set up the Vite + React project:**
+   ```bash
+   npm create vite@latest portfolio -- --template react-ts
+   cd portfolio
+   npm install
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init -p
+   npm install shadcn-ui
+   ```
+
+2. **Build the Hero section first** — this is the most important part.
+
+3. **Create the Projects grid component:**
+   - Mock data initially (hardcoded projects)
+   - Later, connect to backend API
+
+4. **Build the Contact form:**
+   - Form with validation
+   - Submit button that calls backend API
+
+5. **Implement JWT authentication for admin pages:**
+   - Login form
+   - Store JWT token in localStorage
+   - Create a `ProtectedRoute` component
+
+6. **Add responsive design:**
+   - Mobile-first (Tailwind breakpoints)
+   - Test on phone-sized screens
+
+---
+
+### Lesson 15.3: Building the Backend
+
+**API Endpoints:**
+
+```
+GET /api/projects — Get all projects (public)
+GET /api/projects/{id} — Get single project (public)
+
+POST /api/projects — Create project (protected)
+PUT /api/projects/{id} — Update project (protected)
+DELETE /api/projects/{id} — Delete project (protected)
+
+POST /api/contact — Submit contact form (public)
+GET /api/contact — View messages (protected)
+
+GET /api/stats — View portfolio stats (protected)
+
+POST /api/auth/login — Admin login (public)
+```
+
+**📝 Activities:**
+
+1. **Create a new ASP.NET Core Web API project:**
+   ```bash
+   dotnet new webapi -n PortfolioBackend
+   cd PortfolioBackend
+   dotnet add package Microsoft.EntityFrameworkCore.Npgsql
+   dotnet add package Microsoft.EntityFrameworkCore.Tools
+   dotnet add package System.IdentityModel.Tokens.Jwt
+   ```
+
+2. **Set up the database:**
+   - Create DbContext with `Project`, `ContactMessage` entities
+   - Run migrations
+   - Seed sample projects
+
+3. **Build the Project Controller:**
+   - `GetAll()` — return all projects
+   - `GetById(id)` — return single project
+   - `Create(dto)` — add new project [Authorize]
+   - `Update(id, dto)` — modify project [Authorize]
+   - `Delete(id)` — remove project [Authorize]
+
+4. **Build the Contact Controller:**
+   - `Submit(dto)` — save contact message
+   - `GetAll()` — return all messages [Authorize]
+
+5. **Implement JWT authentication:**
+   ```csharp
+   [ApiController]
+   [Route("api/auth")]
+   public class AuthController : ControllerBase
+   {
+       [HttpPost("login")]
+       public IActionResult Login([FromBody] LoginRequest request)
+       {
+           // Validate hardcoded admin credentials (or fetch from database)
+           if (request.Email != "admin@portfolio.com" || request.Password != "YourPassword123!")
+               return Unauthorized();
+
+           var token = GenerateJwtToken();
+           return Ok(new { token });
+       }
+   }
+   ```
+
+6. **Add CORS for frontend:**
+   ```csharp
+   builder.Services.AddCors(options =>
+       options.AddPolicy("AllowFrontend", policy =>
+           policy.WithOrigins("http://localhost:5173", "https://yourportfolio.com")
+                 .AllowAnyMethod()
+                 .AllowAnyHeader()
+   );
+   ```
+
+7. **Test all endpoints with Postman or cURL**
+
+---
+
+### Lesson 15.4: Connecting Frontend ↔ Backend
+
+**📝 Activities:**
+
+1. **Create API service file:**
+   ```typescript
+   // src/services/api.ts
+   const API_URL = process.env.REACT_APP_API_URL || "http://localhost:5107/api";
+
+   export const fetchProjects = async () => {
+       const res = await fetch(`${API_URL}/projects`);
+       return res.json();
+   };
+
+   export const submitContactForm = async (data: ContactData) => {
+       const res = await fetch(`${API_URL}/contact`, {
+           method: "POST",
+           headers: { "Content-Type": "application/json" },
+           body: JSON.stringify(data),
+       });
+       return res.json();
+   };
+   ```
+
+2. **Update Projects component to use real API:**
+   ```typescript
+   useEffect(() => {
+       fetchProjects().then(setProjects);
+   }, []);
+   ```
+
+3. **Test the full flow:**
+   - Frontend loads projects from backend
+   - Contact form submits to backend
+   - Messages appear in admin dashboard
+
+---
+
+### Lesson 15.5: Styling & Polish
+
+**Make It Shine:**
+
+1. **Design:**
+   - Choose a color scheme (use [coolors.co](https://coolors.co))
+   - Consistent typography (1-2 font families)
+   - Spacing & alignment (use Tailwind grid/flex)
+
+2. **Animations:**
+   - Fade-in on scroll (use libraries like `react-intersection-observer`)
+   - Hover effects on project cards
+   - Smooth transitions on all interactive elements
+
+3. **Dark Mode (Optional but impressive):**
+   - Use Tailwind's dark mode
+   - Store preference in localStorage
+   - Toggle in navbar
+
+4. **Accessibility:**
+   - Alt text on all images
+   - Proper semantic HTML
+   - Keyboard navigation
+   - Contrast ratios pass WCAG AA
+
+5. **Performance:**
+   - Image optimization (compress, use modern formats like WebP)
+   - Lazy load images below the fold
+   - Code splitting for large bundles
+
+**📝 Activities:**
+
+1. Implement dark mode toggle
+2. Add page transition animations
+3. Optimize images (use `next-gen` formats or a tool like TinyPNG)
+4. Test with Lighthouse (`npm run build && npx light-house http://localhost:5173`)
+
+---
+
+### Lesson 15.6: Testing Your Portfolio
+
+**📝 Activities:**
+
+1. **Unit tests for utility functions:**
+   - Test form validation logic
+   - Test API service helpers
+
+2. **Component tests:**
+   - Test that projects render correctly
+   - Test that contact form validation works
+   - Test that admin login requires correct credentials
+
+3. **E2E tests:**
+   - User flow: Visit site → View projects → Submit contact form
+   - Admin flow: Login → Add project → Verify it appears on public site
+
+4. **Manual testing:**
+   - Test on mobile, tablet, desktop
+   - Test on Chrome, Firefox, Safari
+   - Test contact form email delivery
+   - Test broken image links
+
+---
+
+### Lesson 15.7: Deployment
+
+**Deploy to the Web:**
+
+1. **Backend Deployment (Azure, AWS, or DigitalOcean):**
+   - Create Docker image for backend
+   - Push to container registry
+   - Deploy to cloud platform
+   - Set up database in cloud (Azure SQL, AWS RDS, or managed PostgreSQL)
+   - Environment variables: connection string, JWT secret, admin password
+
+2. **Frontend Deployment (Vercel, Netlify, or same cloud):**
+   - Build React app: `npm run build`
+   - Deploy to Vercel: `npm install -g vercel && vercel`
+   - OR deploy to same cloud as backend with Docker
+
+3. **Custom Domain:**
+   - Buy domain (Namecheap, GoDaddy, etc.)
+   - Point DNS to your deployment
+   - Your portfolio is now live at `yourname.dev` (or similar)
+
+4. **HTTPS/SSL:**
+   - Automatically handled by Vercel/Netlify
+   - If self-hosting, use Let's Encrypt (free)
+
+**📝 Activities:**
+
+1. Choose deployment platform
+2. Deploy backend to cloud
+3. Deploy frontend to Vercel/Netlify
+4. Set up custom domain
+5. Test live site works end-to-end
+
+---
+
+### Lesson 15.8: Maintaining & Iterating
+
+**This is just the beginning:**
+
+Your portfolio is not a one-time project. Keep it fresh:
+
+1. **Add new projects as you build them**
+2. **Blog about your learning journey** — write articles about what you built and why
+3. **Improve design & performance** — keep refining
+4. **Collect testimonials** — ask colleagues/mentors to vouch for your skills
+5. **Add analytics** — track visitors and which projects get clicks
+6. **Stay current** — update tech stack as you learn new tools
+
+**📝 Activities:**
+
+1. Add your first blog post: "Building My Portfolio" or "What I Learned in the Full-Stack Course"
+2. Get feedback from a peer or mentor
+3. Plan 2-3 improvements for next week
+4. Commit regularly to GitHub
+
+---
+
+### Portfolio Project Checklist
+
+✅ GitHub repo created and public  
+✅ React frontend with 5+ pages  
+✅ ASP.NET Core backend with API  
+✅ PostgreSQL database  
+✅ JWT authentication for admin  
+✅ Responsive design (mobile, tablet, desktop)  
+✅ Contact form with backend submission  
+✅ 3+ projects showcased  
+✅ Styled with Tailwind + Shadcn  
+✅ Tested (unit, component, or E2E)  
+✅ Deployed to live URL  
+✅ Custom domain  
+✅ README explaining setup  
+✅ Professional code (clean, commented where needed)  
 
 ---
 
