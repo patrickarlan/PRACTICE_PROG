@@ -37,6 +37,549 @@
 
 ---
 
+### Lesson 1.1b: Full-Stack Architecture Overview — Where Everything Lives
+
+*Now that you understand Client, Server, and HTTP, it's time to see the COMPLETE picture: where every file goes, what each file does, and how frontend and backend communicate. This is the master blueprint.*
+
+**The Big Picture: Browser → Frontend → Backend → Database**
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ USER'S BROWSER                                                  │
+│ ┌───────────────────────────────────────────────────────────┐  │
+│ │ index.html (loaded once)                                  │  │
+│ │ ├─ React app loads here (ReactDOM.render())              │  │
+│ │ ├─ TypeScript + JSX compiles to JavaScript               │  │
+│ │ └─ All the UI interactions happen here                   │  │
+│ └───────────────────────────────────────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+                          ↓ (API calls)
+┌─────────────────────────────────────────────────────────────────┐
+│ FRONTEND SERVER (Vite - runs on localhost:5173)                │
+│ ┌─ package.json (what packages we use)                        │
+│ ├─ vite.config.ts (how to build & serve files)                │
+│ ├─ tsconfig.json (TypeScript rules)                           │
+│ ├─ tailwind.config.ts (CSS configuration)                     │
+│ ├─ .env (API_URL=http://localhost:5107)                       │
+│ └─ src/                                                        │
+│    ├─ main.tsx (entry point - loads index.html)               │
+│    ├─ App.tsx (root component)                                │
+│    ├─ components/ (reusable UI pieces)                        │
+│    ├─ pages/ (page-level components)                          │
+│    ├─ services/ (fetch() calls to backend API)                │
+│    └─ hooks/ (React hooks)                                    │
+└─────────────────────────────────────────────────────────────────┘
+                          ↓ (HTTP requests)
+┌─────────────────────────────────────────────────────────────────┐
+│ BACKEND SERVER (ASP.NET Core - runs on localhost:5107)         │
+│ ┌─ Program.cs (entry point - starts the server)               │
+│ │   ├─ Configures CORS (allows frontend to talk to backend)   │
+│ │   ├─ Registers services (dependency injection)              │
+│ │   ├─ Configures JWT authentication                          │
+│ │   └─ Sets up middleware (logging, error handling)           │
+│ │                                                              │
+│ ├─ appsettings.json (configuration - database, logging, etc.) │
+│ ├─ appsettings.Development.json (dev-only settings)           │
+│ ├─ .env (secrets: DB_PASSWORD, JWT_SECRET)                    │
+│ │                                                              │
+│ ├─ Controllers/ (receives HTTP requests)                      │
+│ │   └─ EmployeesController.cs                                 │
+│ │       ├─ [HttpGet] /api/employees                           │
+│ │       └─ [HttpPost] /api/employees                          │
+│ │                                                              │
+│ ├─ Services/ (business logic)                                 │
+│ │   └─ EmployeeService.cs                                     │
+│ │       ├─ GetAllEmployees()                                  │
+│ │       └─ CreateEmployee()                                   │
+│ │                                                              │
+│ ├─ Models/ (database entities)                                │
+│ │   └─ Employee.cs (maps to database table)                   │
+│ │                                                              │
+│ ├─ DTOs/ (objects sent to frontend)                           │
+│ │   └─ EmployeeDto.cs (simplified version of Employee)        │
+│ │                                                              │
+│ └─ Migrations/ (auto-generated database changes)              │
+│    └─ 20240520_InitialCreate.cs                               │
+└─────────────────────────────────────────────────────────────────┘
+                          ↓ (SQL queries)
+┌─────────────────────────────────────────────────────────────────┐
+│ POSTGRESQL DATABASE (runs on localhost:5432)                   │
+│ ├─ hris_db (database name)                                    │
+│ ├─ employees (table)                                          │
+│ │   ├─ id (integer)                                           │
+│ │   ├─ name (text)                                            │
+│ │   ├─ department (text)                                      │
+│ │   └─ position (text)                                        │
+│ │                                                              │
+│ └─ other tables...                                             │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+**Frontend vs Backend: Where Things Go**
+
+| Question | Frontend | Backend |
+|----------|----------|---------|
+| **Entry point?** | `index.html` | `Program.cs` |
+| **Configuration file?** | `.env` or `vite.config.ts` | `appsettings.json` + `.env` |
+| **Language?** | TypeScript / JavaScript | C# |
+| **Framework?** | React + Vite | ASP.NET Core |
+| **Where does UI live?** | React components (`.tsx`) | NOT HERE |
+| **Where does business logic live?** | NOT HERE (or minimal state logic) | Services & Controllers |
+| **Database access?** | NOT HERE | Entity Framework Core in Repositories |
+| **Authentication config?** | Stores JWT token in localStorage | Issues JWT, validates it in `Program.cs` |
+| **API URLs?** | `.env` (API_URL) | Defined in Controllers |
+| **Run command?** | `npm run dev` | `dotnet watch run` |
+| **Port?** | 5173 (Vite dev server) | 5107 (Kestrel web server) |
+| **Restart needed when?** | Change React code, CSS, `.env` | Change C# code, `Program.cs`, migrations |
+
+---
+
+**The Request-Response Cycle (Detailed)**
+
+**Scenario:** User clicks "Load Employees" button in React
+
+```
+1. USER CLICKS BUTTON IN BROWSER
+   ↓
+2. FRONTEND (React component)
+   → useEffect hook triggers
+   → calls service.getEmployees()
+   → which calls fetch('http://localhost:5107/api/employees')
+   → sends HTTP GET request
+   ↓
+3. FRONTEND SERVER (Vite)
+   → Routes the request to the backend
+   ↓
+4. BACKEND SERVER (ASP.NET Core)
+   → localhost:5107/api/employees arrives at EmployeesController
+   → [HttpGet] method is invoked
+   → Calls _employeeService.GetAllEmployees()
+   ↓
+5. BACKEND SERVICE
+   → EmployeeService.GetAllEmployees()
+   → Calls _repository.GetAll() or _context.Employees.ToList()
+   ↓
+6. DATABASE
+   → Executes SQL: SELECT * FROM employees;
+   → Returns rows from database
+   ↓
+7. BACKEND SERVICE
+   → Maps Model objects to DTOs (for safety)
+   → Returns List<EmployeeDto>
+   ↓
+8. BACKEND CONTROLLER
+   → Receives the list
+   → Returns Ok(employeeList)  [HTTP 200]
+   → Serializes to JSON
+   ↓
+9. NETWORK
+   → HTTP response with JSON body travels back to browser
+   ↓
+10. FRONTEND SERVER (Vite)
+    → Routes response back to React
+    ↓
+11. FRONTEND (React)
+    → fetch() promise resolves
+    → Response JSON is parsed
+    → setEmployees(data) updates state
+    → Component re-renders with new data
+    ↓
+12. BROWSER
+    → Displays the list of employees!
+```
+
+---
+
+**Key Files Explained: What They Do**
+
+### Frontend Files
+
+**`index.html`** (The absolute entry point)
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HRIS</title>
+</head>
+<body>
+    <div id="root"></div>  <!-- React mounts HERE -->
+    <script type="module" src="/src/main.tsx"></script>
+</body>
+</html>
+```
+- **What:** The only HTML file. Browser loads this ONCE.
+- **Why:** React takes over from here and creates all UI dynamically.
+- **When to change:** Almost never. Only for global meta tags, favicon, etc.
+
+**`src/main.tsx`** (Startup script for React)
+```tsx
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from './App.tsx'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)
+```
+- **What:** Finds the `<div id="root">` in `index.html` and mounts the React app there.
+- **Why:** Connects the static HTML to the dynamic React application.
+- **When to change:** Almost never.
+
+**`src/App.tsx`** (Root React component)
+```tsx
+function App() {
+  return (
+    <BrowserRouter>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/employees" element={<EmployeeList />} />
+        </Routes>
+      </main>
+      <Footer />
+    </BrowserRouter>
+  );
+}
+```
+- **What:** The top-level React component. Defines page layout and routing.
+- **Why:** Orchestrates which components show on which pages.
+- **When to change:** When adding new pages or reorganizing layout.
+
+**`.env`** (Frontend configuration)
+```
+VITE_API_URL=http://localhost:5107
+VITE_APP_NAME=HRIS
+```
+- **What:** Variables accessible in React code via `import.meta.env.VITE_API_URL`
+- **Why:** Different API URLs for dev/staging/production without changing code.
+- **When to change:** When deploying to different environments.
+- **IMPORTANT:** Never commit sensitive values like API keys!
+
+**`vite.config.ts`** (Build & dev server configuration)
+```ts
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:5107',
+        changeOrigin: true,
+      }
+    }
+  },
+})
+```
+- **What:** Tells Vite how to build and serve your app.
+- **Why:** Configure ports, proxies, plugins.
+- **When to change:** Rarely. Usually only for advanced build options.
+
+**`tailwind.config.ts`** (CSS design system)
+```ts
+export default {
+  theme: {
+    colors: {
+      primary: '#3B82F6',
+      secondary: '#10B981',
+    }
+  }
+}
+```
+- **What:** Configuration for Tailwind CSS utility classes.
+- **Why:** Define your app's color palette, spacing, fonts globally.
+- **When to change:** When updating design system.
+
+**`src/services/employeeService.ts`** (API communication)
+```ts
+export const employeeService = {
+  async getAll() {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/employees`);
+    return response.json();
+  },
+  
+  async create(employee: EmployeeDto) {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/employees`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(employee),
+    });
+    return response.json();
+  }
+};
+```
+- **What:** Functions that call the backend API.
+- **Why:** Centralize all fetch() calls so components don't know about URLs.
+- **When to change:** When backend API endpoints change.
+
+---
+
+### Backend Files
+
+**`Program.cs`** (The absolute entry point)
+```csharp
+var builder = WebApplicationBuilder.CreateBuilder(args);
+
+// Register services (Dependency Injection)
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+builder.Services.AddDbContext<AppDbContext>();
+
+// Configure middleware
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowFrontend", builder =>
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+    );
+});
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer();
+
+var app = builder.Build();
+
+// Use middleware
+app.UseCors("AllowFrontend");
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();
+
+app.Run();
+```
+- **What:** Starts the backend server, configures everything.
+- **Why:** All backend setup happens here (services, authentication, CORS, middleware).
+- **When to change:** Adding new services, middleware, or authentication schemes.
+- **IMPORTANT:** If you change `Program.cs`, you MUST restart the backend!
+
+**`appsettings.json`** (Configuration)
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Database=hris_db;Username=postgres;Password=..."
+  },
+  "Jwt": {
+    "SecretKey": "your-secret-key-here"
+  }
+}
+```
+- **What:** Non-sensitive configuration values.
+- **Why:** Different settings for different environments (dev vs production).
+- **When to change:** When configuring database, logging, JWT, etc.
+- **IMPORTANT:** Don't put secrets here! Use `.env` and `IConfiguration` instead.
+
+**`.env`** (Backend secrets)
+```
+DB_PASSWORD=postgres_password_123
+JWT_SECRET=your-super-secret-key-min-32-characters
+```
+- **What:** Sensitive values loaded by code, not committed to Git.
+- **Why:** Security. API keys, passwords should never be in version control.
+- **When to change:** When deploying to new environments.
+
+**`Controllers/EmployeesController.cs`** (HTTP endpoints)
+```csharp
+[ApiController]
+[Route("api/[controller]")]
+public class EmployeesController : ControllerBase
+{
+    private readonly IEmployeeService _service;
+    
+    public EmployeesController(IEmployeeService service) {
+        _service = service;
+    }
+    
+    [HttpGet]
+    public async Task<ActionResult<List<EmployeeDto>>> GetAll() {
+        var employees = await _service.GetAllEmployees();
+        return Ok(employees);
+    }
+    
+    [HttpPost]
+    public async Task<ActionResult<EmployeeDto>> Create([FromBody] CreateEmployeeRequest request) {
+        var employee = await _service.CreateEmployee(request);
+        return CreatedAtAction(nameof(GetAll), employee);
+    }
+}
+```
+- **What:** Handles HTTP requests and responses.
+- **Why:** Defines API endpoints (GET /api/employees, POST /api/employees, etc.).
+- **When to change:** When adding new endpoints or changing request/response formats.
+- **RULE:** Controllers should be THIN. All business logic goes in Services!
+
+**`Services/EmployeeService.cs`** (Business logic)
+```csharp
+public interface IEmployeeService {
+    Task<List<EmployeeDto>> GetAllEmployees();
+    Task<EmployeeDto> CreateEmployee(CreateEmployeeRequest request);
+}
+
+public class EmployeeService : IEmployeeService
+{
+    private readonly IEmployeeRepository _repository;
+    
+    public EmployeeService(IEmployeeRepository repository) {
+        _repository = repository;
+    }
+    
+    public async Task<List<EmployeeDto>> GetAllEmployees() {
+        var employees = await _repository.GetAllAsync();
+        return employees.Select(e => new EmployeeDto {
+            Id = e.Id,
+            Name = e.Name,
+            Department = e.Department
+        }).ToList();
+    }
+    
+    public async Task<EmployeeDto> CreateEmployee(CreateEmployeeRequest request) {
+        // Validation
+        if (string.IsNullOrEmpty(request.Name))
+            throw new ArgumentException("Name is required");
+        
+        // Business logic
+        var employee = new Employee { Name = request.Name, Department = request.Department };
+        var created = await _repository.AddAsync(employee);
+        
+        return new EmployeeDto { Id = created.Id, Name = created.Name, Department = created.Department };
+    }
+}
+```
+- **What:** Contains all business logic.
+- **Why:** Controllers should NOT have logic. Services make code testable and reusable.
+- **When to change:** When business rules change.
+
+**`Models/Employee.cs`** (Database entity)
+```csharp
+public class Employee
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Department { get; set; }
+    public string Position { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+}
+```
+- **What:** C# class that maps to a database table.
+- **Why:** Entity Framework uses this to create/read database tables.
+- **When to change:** When database schema changes (then create a Migration).
+
+**`DTOs/EmployeeDto.cs`** (Safe response object)
+```csharp
+public class EmployeeDto
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Department { get; set; }
+}
+// Notice: no CreatedAt (internal field, not sent to frontend)
+```
+- **What:** Simplified version of Model, sent to frontend.
+- **Why:** Never send the full Model to the frontend. Hide sensitive fields.
+- **When to change:** When frontend needs different fields than the Model has.
+
+---
+
+**Development Workflow: Starting Everything**
+
+**Step 1: Start the Database**
+```powershell
+# PostgreSQL is usually running as a service
+# Or use Docker:
+docker run -p 5432:5432 -e POSTGRES_PASSWORD=password postgres
+```
+- Check: Open pgAdmin, can you connect?
+
+**Step 2: Start the Backend**
+```powershell
+cd backend
+dotnet watch run
+# Backend is now running on http://localhost:5107
+# Check: http://localhost:5107/swagger shows API docs
+```
+
+**Step 3: Start the Frontend**
+```powershell
+cd hris  # or wherever your React app is
+npm run dev
+# Frontend is now running on http://localhost:5173
+# Check: Browser shows the app, no CORS errors
+```
+
+**Step 4: Test the Connection**
+- Open browser DevTools → Network tab
+- Click a button that fetches data
+- See the request go to `http://localhost:5107/api/...`
+- See JSON response come back
+
+---
+
+**Quick Reference: "Where do I put this?"**
+
+| If you want to... | File/Location | Why |
+|-------------------|---------------|-----|
+| ...change the API URL | `.env` (frontend) | Different URLs for dev/prod |
+| ...change database connection | `appsettings.json` or `.env` (backend) | Different DBs for dev/prod |
+| ...add a new endpoint | `Controllers/` + `Services/` (backend) | That's where API code goes |
+| ...add a new page | `src/pages/` (frontend) | That's where page components go |
+| ...change the color scheme | `tailwind.config.ts` (frontend) | That's the design system |
+| ...change business logic | `Services/` (backend) | Controllers are thin, Services have logic |
+| ...add a new database table | `Models/` (backend) + Migration | That's where database schema goes |
+| ...hide a field from frontend | `DTO` file (backend) | Never send raw Model, use DTO |
+| ...add a global middleware | `Program.cs` (backend) | That's where middleware is registered |
+| ...add a global style | `src/App.css` or Tailwind config (frontend) | Global styles go at the top level |
+
+---
+
+**📝 Activities:**
+
+1. **Map your HRIS project:**
+   - Create a text file with the directory structure
+   - For each major folder/file, write one sentence: "What does this do?"
+   - Compare to the diagram above
+
+2. **Trace a Request:**
+   - Open HRIS frontend → click "View Employees"
+   - Open DevTools → Network tab
+   - Find the request to `/api/employees`
+   - Click it, look at Request/Response tabs
+   - Trace: Browser → Frontend → Backend → Database → back up
+
+3. **Find each file type:**
+   - Backend: `Program.cs`, `appsettings.json`, `.env`, a Controller, a Service, a Model, a DTO
+   - Frontend: `index.html`, `src/main.tsx`, `src/App.tsx`, `.env`, `vite.config.ts`, `package.json`
+   - Take screenshots of each
+
+4. **Understand the startup:**
+   - Start backend: `dotnet watch run`
+   - Watch the console: Find where it says "Now listening on http://localhost:5107"
+   - Start frontend: `npm run dev`
+   - Watch the console: Find where it says the Vite server is running
+   - Open browser DevTools → look at Network tab as frontend loads
+
+5. **Restart test:**
+   - Backend is running
+   - Change something in `Program.cs` (add a comment)
+   - Watch the terminal: It should restart automatically
+   - Now change a React component (change text in App.tsx)
+   - Frontend hot-reloads (no restart needed)
+   - Understand: Backend restarts for C# changes, Frontend hot-reloads for JS/TS changes
+
+6. **Configuration exploration:**
+   - Open backend `.env` → what secrets are there?
+   - Open backend `appsettings.json` → what configuration?
+   - Open frontend `.env` → what environment variables?
+   - Write: "Why is JWT_SECRET in backend .env but API_URL in frontend .env?"
+
+---
+
 ### Lesson 1.2: Frontend vs Backend vs Database
 - What is the **Frontend**? (What the user sees)
 - What is the **Backend**? (The brain — processes logic)
