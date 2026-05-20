@@ -722,13 +722,15 @@ npm run dev
 - Unordered lists (`<ul>`, `<li>`)
 - Ordered lists (`<ol>`, `<li>`)
 - Tables (`<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>`)
+- Table header alignment: `scope="col"` and `scope="row"` for semantic clarity and accessibility
 
 **📝 Activities:**
 1. Create `table.html`. Build an HTML table with 4 columns: `Employee ID`, `Name`, `Department`, `Position`.
 2. Add 3 fake employee rows inside the table.
 3. Use `<thead>` and `<tbody>` to properly separate the header from the data rows.
-4. Add a bullet list of 5 programming languages you want to learn.
-5. Add a numbered list of the 3 steps to start the HRIS project (from memory — don't look!).
+4. Add `scope="col"` to each `<th>` header to make the table semantic and accessible.
+5. Add a bullet list of 5 programming languages you want to learn.
+6. Add a numbered list of the 3 steps to start the HRIS project (from memory — don't look!).
 
 ---
 
