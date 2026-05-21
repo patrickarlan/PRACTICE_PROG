@@ -4,80 +4,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TABLE ACTIVITY</title>
+    <title>HRIS Login</title>
+    <style>
+        form {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 
 <body>
-    <div>
-        <h1>Employee Directory</h1>
+    <h1>HRIS Login</h1>
 
-        <!-- table container ACT 1-->
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Position</th>
-                        <th scope="col">Department</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Alice Johnson</td>
-                        <td>Software Engineer</td>
-                        <td>IT</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Bob Smith</td>
-                        <td>Marketing Manager</td>
-                        <td>Marketing</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Charlie Brown</td>
-                        <td>Sales Associate</td>
-                        <td>Sales</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Diana Prince</td>
-                        <td>HR Specialist</td>
-                        <td>Human Resources</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+    <form action="/api/login" method="POST">
+        <!-- Email Field -->
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required>
 
-        <!-- table container ACT 2 -->
-        <div>
-            <h2>Languages I want to learn</h2>
-            <div>
-                <ul>
-                    <li>Python</li>
-                    <li>CSharp</li>
-                    <li>C++</li>
-                    <li>JavaScript</li>
-                    <li>Java</li>
-                </ul>
-            </div>
-        </div>
+        <!-- Password Field -->
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter your password" required>
 
-        <!-- table container ACT 3 -->
-        <div>
-            <h2>STEPS TO BUILD HRIS</h2>
-            <div>
-                <ol>
-                    <li>Step 1: Setup the development environment</li>
-                    <li>Step 2: Design the database schema</li>
-                    <li>Step 3: Implement the core features</li>
-                </ol>
-            </div>
-        </div>
+        <!-- Remember Me Checkbox -->
+        <label for="rememberMe">
+            <input type="checkbox" id="rememberMe" name="rememberMe">
+            Remember me
+        </label>
 
-    </div>
+        <!-- Role Radio Buttons -->
+        <fieldset>
+            <legend>Login as:</legend>
+            <input type="radio" id="employee" name="role" value="employee" checked>
+            <label for="employee">Employee</label>
+
+            <input type="radio" id="admin" name="role" value="admin">
+            <label for="admin">Admin</label>
+        </fieldset>
+
+        <!-- Submit Button -->
+        <button type="submit">Login</button>
+    </form>
 </body>
 
 </html>
