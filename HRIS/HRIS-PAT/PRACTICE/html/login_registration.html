@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN</title>
+    <style>
+        /* login form */
+        .login-form,
+        .regist-form {
+            display: block;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            padding-right: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .h1 {
+            display: block;
+            text-align: center;
+            margin: 15px auto 0;
+        }
+
+
+        .label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+
+
+        button {
+            display: block;
+            width: 50%;
+            padding: 10px;
+            margin: 15px auto 0;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        /* registration form */
+        #regLabelPos {
+            margin-top: 15px;
+            display: block;
+
+        }
+
+        input[type="checkbox"] {
+            width: auto;
+            display: inline;
+            margin-right: 8px;
+            margin-bottom: 15px;
+            padding: 0;
+        }
+
+        label[for="terms"] {
+            display: inline;
+        }
+
+        .radioRoles {
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
+
+        input[type="radio"] {
+            width: auto;
+            display: inline;
+            margin-right: 5px;
+        }
+
+        label[for="employee"],
+        label[for="admin"] {
+            display: inline;
+            margin-right: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: auto;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <form action="/api/login" method="POST">
+            <!-- login form -->
+            <div class="login-form">
+                <h1 class="h1">Login</h1>
+                <label for="email">Email:</label>
+                <input type="email" id="logEmail" name="userEmail" required placeholder="you@example.com">
+                <label for="password">Password:</label>
+                <input type="password" id="logPassw" name="userPasswords" required placeholder="Enter your password">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+
+        <form action="/api/register" method="POST">
+            <!-- registration form -->
+            <div class="regist-form">
+                <h1 class="h1">Register</h1>
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullname" name="fullName" required placeholder="Full name">
+                <label for="email">Email:</label>
+                <input type="email" id="regEmail" name="userEmail" required placeholder="you@example.com">
+                <label for="password">Password:</label>
+                <input type="password" id="regPass" name="userPasswords" required placeholder="Enter your password">
+
+                <label for="department">Department:</label>
+                <select name="department">
+                    <option value="" disabled selected>Select your department</option>
+                    <option value="ENG">Engineering</option>
+                    <option value="SL">Sales</option>
+                    <option value="HR">Human Resource</option>
+                    <option value="MR">Marketing</option>
+                </select>
+
+                <label for="position" id="regLabelPos">Position:</label>
+                <input type="text" id="regPos" name="position" required placeholder="Your position in the company">
+
+                <div class="radioRoles">
+                    <input type="radio" name="role" value="employee" id="employee">
+                    <label for="employee">Employee</label>
+                    <input type="radio" name="role" value="admin" id="admin">
+                    <label for="admin">Admin</label>
+                </div>
+
+                <input type="checkbox" id="terms" name="terms">
+                <label for="terms">I agree to the terms and conditions</label>
+
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
