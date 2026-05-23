@@ -4,82 +4,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HRIS Login</title>
+    <title>TABLE</title>
     <style>
-        form {
-            max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            font-size: 14px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            background-color: #4CAF50;
+        header {
+            background-color: #333;
             color: white;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 16px;
+            padding: 20px;
+            text-align: center;
         }
 
-        button:hover {
-            background-color: #45a049;
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .employeeTable {
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: block;
+            text-align: center;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .progList,
+        .hrisSteps {
+            border: 1px solid #ccc;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            bottom: 0;
         }
     </style>
 </head>
 
 <body>
-    <h1>HRIS Login</h1>
+    <header>
+        <h1>TABLE</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="blog.html">Blog</a>
+            <a href="table.html">Table</a>
+            <a href="login_registration.html">Login/Register</a>
+        </nav>
+    </header>
 
-    <form action="/api/login" method="POST">
-        <!-- Email Field -->
-        <label for="email">Email Address:</label>
-        <input type="email" id="email" name="email" placeholder="you@example.com" required>
+    <main>
+        <section class="employeeTable">
+            <h2>Employee Table</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">Employee ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Position</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">001</th>
+                        <td>Alice Johnson</td>
+                        <td>Engineering</td>
+                        <td>Senior Developer</td>
+                    </tr>
 
-        <!-- Password Field -->
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <tr>
+                        <th scope="row">002</th>
+                        <td>Bob Smith</td>
+                        <td>Sales</td>
+                        <td>Sales Manager</td>
+                    </tr>
 
-        <!-- Remember Me Checkbox -->
-        <label for="rememberMe">
-            <input type="checkbox" id="rememberMe" name="rememberMe">
-            Remember me
-        </label>
+                    <tr>
+                        <th scope="row">003</th>
+                        <td>Carol White</td>
+                        <td>HR</td>
+                        <td>HR Specialist</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="progList">
+            <h2>Programmings Languages List</h2>
+            <ul>
+                <li>Python</li>
+                <li>C++</li>
+                <li>C#</li>
+            </ul>
+        </section>
+        <section class="hrisSteps">
+            <h2>HRIS Setup Steps</h2>
+            <ol>
+                <li>Define HRIS requirements</li>
+                <li>Choose an HRIS vendor</li>
+                <li>Plan implementation timeline</li>
+                <li>Train HR staff</li>
+                <li>Go live and monitor system performance</li>
+            </ol>
+        </section>
 
-        <!-- Role Radio Buttons -->
-        <fieldset>
-            <legend>Login as:</legend>
-            <input type="radio" id="employee" name="role" value="employee" checked>
-            <label for="employee">Employee</label>
+    </main>
 
-            <input type="radio" id="admin" name="role" value="admin">
-            <label for="admin">Admin</label>
-        </fieldset>
-
-        <!-- Submit Button -->
-        <button type="submit">Login</button>
-    </form>
+    <footer>
+        <p>&copy; 2026 Patrick's HTML Practice. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>

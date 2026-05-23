@@ -6,6 +6,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIN</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+
         /* login form */
         .login-form,
         .regist-form {
@@ -105,32 +138,41 @@
 </head>
 
 <body>
-    <div>
+    <header>
+        <h1>Login and Registration Forms</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="blog.html">Blog</a>
+            <a href="table.html">Table</a>
+            <a href="login_registration.html">Login/Register</a>
+        </nav>
+    </header>
+    <main>
         <form action="/api/login" method="POST">
             <!-- login form -->
-            <div class="login-form">
-                <h1 class="h1">Login</h1>
-                <label for="email">Email:</label>
+            <section class="login-form">
+                <h2 class="h1">Login</h2>
+                <label for="logEmail">Email:</label>
                 <input type="email" id="logEmail" name="userEmail" required placeholder="you@example.com">
-                <label for="password">Password:</label>
+                <label for="logPassw">Password:</label>
                 <input type="password" id="logPassw" name="userPasswords" required placeholder="Enter your password">
                 <button type="submit">Login</button>
-            </div>
+            </section>
         </form>
 
         <form action="/api/register" method="POST">
             <!-- registration form -->
-            <div class="regist-form">
-                <h1 class="h1">Register</h1>
-                <label for="fullName">Full Name:</label>
-                <input type="text" id="fullname" name="fullName" required placeholder="Full name">
-                <label for="email">Email:</label>
+            <section class="regist-form">
+                <h2 class="h1">Register</h2>
+                <label for="regFullName">Full Name:</label>
+                <input type="text" id="regFullName" name="fullName" required placeholder="Full name">
+                <label for="regEmail">Email:</label>
                 <input type="email" id="regEmail" name="userEmail" required placeholder="you@example.com">
-                <label for="password">Password:</label>
-                <input type="password" id="regPass" name="userPasswords" required placeholder="Enter your password">
+                <label for="regPassw">Password:</label>
+                <input type="password" id="regPassw" name="userPasswords" required placeholder="Enter your password">
 
                 <label for="department">Department:</label>
-                <select name="department">
+                <select id="department" name="regDepartment">
                     <option value="" disabled selected>Select your department</option>
                     <option value="ENG">Engineering</option>
                     <option value="SL">Sales</option>
@@ -138,7 +180,7 @@
                     <option value="MR">Marketing</option>
                 </select>
 
-                <label for="position" id="regLabelPos">Position:</label>
+                <label for="regPos" id="regLabelPos">Position:</label>
                 <input type="text" id="regPos" name="position" required placeholder="Your position in the company">
 
                 <div class="radioRoles">
@@ -152,9 +194,12 @@
                 <label for="terms">I agree to the terms and conditions</label>
 
                 <button type="submit">Register</button>
-            </div>
+            </section>
         </form>
-    </div>
+    </main>
+    <footer>
+        <p>&copy; 2026 Patrick's HTML Practice. All rights reserved.</p>
+    </footer>
 </body>
 
 </html>
