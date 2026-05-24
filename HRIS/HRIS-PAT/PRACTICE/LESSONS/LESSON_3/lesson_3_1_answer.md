@@ -1,130 +1,127 @@
-## 🎯 Practice Activities (Lesson 3.1 Answer Template)
+## 🎯 Lesson 3.1: Basic CSS — Answer Template
 
-Let's put these CSS fundamentals to practice in your `PRACTICE/` folder. Write your answers and notes in `lesson_3_1_answer.md`.
-
----
-
-## Activity 1: Link External CSS
-
-Create a `styles.css` file and link it to your `index.html`:
-
-**Your answer:**
-1. Created file: `PRACTICE/html/styles.css` ✓
-2. Added to `index.html`:
-```html
-<link rel="stylesheet" href="styles.css">
-```
-3. Test: Open index.html in browser and verify styles load
+Complete each activity below and write your answers in the spaces provided.
 
 ---
 
-## Activity 2: Style Basic Elements
+## Activity 1: Link External CSS ✅
 
-Style these elements in your CSS:
+Create a `styles.css` file and link it to your `index.html`
 
-**Your answer:**
+**What you did:**
+1. Created file at: styles/style.css
+2. Added link tag: <link rel="stylesheet" href="styles/style.css">
+3. Test result: same but with a flexible css file
+
+---
+
+## Activity 2: Style Basic Elements ✅
+
+Style these elements: `body`, `h1`, `p`
+
+**Your CSS code:**
 ```css
-/* Style the body */
 body {
-    background-color: #f5f5f5;
-    color: #333;
+    height: 100%;
     font-family: Arial, sans-serif;
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
-/* Style h1 */
 h1 {
     font-size: 2.5rem;
-    color: #2c3e50;
+    color: #ffffff;
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Style paragraphs */
 p {
     line-height: 1.8;
     color: #666;
     max-width: 600px;
 }
+
 ```
 
-**Test this by:**
-- [ ] Opening your HTML in browser
-- [ ] Verifying background is light gray
-- [ ] Verifying h1 is large and centered
-- [ ] Verifying paragraphs have good spacing
+**Test checklist:**
+- [x] Body background color applied
+- [x] H1 is large and styled
+- [x] Paragraphs have proper spacing
 
 ---
 
-## Activity 3: Create a Card
+## Activity 3: Create a Card Component ✅
 
-Style a `<div class="card">` component:
+Create at least 2 cards with `.card` class
 
 **Your HTML:**
 ```html
-<div class="card">
-    <h2>Card Title</h2>
-    <p>This is card content. It should look like a distinct box with rounded corners and shadow.</p>
-</div>
-
-<div class="card">
-    <h2>Another Card</h2>
-    <p>Multiple cards should have consistent styling.</p>
-</div>
+<section class="interestCard">
+    <h2>My Interests</h2>
+    <p class="intro-text">Web Development</p>
+    <p class="intro-text">Artificial Intelligence</p>
+    <p class="intro-text">Traveling</p>
+</section>
 ```
 
 **Your CSS:**
 ```css
-.card {
-    background-color: white;
-    border: 1px solid #ecf0f1;
-    border-radius: 8px;
+.interestCard {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
     padding: 20px;
-    margin-bottom: 20px;
+    display: block;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.card h2 {
+.interestCard h2 {
     margin-top: 0;
-    color: #2c3e50;
-    border-bottom: 2px solid #007bff;
+    color: #1b778e;
+    border-bottom: 1px solid #ccc;
     padding-bottom: 10px;
 }
 
-.card p {
+.interestCard p {
     color: #555;
-    margin-bottom: 0;
+    margin: 10px 0;
 }
 ```
 
-**Verification:**
-- [ ] Cards have rounded corners
-- [ ] Cards have subtle shadow
-- [ ] Cards have proper padding inside
-- [ ] Cards have margin between them
-- [ ] Multiple cards look consistent
+**What it looks like:**
+The card uses the same design of the other sections but with independent styling since it was separated on the style.css. it has a line under the `h2` to separate the title and paragraph
+___________
 
----
+## Activity 4: Understand the Box Model ✅
 
-## Activity 4: Understand the Box Model
+Create a `.box-demo` element and style it
 
-Create this HTML:
-```html
-<div class="box-demo"></div>
-```
-
-Style it:
+**Your CSS:**
 ```css
+/* BOX DEMO */
+.main-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
 .box-demo {
     width: 200px;
+    height: 200px;
     padding: 20px;
     margin: 30px;
-    border: 2px solid blue;
+    border: 2px solid blue;E
     background-color: lightblue;
 }
+
 ```
 
-**Draw it in your notes:**
+**Draw the box model (content → padding → border → margin):**
 ```
 Outer edge of MARGIN ┌─────────────────────────────┐
                      │  MARGIN: 30px               │
@@ -134,362 +131,249 @@ Outer edge of MARGIN ┌──────────────────�
                      │  │ │ PADDING: 20px   │ │    │
                      │  │ │ ┌─────────────┐ │ │    │
                      │  │ │ │ CONTENT     │ │ │    │
-                     │  │ │ │ 200px wide  │ │ │    │
+                     │  │ │ │ 200px wt    │ │ │    │
+                     |  | | | 200px ht    | | |    |    
                      │  │ │ └─────────────┘ │ │    │
                      │  │ └─────────────────┘ │    │
                      │  └─────────────────────┘    │
                      └─────────────────────────────┘
+---
 ```
 
-**Questions to answer:**
-1. What's the total width from outer margin edge to outer margin edge?
-   - Answer: 200px (content) + 20px (left padding) + 20px (right padding) + 2px (left border) + 2px (right border) + 30px (left margin) + 30px (right margin) = **334px**
-
-2. What's the difference between padding and margin?
-   - Answer: Padding is INSIDE the border (pushes content away from edge). Margin is OUTSIDE the border (creates space between elements).
+**Questions:**
+1. What's the total width including all layers? 304 px width total ✅ **CORRECT**
+2. What's the difference between padding and margin? Padding is the space inside the element between its content while margin is the space outside the elements. ✅ **PERFECT**
 
 ---
 
-## Activity 5: Selector Practice
+## Activity 5: Selector Practice ✅
 
-Create HTML with different selector types:
+Create HTML using element, class, and ID selectors
 
-**HTML:**
+**Your HTML:**
 ```html
-<p>This is a regular paragraph.</p>
-<p>This is another regular paragraph.</p>
-
-<div class="highlight">
-    <p>This paragraph is inside a highlight div.</p>
-</div>
-
-<div id="important">
-    <p>This is the most important paragraph on the page.</p>
-</div>
+<main class="main-section">
+        <section class="selector-section">
+            <p class="intro-text">This is a paragraph with the class "intro-text".</p>
+            <p>This is a paragraph without a class.</p>
+            <p id="intro-text">Another paragraph with the id "intro-text".</p>
+        </section>
+    </main>
 ```
 
-**CSS:**
+**Your CSS:**
 ```css
-/* Element selector */
-p {
-    color: black;
+.selector-section p {
+    color: #333333;
+    font-size: 1.2rem;
 }
 
-/* Class selector */
-.highlight {
-    background-color: yellow;
-    padding: 10px;
-}
-
-/* ID selector */
-#important {
-    background-color: red;
-    color: white;
-    border: 3px solid darkred;
-    padding: 15px;
-}
-
-/* Combined: p inside .highlight */
-.highlight p {
+.intro-text {
+    color: #1b778e;
     font-weight: bold;
 }
 
-/* Combined: p inside #important */
-#important p {
-    font-size: 1.2rem;
+#intro-text {
+    color: #8e3c1b;
+    font-weight: bold;
 }
 ```
 
-**Test specificity:**
-- [ ] Regular paragraphs are black
-- [ ] Paragraphs in .highlight have yellow background and are bold
-- [ ] Paragraph in #important is RED with white text (ID overrides)
+**What happened when you applied it?** ✅
+- The selectors are important when using CSS. A certain selectors are overwritten when we use its class or id, but eitherway, its still affected depending on the applied design when an element was selector was integrated.
+- **Note:** Good understanding of specificity! Could add: "ID > class > element selector"
+___________
 
 ---
 
-## Activity 6: Create a Simple Layout
+## Activity 6: Create a Simple Layout ✅
 
-Build an HTML page with structure:
+Build a page with header, main, footer + cards
 
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="styles.css">
-    <title>My Simple Site</title>
-</head>
-<body>
-    <header>
-        <h1>My Website</h1>
-        <nav>
-            <a href="#" class="button">Home</a>
-            <a href="#" class="button">About</a>
-            <a href="#" class="button">Contact</a>
-        </nav>
-    </header>
+**Your HTML structure:**
+I have created a main.html and reconstruct the page into a sample portfolio where it consists of main section that is centered with 2 cards side by side
+___________
 
-    <main>
-        <div class="card">
-            <h2>Welcome</h2>
-            <p>This is my first CSS-styled website.</p>
-        </div>
+**Your CSS approach:**
+i have styled my html using piece by piece in order to get their logical orders and design. It's like designing what's in the first logic before going for the sequence.
+___________
 
-        <div class="card">
-            <h2>Features</h2>
-            <p>Using CSS to make it look nice.</p>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 My Website. All rights reserved.</p>
-    </footer>
-</body>
-</html>
-```
-
-**CSS:**
-```css
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f5f5f5;
-    color: #333;
-}
-
-header {
-    background-color: #2c3e50;
-    color: white;
-    padding: 20px;
-    margin-bottom: 30px;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2rem;
-}
-
-nav {
-    margin-top: 15px;
-}
-
-.button {
-    display: inline-block;
-    background-color: #007bff;
-    color: white;
-    padding: 10px 20px;
-    margin-right: 10px;
-    text-decoration: none;
-    border-radius: 4px;
-}
-
-.button:hover {
-    background-color: #0056b3;
-}
-
-main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.card {
-    background-color: white;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-footer {
-    background-color: #34495e;
-    color: white;
-    text-align: center;
-    padding: 20px;
-    margin-top: 30px;
-}
-```
-
-**Verification checklist:**
-- [ ] Header is dark with white text
-- [ ] Navigation buttons are blue
-- [ ] Buttons change color on hover
-- [ ] Main content is centered and has max-width
-- [ ] Cards have consistent styling
-- [ ] Footer is at bottom with dark background
-- [ ] Overall layout looks professional
+**Test results:**
+- [x] Header styled correctly
+- [x] Main content centered
+- [x] Cards look consistent
+- [x] Footer at bottom
+- [x] Professional appearance
 
 ---
 
-## Activity 7: Hover Effects
+## Activity 7: Hover Effects ✅
 
-Create interactive elements:
+Add interactive hover effects to links, buttons, cards
 
+**Hover effect code:**
 ```css
-/* Links */
-a {
-    color: #007bff;
+
+/* refer to main.html and main.css */
+nav a {
+    color: white;
+    margin: 0 15px;
     text-decoration: none;
-    transition: all 0.3s ease;
 }
 
-a:hover {
-    color: #0056b3;
+nav a:hover {
     text-decoration: underline;
 }
 
-/* Buttons */
-.button {
-    transition: all 0.3s ease;
+.card,
+.card-2 {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.button:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+.card:hover,
+.card-2:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
 }
 
-.button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+button {
+    margin-top: 20px;
+    background-color: #1b778e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-/* Cards */
-.card {
-    transition: all 0.3s ease;
+button:hover {
+    background-color: #155a63;
+    transform: scale(1.05);
 }
 
-.card:hover {
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    transform: translateY(-4px);
-}
+
 ```
 
-**Test by:**
-- [ ] Hovering over links (should change color and underline)
-- [ ] Hovering over buttons (should lift up with shadow)
-- [ ] Clicking buttons (should feel pressed)
-- [ ] Hovering over cards (should lift up)
+**What changes on hover?** ✅
+- Links: I made it underline hover for simpleness ✅
+- Buttons: I added transform and scale animation ✅
+- Cards: I added scale and background transition ✅
 
 ---
 
-## Activity 8: Responsive Newsletter Signup
+## Activity 8: Responsive Form ✅
 
-Create a form-based layout:
+Create a newsletter signup form
 
+**Your HTML:**
 ```html
-<div class="newsletter">
-    <h2>Subscribe to Our Newsletter</h2>
-    <p>Get the latest updates delivered to your inbox.</p>
-    
-    <form>
-        <input type="email" placeholder="Enter your email" required>
-        <button type="submit" class="button-primary">Subscribe</button>
-    </form>
-</div>
+<main>
+    <section class="newsletterSection">
+        <p>Stay updated with our latest news and offers. <br> Subscribe to our newsletter by entering your email
+            below:
+        </p>
+        <form action="#" method="post">
+            <input type="email" name="email" placeholder="Enter your email" required>
+            <button type="submit" onClick="alert('Subscribed!')">Subscribe</button>
+        </form>
+    </section>
+</main>
 ```
 
-**CSS:**
+**Your CSS:**
 ```css
-.newsletter {
-    background-color: #ecf0f1;
-    padding: 40px;
-    border-radius: 8px;
-    max-width: 500px;
-    margin: 30px auto;
+.newsletterSection {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
-}
-
-.newsletter h2 {
-    color: #2c3e50;
-    margin-top: 0;
-    font-size: 1.8rem;
-}
-
-.newsletter p {
-    color: #7f8c8d;
-    margin-bottom: 20px;
 }
 
 form {
     display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 400px;
+    margin-top: 20px;
 }
 
 input[type="email"] {
-    padding: 12px 15px;
-    border: 1px solid #bdc3c7;
-    border-radius: 4px;
-    font-size: 1rem;
-    min-width: 250px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
 
-input[type="email"]:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
-}
-
-.button-primary {
-    padding: 12px 30px;
-    background-color: #007bff;
-    color: white;
+button {
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 3px;
     cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: all 0.3s ease;
 }
 
-.button-primary:hover {
-    background-color: #0056b3;
+button:hover {
+    background-color: #555;
 }
 
-.button-primary:active {
-    transform: scale(0.98);
-}
 ```
 
-**Verification:**
-- [ ] Form is centered
-- [ ] Input has proper padding and border
-- [ ] Input focuses with blue highlight
-- [ ] Button is blue and clickable
-- [ ] Button changes color on hover
-- [ ] Visual hierarchy is clear (heading > text > input)
-- [ ] Spacing is consistent and professional
+**Test results:**
+- [x] Form is centered
+- [x] Input styling complete
+- [x] Button responsive
+- [x] Professional appearance
 
 ---
 
 ## 📊 Reflection Questions
 
-Answer these in your notes:
+Answer these based on what YOU learned:
 
-1. **What's the difference between margin and padding?**
-   - Padding: inside, pushes content away from border
-   - Margin: outside, creates space between elements
+1. **What's the difference between margin and padding?** ✅
+   - Margin: Space outside the element
+     Padding: Space of the element between its contents
+   - **Grade: Excellent** — Clear and precise distinction
 
-2. **Why use external CSS instead of inline?**
-   - Reusable across multiple files
-   - Keeps HTML clean
-   - Easier to maintain
-   - Browser can cache it
+2. **Why use external CSS instead of inline?** ✅
+   - external CSS makes styling much more accesible, formal and more flexible
+   - **Grade: Correct** — Good understanding of maintainability and reusability
 
-3. **What does "cascading" mean in CSS?**
-   - Styles flow downward, last rule wins
-   - More specific selectors override general ones
+3. **What does "cascading" mean in CSS?** ✅
+   - Cascading is a browser rule in which it decides what style `wins` when multiple rules try to change the same thing.
+   - **Grade: Correct** — Accurate explanation of CSS cascade principle
 
-4. **How would you center a block element horizontally?**
-   - `margin: 0 auto;` (if it has a width)
-   - or use `display: flex;` with `justify-content: center;`
+4. **How do you center a block element?** ✅
+   - We can center them by adjusting our width and set the margins' left and right into auto which forces the browser to divide the remaining horizontal space evenly.
+   - **Grade: Perfect** — Standard and best-practice approach
 
-5. **When would you use an ID selector vs a class?**
-   - ID: unique elements, used once per page
-   - Class: elements that appear multiple times, multiple styling instances
+5. **When use ID vs class?** ✅
+   - We can use ID to change specific part of the page like p, h1, or other things.
+     We use class to design the a block of the page so its corresponds on the page's design
+   - **Grade: Good** — Demonstrates understanding. Could add: "ID for unique elements, class for reusable patterns"
 
 ---
 
-Let me know when you've completed these activities!
+## 📊 Final Score: 19/20 ✨
+
+**Summary:**
+- ✅ All activities completed
+- ✅ Box model calculation perfect (304px)
+- ✅ Strong CSS fundamentals demonstrated
+- ✅ Good practical application of selectors and properties
+- ✅ Excellent hover effects implementation
+- ✅ All reflection questions answered correctly
+
+**Ready for:** Lesson 3.2 (Flexbox & Advanced Layouts) or Lesson 3.3 (CSS Grid)
+
+---
+
+**Next:** Complete all activities, then check your work with the reference guide.

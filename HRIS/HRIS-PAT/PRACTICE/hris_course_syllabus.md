@@ -1163,6 +1163,730 @@ npm run dev
 
 ---
 
+## ═══════════════════════════════════════════════════════════════════
+## 🟢 UNIT 3.5: FRONTEND DEVELOPMENT ENVIRONMENT & NODE.JS
+## ═══════════════════════════════════════════════════════════════════
+*Before you write a single line of JavaScript, you need to understand the tools that power modern frontend development. Node.js is the JavaScript runtime that makes all of this possible.*
+
+---
+
+### Lesson 3.5.0: What is Node.js and Why Does the Frontend Need It?
+
+*Your browser runs JavaScript inside the browser context. Node.js lets you run JavaScript on your computer (or a server) like any other programming language. This is revolutionary for web development.*
+
+#### The Problem It Solves
+
+Without Node.js, web development would be:
+- **Manual and tedious:** No automated build tools, no package management, no live reloading.
+- **Fragile:** No dependency management — you'd need to manually download and include every library.
+- **Slow:** No optimization, no minification, no asset bundling.
+- **Chaotic:** Everyone would organize their code differently.
+
+With Node.js, you get:
+- **npm:** A package manager (like installing apps, but for code libraries).
+- **Build tools:** Vite, Webpack, TypeScript compiler — automate all the repetitive work.
+- **Development server:** Hot module replacement (HMR) — change your code, see it instantly without refreshing.
+- **Scripts:** Write Node.js scripts to automate tasks (database seeding, data generation, testing).
+
+#### How Node.js Fits Into HRIS
+
+```
+┌──────────────────────────────────────────────┐
+│ Your Computer (Running Node.js)              │
+├──────────────────────────────────────────────┤
+│                                              │
+│  ┌─────────────────────────────────────┐   │
+│  │ Node.js Runtime                     │   │
+│  ├─────────────────────────────────────┤   │
+│  │ - npm (package manager)             │   │
+│  │ - node_modules/ (installed packages)│   │
+│  │ - package.json (dependency list)    │   │
+│  │                                     │   │
+│  │  ┌──────────────────────────────┐  │   │
+│  │  │ Vite Development Server      │  │   │
+│  │  │ - Compiles TypeScript → JS   │  │   │
+│  │  │ - Compiles JSX → JavaScript  │  │   │
+│  │  │ - Serves on localhost:5173   │  │   │
+│  │  │ - Hot Module Replacement     │  │   │
+│  │  └──────────────────────────────┘  │   │
+│  │                                     │   │
+│  │  ┌──────────────────────────────┐  │   │
+│  │  │ Your React Source Code       │  │   │
+│  │  │ - src/components/            │  │   │
+│  │  │ - src/pages/                 │  │   │
+│  │  │ - package.json scripts       │  │   │
+│  │  └──────────────────────────────┘  │   │
+│  └─────────────────────────────────────┘   │
+│                 ↓ (HTTP)                    │
+│         Your Browser (localhost:5173)       │
+│         - Downloads the built JavaScript    │
+│         - Runs the React app                │
+└──────────────────────────────────────────────┘
+```
+
+#### What Node.js IS and ISN'T
+
+| Concept | Node.js | Browser JavaScript |
+|---------|---------|-------------------|
+| **Runtime** | Runs JavaScript on your computer/server | Runs JavaScript inside a web browser |
+| **Use Case** | Build tools, scripts, server-side code | User-facing interactive websites |
+| **Package Manager** | `npm` (comes with Node.js) | N/A (uses npm from Node.js) |
+| **Built-in Modules** | `fs` (file system), `path`, `os`, `http` | `window`, `document`, `localStorage` |
+| **Global Object** | `global` | `window` |
+| **Can access files?** | YES — read/write files on disk | NO — security restriction |
+| **Used in HRIS?** | YES — Vite, build tools, npm | YES — React app runs here |
+
+---
+
+### Lesson 3.5.1: Installing Node.js & npm — Your First Setup
+
+#### What You're Actually Installing
+
+When you install Node.js, you get:
+1. **node** — The JavaScript runtime. Lets you run `.js` files outside the browser.
+2. **npm** — Node Package Manager. Think of it as "App Store for JavaScript code."
+3. **npx** — A tool to run packages without installing them globally.
+
+#### Installation Steps
+
+**Windows:**
+1. Go to https://nodejs.org/
+2. Download the LTS (Long Term Support) version — at the time of writing, this is Node 20 or 22.
+3. Run the installer and accept all defaults.
+4. Open Git Bash and verify:
+   ```bash
+   node --version    # Should print v20.x.x or similar
+   npm --version     # Should print 10.x.x or similar
+   ```
+
+**Check you're ready:**
+```bash
+node -e "console.log('Node is working!')"
+# Output: Node is working!
+```
+
+#### Your First Node.js Program
+
+Create a file called `hello.js`:
+```javascript
+console.log("Hello from Node.js!");
+const age = 25;
+console.log(`I am ${age} years old.`);
+```
+
+Run it:
+```bash
+node hello.js
+# Output:
+# Hello from Node.js!
+# I am 25 years old.
+```
+
+**This is not running in a browser — it's running directly on your computer.**
+
+---
+
+### Lesson 3.5.2: Understanding package.json — The Blueprint of Your Project
+
+#### What is package.json?
+
+It's a **JSON file** (like a data file) that describes your project. It tells Node.js:
+- What this project is
+- What dependencies (libraries) it needs
+- What scripts to run
+- Version information
+
+#### Real Example from HRIS
+
+```json
+{
+  "name": "hris-frontend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Frontend for the HRIS project",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.28.0",
+    "@tanstack/react-query": "^5.66.0",
+    "@shadcn/ui": "^0.8.0",
+    "tailwindcss": "^3.4.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2",
+    "vite": "^5.4.0",
+    "eslint": "^8.50.0",
+    "@vitejs/plugin-react": "^4.0.3"
+  }
+}
+```
+
+#### Breaking Down the Fields
+
+**`"name"`** — The project name (lowercase, no spaces).
+```json
+"name": "hris-frontend"
+```
+
+**`"version"`** — Semantic versioning: MAJOR.MINOR.PATCH (1.0.0).
+- Major: Breaking changes
+- Minor: New features (backward compatible)
+- Patch: Bug fixes
+
+**`"scripts"`** — Commands you can run with `npm run [name]`.
+```json
+"scripts": {
+  "dev": "vite"
+}
+```
+Run with: `npm run dev`
+
+**`"dependencies"`** — Libraries needed for your app to run.
+```json
+"dependencies": {
+  "react": "^18.3.1"
+}
+```
+The `^` means "any version 18.x.x" (minor/patch updates OK, no major version jumps).
+
+**`"devDependencies"`** — Libraries needed only for development (testing, building, linting).
+```json
+"devDependencies": {
+  "typescript": "^5.2.2"
+}
+```
+These are NOT included when you deploy to production.
+
+---
+
+### Lesson 3.5.3: npm — Installing & Managing Packages
+
+#### What is npm?
+
+**npm = Node Package Manager.** It's a central repository (npmjs.com) of millions of reusable JavaScript libraries.
+
+Think of it like:
+- **Mac:** Homebrew (install tools)
+- **Windows:** Chocolatey (install tools)
+- **npm:** Install JavaScript libraries
+
+#### The Three Core Commands
+
+**1. `npm install` (or `npm i`)**
+Install all dependencies listed in `package.json`.
+
+```bash
+npm install
+# Reads package.json, downloads all dependencies into node_modules/
+```
+
+After running this once:
+- A `node_modules/` folder appears (contains thousands of files).
+- A `package-lock.json` file appears (locked versions of everything).
+
+**2. `npm install [package-name]`**
+Add a new dependency.
+
+```bash
+npm install react-router-dom
+# OR
+npm i react-router-dom
+```
+
+This:
+- Downloads the package
+- Updates `package.json`
+- Updates `package-lock.json`
+
+**3. `npm run [script-name]`**
+Run a script defined in `package.json`.
+
+```bash
+npm run dev      # Runs: "vite"
+npm run build    # Runs: "tsc && vite build"
+npm run lint     # Runs: "eslint . --ext ts,tsx ..."
+```
+
+#### Real Workflow in HRIS
+
+```bash
+# Step 1: Clone the project
+git clone [repo-url]
+cd hris
+
+# Step 2: Install dependencies
+npm install
+# This reads package.json and installs React, Vite, Tailwind, etc.
+
+# Step 3: Start the development server
+npm run dev
+# Runs Vite, opens http://localhost:5173
+
+# Step 4: Edit code
+# (change a .tsx file)
+
+# Step 5: See it instantly
+# Vite watches your files and reloads in the browser automatically
+```
+
+#### Semantic Versioning in Dependencies
+
+```
+"react": "^18.3.1"
+        ↓
+        Version: 18 . 3 . 1
+                 ↓   ↓   ↓
+              MAJOR MINOR PATCH
+```
+
+- **`^18.3.1`** — Allow 18.x.x (any minor/patch)
+- **`~18.3.1`** — Allow 18.3.x (only patch updates)
+- **`18.3.1`** — Exact version only
+- **`*`** — Any version (dangerous!)
+
+**Why?** Different versions have breaking changes. The caret `^` is a safety compromise: get security patches, avoid major rewrites.
+
+---
+
+### Lesson 3.5.4: Vite — The Modern Frontend Build Tool
+
+#### What is Vite?
+
+**Vite (French for "fast") is a build tool that:**
+1. Compiles TypeScript → JavaScript
+2. Compiles JSX → JavaScript
+3. Serves your app on a development server
+4. Hot-reloads when you save (instant browser update)
+5. Bundles everything for production
+
+#### Why Vite Instead of Webpack?
+
+| Feature | Webpack | Vite |
+|---------|---------|------|
+| **Setup** | Complex, lots of config | Simple, works out of the box |
+| **Dev server startup** | Slow (minutes) | Instant (< 1 second) |
+| **Hot reload** | Works but slow | Blazing fast |
+| **Learning curve** | Steep | Gentle |
+
+#### How Vite Works (Simplified)
+
+```
+1. You run: npm run dev
+   ↓
+2. Vite starts a development server on localhost:5173
+   ↓
+3. Vite reads your source files (TypeScript, JSX, CSS)
+   ↓
+4. On-the-fly compilation:
+   - *.tsx → *.js
+   - TypeScript annotations → Removed
+   - JSX → JavaScript function calls
+   ↓
+5. Browser downloads the compiled JavaScript
+   ↓
+6. React app runs in the browser
+   ↓
+7. You change code → Vite detects → Recompiles → Hot reload → Browser updates instantly
+```
+
+#### vite.config.ts — Vite's Configuration
+
+```typescript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  server: {
+    port: 5173,
+    proxy: {
+      '/api': 'http://localhost:5107'  // Forward API calls to backend
+    }
+  }
+})
+```
+
+**Key settings:**
+- `plugins: [react()]` — "I'm using React, compile JSX."
+- `port: 5173` — "Serve on this port."
+- `proxy` — "Forward /api calls to the backend."
+
+---
+
+### Lesson 3.5.5: Understanding node_modules & package-lock.json
+
+#### What is node_modules/?
+
+After `npm install`, you get a `node_modules/` folder containing **thousands** of files — every library and every library's dependencies.
+
+Example structure:
+```
+node_modules/
+├── react/
+│   ├── package.json
+│   ├── index.js
+│   ├── dist/
+│   └── ...
+├── react-dom/
+│   ├── package.json
+│   ├── index.js
+│   └── ...
+├── tailwindcss/
+│   ├── package.json
+│   └── ...
+└── ... (hundreds more)
+```
+
+**Why so many files?** Because dependencies have their own dependencies (and so on).
+
+#### .gitignore & node_modules
+
+**NEVER commit `node_modules/` to Git.** It's huge (thousands of files, hundreds of MB).
+
+Instead, commit `package.json` and `package-lock.json`:
+- **package.json** — "What we need"
+- **package-lock.json** — "The exact versions we installed"
+
+When someone clones the repo:
+```bash
+git clone [repo]
+npm install    # Reads package-lock.json, installs exact same versions
+```
+
+#### package-lock.json — The Exact Recipe
+
+```json
+{
+  "name": "hris-frontend",
+  "version": "1.0.0",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "hris-frontend",
+      "version": "1.0.0",
+      "dependencies": {
+        "react": "18.3.1"
+      }
+    },
+    "node_modules/react": {
+      "version": "18.3.1",
+      "resolved": "https://registry.npmjs.org/react/-/react-18.3.1.tgz",
+      "integrity": "sha512-..."
+    }
+  }
+}
+```
+
+**Why lock files?**
+- Reproducibility: Everyone gets the same versions.
+- Security: Hashes verify packages weren't tampered with.
+- Consistency: No surprises from automatic minor updates.
+
+---
+
+### Lesson 3.5.6: Running npm Scripts — Automate Everything
+
+#### The npm Scripts in HRIS
+
+From `hris/package.json`:
+
+```json
+"scripts": {
+  "dev": "vite",
+  "build": "tsc && vite build",
+  "preview": "vite preview",
+  "lint": "eslint . --ext ts,tsx --report-unused-disable-directives",
+  "test": "vitest"
+}
+```
+
+**`npm run dev`** — Start the development server
+```bash
+npm run dev
+# Runs: vite
+# Output:
+#   ✨ Vite v5.4.0  ready in 323 ms
+#   ➜  Local:   http://localhost:5173/
+#   ➜  press h to show help
+```
+Then open http://localhost:5173 in your browser.
+
+**`npm run build`** — Build for production
+```bash
+npm run build
+# Runs: tsc && vite build
+# - tsc: Check TypeScript for errors
+# - vite build: Create optimized dist/ folder
+# Output:
+#   dist/index.html                   0.46 kB │ gzip: 0.29 kB
+#   dist/assets/index.js            145.23 kB │ gzip: 42.13 kB
+```
+
+**`npm run lint`** — Check code for style issues
+```bash
+npm run lint
+# Runs: eslint . --ext ts,tsx
+# Output: (if all good) nothing
+# OR: (if issues) shows errors and warnings
+```
+
+**`npm run preview`** — Preview the production build locally
+```bash
+npm run preview
+# Serves the dist/ folder (what you'd deploy)
+```
+
+---
+
+### Lesson 3.5.7: Common npm Workflows in HRIS
+
+#### Workflow 1: Daily Development
+
+```bash
+# Day 1: First time on the project
+npm install              # Install all dependencies
+npm run dev             # Start the dev server
+# Browser opens: http://localhost:5173
+# Make changes, save, see them instantly
+
+# When you restart your computer
+npm run dev             # Same command, dev server is back up
+```
+
+#### Workflow 2: Adding a New Package
+
+Your project needs a new library (e.g., date formatting with date-fns):
+
+```bash
+npm install date-fns
+# package.json automatically updated:
+#  "date-fns": "^3.0.0"
+```
+
+In your code:
+```typescript
+import { format } from 'date-fns';
+
+const today = format(new Date(), 'yyyy-MM-dd');
+console.log(today);  // Output: 2024-05-24
+```
+
+#### Workflow 3: Deploying to Production
+
+```bash
+npm run build          # Creates dist/ folder
+npm run preview        # Test the build locally
+# Then deploy dist/ to a web server
+```
+
+#### Workflow 4: Troubleshooting Issues
+
+```bash
+# Delete node_modules and start fresh
+rm -rf node_modules
+npm install
+npm run dev
+```
+
+---
+
+### Lesson 3.5.8: Environment Variables in Node.js & Frontend
+
+#### What are Environment Variables?
+
+Variables that change based on your environment (development, staging, production).
+
+Example:
+```
+Development:  API_URL = http://localhost:5107
+Production:   API_URL = https://hris.company.com
+```
+
+#### The .env File
+
+Create `.env` in the root of your frontend project:
+
+```
+VITE_API_URL=http://localhost:5107
+VITE_ENVIRONMENT=development
+```
+
+**Rules for Vite:**
+- **`VITE_*` prefix:** Only variables starting with `VITE_` are exposed to the browser.
+- **`VITE_API_URL`** becomes accessible as `import.meta.env.VITE_API_URL`
+
+#### Using Environment Variables in Code
+
+```typescript
+// config.ts
+const API_URL = import.meta.env.VITE_API_URL;
+const ENVIRONMENT = import.meta.env.VITE_ENVIRONMENT;
+
+export const config = {
+  apiUrl: API_URL,
+  isDevelopment: ENVIRONMENT === 'development',
+};
+```
+
+In a component:
+```typescript
+import { config } from '@/config';
+
+const response = await fetch(`${config.apiUrl}/api/employees`);
+```
+
+#### Why Not Commit .env?
+
+`.env` contains secrets (API keys, passwords). Add to `.gitignore`:
+
+```
+.env
+.env.local
+.env.*.local
+```
+
+Commit `.env.example` instead:
+```
+VITE_API_URL=http://localhost:5107
+VITE_ENVIRONMENT=development
+```
+
+Others copy this and fill in their own values:
+```bash
+cp .env.example .env
+# Then edit .env with their own values
+```
+
+---
+
+### Lesson 3.5.9: Real Node.js in Action — The HRIS Project
+
+#### Exploring the HRIS Frontend
+
+Navigate to your HRIS project:
+
+```bash
+cd c:/Users/HP/Documents/PRACTICE_PROG/HRIS/HRIS-PAT/hris
+```
+
+**Files you'll see:**
+```
+hris/
+├── src/                 # Your React source code
+├── public/              # Static files (favicon, etc)
+├── package.json         # Dependencies & scripts
+├── package-lock.json    # Locked versions
+├── tsconfig.json        # TypeScript config
+├── vite.config.ts       # Vite config
+├── tailwind.config.ts   # Tailwind CSS config
+├── .env                 # Environment variables (local only)
+├── .env.example         # Template for .env
+├── .gitignore           # Files to not commit
+├── index.html           # Entry point (served by Vite)
+└── node_modules/        # (Should exist after npm install)
+```
+
+#### Starting the Dev Server
+
+```bash
+npm install              # If you haven't already
+npm run dev             # Start dev server
+# Output:
+#   ✨ Vite v5.4.0  ready in 1256 ms
+#   ➜  Local:   http://localhost:5173/
+```
+
+Open http://localhost:5173 in your browser — the HRIS frontend loads!
+
+#### Watch What Happens
+
+1. Open `hris/src/App.tsx`
+2. Change something (e.g., add a comment)
+3. Save the file
+4. Watch the browser update **instantly** (without full refresh)
+5. This is **Hot Module Replacement (HMR)** — Vite's superpower
+
+---
+
+### Lesson 3.5.10: Node.js Scripts for Automation
+
+Node.js can run scripts on your computer, not just for web dev.
+
+#### Example: generate_data.cjs in HRIS
+
+```javascript
+// generate_data.cjs (runs on Node.js, not in browser)
+const fs = require('fs');
+
+function generateFakeEmployees(count) {
+  const employees = [];
+  for (let i = 1; i <= count; i++) {
+    employees.push({
+      id: i,
+      name: `Employee ${i}`,
+      department: ['Engineering', 'HR', 'Sales'][i % 3],
+      email: `emp${i}@company.com`
+    });
+  }
+  return employees;
+}
+
+const employees = generateFakeEmployees(100);
+fs.writeFileSync('employees.json', JSON.stringify(employees, null, 2));
+console.log('Generated 100 fake employees!');
+```
+
+Run it:
+```bash
+node generate_data.cjs
+# Output: Generated 100 fake employees!
+# Creates: employees.json
+```
+
+---
+
+**📝 Activities:**
+
+1. **Install Node.js:** Go to nodejs.org, install LTS version, verify with `node --version`.
+
+2. **Create your first Node.js program:**
+   - Create `PRACTICE/nodejs/hello.js`
+   - Inside: `console.log("I am learning Node.js!")`
+   - Run: `node hello.js`
+   - Screenshot the output
+
+3. **Explore package.json:**
+   - Navigate to `hris/`
+   - Open `package.json`
+   - Copy the `"scripts"` section into your notes
+   - Explain what each script does in plain English
+
+4. **Start the HRIS dev server:**
+   - Run: `npm run dev` in the `hris/` folder
+   - Open http://localhost:5173
+   - Take a screenshot of the running app
+   - Change something in `src/App.tsx` and save — observe the hot reload
+
+5. **Understand .env:**
+   - Look at `hris/.env` and `hris/.env.example`
+   - Explain why `.env` is in `.gitignore` but `.env.example` is not
+
+6. **npm install workflow:**
+   - Delete `hris/node_modules/` folder (if it exists)
+   - Run: `npm install`
+   - Open `package-lock.json` and find the exact version of `react` that was installed
+   - Screenshot the `"version"` field
+
+---
+
 ## ══════════════════════════════════════════
 ## 🟠 UNIT 4: JAVASCRIPT & TYPESCRIPT BASICS
 ## ══════════════════════════════════════════

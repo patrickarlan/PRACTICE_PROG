@@ -1,0 +1,129 @@
+/* INDEX.HTML */
+
+
+html,
+body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+.Intro,
+.hobbies,
+.contact-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: block;
+    text-align: center;
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.interestCard {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: block;
+    margin: 20px auto;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.interestCard h2 {
+    margin-top: 0;
+    color: #1b778e;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.interestCard p {
+    color: #555;
+    margin: 10px 0;
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
+
+footer p {
+    max-width: none;
+    color: #ffffff;
+    margin: 0;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+p {
+    line-height: 1.8;
+    color: #666;
+    max-width: 600px;
+}
+
+
+/* BOX DEMO */
+.main-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+}
+
+.box-demo {
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    margin: 30px;
+    border: 2px solid blue;
+    background-color: lightblue;
+}
+
+/* SELECTOR HTML */
+.selector-section {
+    text-align: center;
+}
+
+.selector-section p {
+    color: #333333;
+    font-size: 1.2rem;
+}
+
+.intro-text {
+    color: #1b778e;
+    font-weight: bold;
+}
+
+#intro-text {
+    color: #8e3c1b;
+    font-weight: bold;
+}

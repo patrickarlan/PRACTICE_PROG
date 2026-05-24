@@ -1,0 +1,90 @@
+html,
+body {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+section {
+    display: block;
+    text-align: center;
+}
+
+.introCards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+
+}
+
+.card,
+.card-2 {
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 20px;
+    flex: 1;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover,
+.card-2:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.05);
+}
+
+button {
+    margin-top: 20px;
+    background-color: #1b778e;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #155a63;
+    transform: scale(1.05);
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+}
