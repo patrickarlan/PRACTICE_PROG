@@ -134,14 +134,15 @@ stretch:          ┌────┬────┬────┐
                   └────┴────┴────┘
 
 flex-start:       ┌──┬──┬──┐
-                  │A ││B ││C │
-                  │  ││  ││  │   (items hug the top)
+                  │A │B │C │
+                  │  │  │  │   (items hug the top)
                   └──┴──┴──┘
 
-center:           │          │
+center:           │         │
                   │ ┌─┬─┬─┐ │
                   │ │A│B│C│ │   (items centered)
                   │ └─┴─┴─┘ │
+                  
 ```
 
 **In plain English:** If `justify-content` is horizontal alignment, `align-items` is vertical alignment.
