@@ -1054,112 +1054,49 @@ npm run dev
 
 ---
 
-### Lesson 3.3: CSS Grid & Layout Patterns
+### Lesson 3.3: CSS Grid & Responsive Design
 - When to use Grid vs Flexbox
-- `display: grid`, `grid-template-columns`, `grid-template-areas`, `gap`
-- Common layouts: header/sidebar/content/footer
+- `display: grid`, `grid-template-columns`, `gap`
+- Viewport and Media Queries: `@media (min-width: ...)`
+- Making Grid layouts stack on mobile screens
 
 **📝 Activities:**
-1. Create `grid.html`. Build a 2-column layout with a header and footer.
-2. Turn the layout into a 3-column dashboard (sidebar, main, aside).
-3. Use `grid-template-areas` to name each region.
-4. Add `gap` to space columns and rows.
+1. Create `grid.html`. Build a mobile-first dashboard with a header, sidebar, main content, and footer.
+2. By default (mobile), make everything stack in a single column using Grid.
+3. Add a media query (`@media (min-width: 768px)`) to switch the Grid to a 2-column layout (sidebar + main) on wider screens.
+4. Use `gap` to space out the columns and rows perfectly.
 
 ---
 
-### Lesson 3.4: Responsive Design (Mobile-First)
-- Viewport and why mobile-first matters
-- Media queries: `@media (min-width: ...)`
-- Fluid sizing: `%`, `rem`, `clamp()` for text
-
-**📝 Activities:**
-1. Add a mobile-first layout to `grid.html` so it stacks on small screens.
-2. Use a media query to switch to 2 columns at 768px.
-3. Set a heading size using `clamp()` so it scales smoothly.
-4. Make your form inputs full-width on mobile and 50% on desktop.
-
----
-
-### Lesson 3.5: CSS Architecture & Reuse
-- Why styles get messy in large apps
-- Naming: BEM vs utility classes
-- Reusable spacing and color tokens using CSS variables
-
-**📝 Activities:**
-1. Create `:root` color and spacing variables in `styles.css`.
-2. Replace hard-coded colors with variables.
-3. Create reusable classes: `.stack`, `.card`, `.btn`.
-4. Rename 5 selectors using a consistent naming approach.
-
----
-
-### Lesson 3.6: Forms & Validation States
+### Lesson 3.4: Interactive UI (Forms, States & Animations)
+*A consolidated lesson on polishing UI elements.*
 - Styling focus, hover, error, and disabled states
-- `:focus-visible`, `:invalid`, `:disabled`
-- Helper and error text patterns
+- CSS `transition` and `transform` for micro-interactions
+- Accessibility basics: proper `<label>` usage and color contrast
 
 **📝 Activities:**
-1. Add a focus style to all inputs and selects.
-2. Create `.input-error` and `.input-success` classes.
-3. Add an error message under a field and style it.
-4. Disable a button and style the disabled state.
+1. Create `interactive.html`. Build a simple "Edit Employee" form with inputs and a submit button.
+2. Add a smooth `transition` for the button's background color on `:hover`.
+3. Give the text inputs a visible border and glow effect on `:focus`.
+4. Ensure every input has a properly linked `<label>` (using the `for` and `id` attributes) for accessibility.
+5. Add a `.disabled` class to the button that lowers opacity and changes the cursor to `not-allowed`.
 
 ---
 
-### Lesson 3.7: Accessibility & UX Basics
-- Label associations and form semantics
-- Color contrast and readable typography
-- Keyboard navigation and focus order
-
-**📝 Activities:**
-1. Audit one form for label/for correctness and fix it.
-2. Add `:focus-visible` styles to buttons and links.
-3. Use a contrast checker and adjust one color if needed.
-
----
-
-### Lesson 3.8: Animation & Micro-Interactions
-- `transition` and `transform`
-- Hover and focus feedback
-- Avoiding overuse in production
-
-**📝 Activities:**
-1. Add a `transition` to your buttons and inputs.
-2. Add a subtle hover effect to cards or buttons.
-3. Add a focus animation that does not cause layout shift.
-
----
-
-### Lesson 3.9: Tailwind CSS (The Way HRIS Does It)
+### Lesson 3.5: Tailwind CSS & Production QA
+*How modern React apps (like HRIS) actually write CSS.*
 - What is Tailwind and why use it instead of raw CSS?
 - Installing Tailwind in a Vite/React project
-- Common utilities: `flex`, `p-4`, `m-2`, `text-lg`, `font-bold`, `bg-blue-500`, `rounded`, `shadow`
+- Common utilities: `flex`, `p-4`, `m-2`, `text-lg`, `font-bold`, `bg-blue-500`, `rounded-md`, `shadow-sm`
 - Responsive prefixes: `sm:`, `md:`, `lg:`
+- The Production Checklist: Mobile overflow, contrast, and focus states.
 
 **📝 Activities:**
 1. In `PRACTICE/frontend/`, create a React app with Vite. Install Tailwind CSS following the official docs.
-2. Replicate your `index.html` layout but inside a React component using Tailwind classes instead of a CSS file.
-3. Create a styled card component using Tailwind with: a title, a description, and a button.
-4. Make the card change its background color on hover using Tailwind's `hover:` prefix.
-5. Make the card layout change from a single column on mobile to 3 columns on desktop using `md:grid-cols-3`.
-
----
-
-### Lesson 3.10: Production CSS Checklist (Real-World QA)
-*Use this checklist before you call a UI "done."*
-
-- **Layout:** No overflow on mobile, consistent spacing, and no accidental horizontal scroll
-- **Inputs:** Clear focus states, error states, and disabled states
-- **Readability:** Adequate contrast and readable font sizes (no tiny text)
-- **Responsive:** Looks good at 360px, 768px, and 1024px widths
-- **Accessibility:** Labels tied to inputs, keyboard navigation works, focus is visible
-
-**📝 Activities:**
-1. Test your form at 360px, 768px, and 1024px widths and list any layout issues.
-2. Add a visible focus style to inputs, buttons, and links.
-3. Add a validation error style and message under one field.
-4. Disable your submit button and style the disabled state.
-5. Run a contrast check on your primary button color and adjust if needed.
+2. Replicate your Flexbox Employee Card layout inside a React component using ONLY Tailwind classes (no `.css` files).
+3. Make the card layout responsive: Use Tailwind's `md:grid-cols-2` and `lg:grid-cols-3` to automatically adjust the columns.
+4. Add hover micro-interactions directly in HTML using Tailwind's `hover:bg-gray-100` and `transition` utilities.
+5. QA Check: Shrink the browser to 360px width. Ensure there is no horizontal scrolling and nothing overflows.
 
 ---
 
