@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRIS Employee Card</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: #f5f5f5;
+        }
+
+        /* sidebar layout */
+        .page-wrapper {
+            display: flex;
+            flex: 1;
+        }
+
+        aside {
+            flex: 0 0 220px;
+            background: #6a6a6a;
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            border-right: 0.5px solid #e5e5e5;
+        }
+
+        .logo {
+            color: whitesmoke;
+            font-size: 25px;
+            font-weight: 500;
+            letter-spacing: -0.3px;
+        }
+
+        nav {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .nav-section {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .nav-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #f5f4f4;
+            padding: 0 8px;
+            margin-bottom: 4px;
+        }
+
+        .nav-section a {
+            font-size: 13px;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 6px 8px;
+            border-radius: 6px;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .nav-section a:hover {
+            background: #fff;
+            color: #111;
+        }
+
+        main {
+            flex: 1;
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        h1 {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        /* employee cards */
+        .cards-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .employee-details {
+            width: 280px;
+            background: #ffffff;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .employee-details:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .emp-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #111;
+        }
+
+        .dept-badge {
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: #f0f0f0;
+            color: #666;
+            display: inline-block;
+            margin-top: 2px;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #e5e5e5;
+        }
+
+        .emp-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .emp-label {
+            color: #aaa;
+        }
+
+        .emp-value {
+            color: #555;
+        }
+
+        footer {
+            padding: 16px 32px;
+            border-top: 0.5px solid #e5e5e5;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page-wrapper">
+        <aside>
+            <span class="logo">HRIS</span>
+            <nav>
+                <div class="nav-section">
+                    <span class="nav-label">Navigation</span>
+                    <a href="/">Home</a>
+                    <a href="/">About Us</a>
+                    <a href="/">Contact Us</a>
+                </div>
+                <div class="nav-section">
+                    <span class="nav-label">Options</span>
+                    <a href="/">Settings</a>
+                    <a href="/">Profile</a>
+                </div>
+            </nav>
+        </aside>
+
+        <main>
+            <h1>Employees</h1>
+            <section class="cards-container">
+                <article class="employee-details">
+                    <header style="display:flex; align-items:center; gap:10px;">
+                        <div class="avatar">ED</div>
+                        <div>
+                            <h2 class="emp-name">Eric Dela Cruz</h2>
+                            <span class="dept-badge">IT</span>
+                        </div>
+                    </header>
+                    <hr class="divider">
+                    <div class="emp-row"><span class="emp-label">Age</span><span class="emp-value">30</span></div>
+                    <div class="emp-row"><span class="emp-label">Position</span><span class="emp-value">Software
+                            Engineer</span></div>
+                </article>
+
+                <article class="employee-details">
+                    <header style="display:flex; align-items:center; gap:10px;">
+                        <div class="avatar">JM</div>
+                        <div>
+                            <h2 class="emp-name">Jose Manalo</h2>
+                            <span class="dept-badge">Human Resources</span>
+                        </div>
+                    </header>
+                    <hr class="divider">
+                    <div class="emp-row"><span class="emp-label">Age</span><span class="emp-value">28</span></div>
+                    <div class="emp-row"><span class="emp-label">Position</span><span class="emp-value">HR
+                            Generalist</span></div>
+                </article>
+
+                <article class="employee-details">
+                    <header style="display:flex; align-items:center; gap:10px;">
+                        <div class="avatar">CB</div>
+                        <div>
+                            <h2 class="emp-name">Christ Bautista</h2>
+                            <span class="dept-badge">Marketing</span>
+                        </div>
+                    </header>
+                    <hr class="divider">
+                    <div class="emp-row"><span class="emp-label">Age</span><span class="emp-value">25</span></div>
+                    <div class="emp-row"><span class="emp-label">Position</span><span class="emp-value">Marketing
+                            Specialist</span></div>
+                </article>
+
+                <article class="employee-details">
+                    <header style="display:flex; align-items:center; gap:10px;">
+                        <div class="avatar">PA</div>
+                        <div>
+                            <h2 class="emp-name">Patrick Arlan</h2>
+                            <span class="dept-badge">IT</span>
+                        </div>
+                    </header>
+                    <hr class="divider">
+                    <div class="emp-row"><span class="emp-label">Age</span><span class="emp-value">23</span></div>
+                    <div class="emp-row"><span class="emp-label">Position</span><span class="emp-value">Software
+                            Engineer</span></div>
+                </article>
+
+                <article class="employee-details">
+                    <header style="display:flex; align-items:center; gap:10px;">
+                        <div class="avatar">JD</div>
+                        <div>
+                            <h2 class="emp-name">John Doe</h2>
+                            <span class="dept-badge">Management</span>
+                        </div>
+                    </header>
+                    <hr class="divider">
+                    <div class="emp-row"><span class="emp-label">Age</span><span class="emp-value">35</span></div>
+                    <div class="emp-row"><span class="emp-label">Position</span><span class="emp-value">Project
+                            Manager</span></div>
+                </article>
+
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <h2>PATRICK @2026</h2>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,171 @@
+<!--flexbox with 3 colored boxes side by side-->
+
+<!--style:-->
+<style>
+    html {
+        margin: 0;
+        padding: 0;
+    }
+
+    main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+
+    /*activity1*/
+    .box-parent {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box-children {
+        gap: 5px;
+        display: flex;
+    }
+
+    .box {
+        padding: 20px;
+        border: 5px solid black;
+    }
+
+    .box1 {
+        background: red;
+    }
+
+    .box2 {
+        background: yellow;
+    }
+
+    .box3 {
+        background: green;
+    }
+
+    /*activity2*/
+    .cards-parent {
+        width: 100%;
+        height: 400px;
+        gap: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-hori {
+        width: 200px;
+        height: 100px;
+        background: black;
+    }
+
+    .card-verti {
+        width: 100px;
+        height: 200px;
+        background: black;
+    }
+
+    .card-hori,
+    .card-verti {
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        border: 5px solid red;
+    }
+
+    /*activity3*/
+    nav {
+        width: 100%;
+        background: grey;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 24px
+    }
+
+    .nav-links a:hover {
+        transform: scale(1.03);
+        color: black;
+    }
+
+    .nav-links a {
+        color: white;
+        transition: transform 0.3s ease, color 0.3s ease;
+        text-decoration: none;
+    }
+
+    /*activity5*/
+    .card-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .card {
+        background: grey;
+        padding: 10px;
+        border-radius: 10px;
+        border: 5px solid black;
+        flex: 1 1 220px;
+
+    }
+</style>
+
+<!--html:-->
+<html>
+
+<section class="activity3">
+    <nav class="nav">
+        <h5 class="logo">logo</h5>
+        <div class="nav-links">
+            <a href='/'>home</a>
+            <a href='/'>about</a>
+            <a href='/'>contact</a>
+        </div>
+    </nav>
+</section>
+
+<section class="activity5">
+    <div class="card-grid">
+        <div class="card">Card 1</div>
+        <div class="card">Card 2</div>
+        <div class="card">Card 3</div>
+        <div class="card">Card 4</div>
+    </div>
+</section>
+
+<main>
+    <section class="activity1">
+        <section class="box-parent">
+            <div class="box-children">
+                <div class="box box1">box 1</div>
+                <div class="box box2">box 2</div>
+                <div class="box box3">box 3</div>
+            </div>
+        </section>
+    </section>
+
+    <section class="activity2">
+        <section class="centeringDemo">
+            <div class="cards-parent container">
+                <div class="card-hori">horizontal</div>
+                <div class="card-verti">vertical</div>
+            </div>
+        </section>
+    </section>
+</main>
+
+</html>
