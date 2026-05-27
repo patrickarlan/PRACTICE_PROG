@@ -79,6 +79,9 @@ For mobile devices to understand your layout properly, every single HTML file MU
 
 A **Media Query** tells the browser: *"Only apply these CSS rules if the screen is wider than a certain amount."*
 
+Because we are using **Mobile-First Design**, the CSS *outside* the media query is the mobile default, and the CSS *inside* the media query is the desktop upgrade.
+
+### Example 1: Upgrading Grid Columns
 ```css
 /* 1. MOBILE FIRST (Default CSS) */
 /* On mobile, we want elements stacked vertically */
@@ -98,7 +101,54 @@ A **Media Query** tells the browser: *"Only apply these CSS rules if the screen 
 }
 ```
 
-With just those two blocks of code, you have built a completely responsive layout. No Flexbox nesting required!
+### Example 2: Upgrading Typography (Font Sizes)
+```css
+/* MOBILE DEFAULT */
+h1 {
+    font-size: 24px; /* Smaller font so it fits on a tiny phone screen */
+}
+
+/* DESKTOP UPGRADE */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 48px; /* Massive font for big desktop monitors! */
+    }
+}
+```
+
+### Example 3: Upgrading Flexbox (Stacking vs Row)
+```css
+/* MOBILE DEFAULT */
+.nav-buttons {
+    display: flex;
+    flex-direction: column; /* Stack the buttons vertically so they are easy to tap */
+}
+
+/* DESKTOP UPGRADE */
+@media (min-width: 768px) {
+    .nav-buttons {
+        flex-direction: row; /* Put the buttons side-by-side horizontally */
+    }
+}
+```
+
+### Example 4: Hiding Elements on Mobile
+Sometimes you have a giant decorative image that looks great on a PC, but wastes space on a phone.
+```css
+/* MOBILE DEFAULT */
+.hero-image {
+    display: none; /* Hide the giant image entirely to save mobile screen space */
+}
+
+/* DESKTOP UPGRADE */
+@media (min-width: 768px) {
+    .hero-image {
+        display: block; /* Bring the image back when the screen is wide enough! */
+    }
+}
+```
+
+With just a few media queries, you can completely transform your app based on the device using it!
 
 ---
 
