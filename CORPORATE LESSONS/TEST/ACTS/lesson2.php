@@ -1,5 +1,5 @@
 <?php
-
+echo "<pre>";
 // Run all activities
 activity1();
 activity2();
@@ -8,6 +8,7 @@ activity4();
 activity5();
 activity6_process();
 
+echo "<pre>";
 // ============================================
 // ACTIVITY 1: Output Variables
 // ============================================
@@ -20,7 +21,13 @@ function activity1()
     // TODO: Output them with labels using echo
 
     // Your code here:
+    $name = "Alice Johnson";
+    $position = "Software Engineer";
+    $department = "IT";
 
+    echo "Name: $name\n"; // interpolation
+    echo "Position: $position\n";
+    echo "Department: " . $department . "\n"; // concatenation
 
     echo "\n";
 }
@@ -40,7 +47,20 @@ function activity2()
 
     // Your code here:
 
+    function calculateNetSalary($salary, $tax = 0.15)
+    {
+        $netTax = $salary * $tax;
+        $netSal = $salary - $netTax;
+        return array(
+            "tax" => $netTax,
+            "netSal" => $netSal
+        );
+    }
+    $salary = 50000;
+    $netSal = calculateNetSalary($salary);
 
+    echo "Tax (15%): $" . number_format($netSal["tax"], 2) . "\n";
+    echo "Net Salary: $" . number_format($netSal["netSal"], 2) . "\n";
     echo "\n";
 }
 
@@ -50,14 +70,14 @@ function activity2()
 function activity3()
 {
     echo "===== ACTIVITY 3: Loop Through Job Titles =====\n";
-
     // TODO: Create an array of 5 job titles
     // TODO: Use foreach loop to go through each title
     // TODO: Output: "Position: [title]"
-
     // Your code here:
-
-
+    $employee = array("HR", "ENGR", "IT", "SL", "MNG");
+    foreach ($employee as $emp) {
+        echo "POSITION: $emp\n";
+    }
     echo "\n";
 }
 
@@ -75,6 +95,16 @@ function activity4()
 
     // Your code here:
 
+    $employee = array(
+        array("id" => 0001, "name" => "Patrick", "email" => "patrick@ex.com", "phone" => "09694831145")
+    );
+
+    foreach ($employee as $emp) {
+        echo "===== EMPLOYEE DATA =====\n";
+        foreach ($emp as $key => $value) {
+            echo $key . ": " . $value . "\n";
+        }
+    }
 
     echo "\n";
 }
@@ -92,7 +122,30 @@ function activity5()
     // TODO: Calculate and display total salary spending
 
     // Your code here:
+    $total = 0;
 
+    $employee = array(
+        array("Name" => "Patrick", "Department" => "Engineering", "Salary" => 50000),
+        array("Name" => "Arlan", "Department" => "Human Resource", "Salary" => 40000),
+        array("Name" => "MJ", "Department" => "Development", "Salary" => 55000)
+    );
+
+    foreach ($employee as $emp) {
+        echo "===== EMPLOYEE DATA =====\n";
+        foreach ($emp as $key => $value) {
+            if ($key == "Salary") {
+                echo $key . ": $" . number_format($value, 2) . "\n";
+            } else {
+                echo $key . ": " . $value . "\n";
+            }
+        }
+        echo "=========================\n";
+    }
+
+    foreach ($employee as $emp) {
+        $total += $emp["Salary"];
+    }
+    echo "Total Amount Spending: " . number_format($total, 2) . "\n";
 
     echo "\n";
 }
@@ -113,7 +166,13 @@ function activity6_process()
     //       - Show HTML form with name and age inputs
 
     // Your code here:
-
+    if ($_POST) {
+        $name = $_POST["name"];
+        $age = $_POST["age"];
+        echo "Hello $name, you are $age years old\n";
+    } else {
+        echo "Please submit the form above. \n";
+    }
 
     echo "\n";
 }
