@@ -662,6 +662,46 @@ WHERE department = 'Marketing';
 
 ---
 
+### Lesson 3.7: ALTER TABLE (Modifying Table Structure)
+
+```sql
+-- Add a new column
+ALTER TABLE employees
+ADD COLUMN phone VARCHAR(20);
+
+-- Remove a column
+ALTER TABLE employees
+DROP COLUMN phone;
+
+-- Change column data type
+ALTER TABLE employees
+MODIFY COLUMN salary DECIMAL(12, 2);
+
+-- Rename a column
+ALTER TABLE employees
+CHANGE COLUMN created_at hire_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
+-- Add a NOT NULL constraint to an existing column
+ALTER TABLE employees
+MODIFY COLUMN email VARCHAR(100) NOT NULL;
+```
+
+**Reading Like English:**
+- "Alter the employees table, add a new column called phone (text, up to 20 characters)"
+- "Alter the employees table, drop (remove) the phone column"
+- "Alter the employees table, modify salary column to be DECIMAL with 12 total digits and 2 decimal places"
+- "Alter the employees table, rename created_at column to hire_timestamp"
+- "Alter the employees table, modify email column to be required (NOT NULL)"
+
+**When to Use ALTER:**
+- You forgot to add a column when creating the table
+- You need to change the data type of a column
+- You need to add or remove a constraint
+- You need to rename a column
+- You want to make a column required/optional
+
+---
+
 **📝 Activities for MySQL:**
 
 1. **CREATE TABLE:**
@@ -683,6 +723,12 @@ WHERE department = 'Marketing';
 
 5. **DELETE:**
    - Delete an employee with id = 5
+
+6. **ALTER TABLE:**
+   - Add a phone column to employees
+   - Add a birth_date column as DATE type
+   - Make email NOT NULL (required)
+   - Remove an unnecessary column
 
 ---
 

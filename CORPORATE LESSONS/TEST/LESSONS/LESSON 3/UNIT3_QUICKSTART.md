@@ -14,6 +14,13 @@
    - ✅ Verification queries at the end
    - ✅ Ready to paste into MySQL
 
+3. **LESSON_3_CHEAT_SHEET.md** - Quick reference for terminal/cmd:
+   - ✅ SQLite terminal commands (.tables, .schema, .mode, etc.)
+   - ✅ All SQL syntax (CREATE, INSERT, SELECT, UPDATE, DELETE)
+   - ✅ Common patterns and examples
+   - ✅ Where conditions and formatting
+   - ✅ Step-by-step terminal workflow
+
 ---
 
 ## 🎯 The 5 Activities (Exam-Ready)
@@ -155,6 +162,76 @@ DELETE FROM table WHERE condition;
 
 ---
 
+## 🖥️ TERMINAL / CMD APPROACH (Recommended for Exam!)
+
+### Why Use Terminal?
+- ✅ More professional (real developers use terminal)
+- ✅ Faster than GUI clicking
+- ✅ Better for job interviews
+- ✅ Closer to actual work environment
+- ✅ Practice for exam conditions
+
+### Quick Start (PowerShell)
+
+**1. Open PowerShell**
+```powershell
+# Navigate to your folder
+cd "C:\Users\HP\Documents\PRACTICE_PROG\CORPORATE LESSONS\TEST"
+```
+
+**2. Open Database**
+```powershell
+sqlite3 lesson3.db
+```
+
+**3. Format Output (Optional but Recommended)**
+```sql
+.mode column
+.headers on
+```
+
+**4. Create and Test**
+```sql
+CREATE TABLE employees (id INT, name TEXT, salary DECIMAL);
+INSERT INTO employees VALUES (1, 'Patrick', 50000);
+SELECT * FROM employees;
+```
+
+**5. Exit**
+```sql
+.exit
+```
+
+### Useful Terminal Commands
+
+| Command | Purpose |
+|---------|---------|
+| `.tables` | List all tables |
+| `.schema` | Show all table structures |
+| `.schema tableName` | Show specific table structure |
+| `.headers on` | Show column names |
+| `.mode column` | Better formatting |
+| `.read lesson3.sql` | Run SQL file |
+| `.exit` | Exit database |
+
+### Running SQL File from Terminal
+Create `lesson3.sql` with your SQL, then:
+```powershell
+sqlite3 lesson3.db < lesson3.sql
+```
+
+### Pro Tips
+1. **Use `.mode column` + `.headers on`** for nice output
+2. **Use `.schema` to verify your table structure**
+3. **Use `.tables` to see what tables exist**
+4. **Write in a .sql file, then run it** (saves time)
+5. **Use semicolons at end of each command** (required)
+
+### See the Full Cheat Sheet
+**Open:** `LESSON_3_CHEAT_SHEET.md` for all terminal commands and SQL syntax!
+
+---
+
 ## 🎓 Learning Goals
 
 After Unit 3, you should be able to:
@@ -169,18 +246,37 @@ After Unit 3, you should be able to:
 
 ## 📋 Activity Checklist
 
-- [ ] Read Lesson 3.1 (Basics)
-- [ ] Complete Activity 1: CREATE TABLE
-- [ ] Read Lesson 3.2 (CREATE TABLE)
-- [ ] Complete Activity 2: INSERT
-- [ ] Read Lesson 3.3 (INSERT)
-- [ ] Read Lesson 3.4 (SELECT)
-- [ ] Complete Activity 3: SELECT Queries
-- [ ] Read Lesson 3.5 (UPDATE)
-- [ ] Complete Activity 4: UPDATE
-- [ ] Read Lesson 3.6 (DELETE)
-- [ ] Complete Activity 5: DELETE
-- [ ] Run verification queries ✅
+- [x] Read Lesson 3.1 (Basics)
+- [x] Complete Activity 1: CREATE TABLE
+- [x] Read Lesson 3.2 (CREATE TABLE)
+- [x] Complete Activity 2: INSERT
+- [x] Read Lesson 3.3 (INSERT)
+- [x] Read Lesson 3.4 (SELECT)
+- [x] Complete Activity 3: SELECT Queries
+- [x] Read Lesson 3.5 (UPDATE)
+- [x] Complete Activity 4: UPDATE
+- [x] Read Lesson 3.6 (DELETE)
+- [x] Complete Activity 5: DELETE
+- [x] Read Lesson 3.7 (ALTER TABLE)
+- [x] Complete Activity 6: ALTER TABLE
+- [x] Run verification queries ✅
+
+---
+
+## ✅ UNIT 3 COMPLETION SUMMARY
+
+| # | Activity | Status | Verified |
+|---|----------|--------|----------|
+| 1 | CREATE TABLE (departments, salaries, employees) | ✅ COMPLETE | ✓ phpMyAdmin |
+| 2 | INSERT (5 employees with various departments) | ✅ COMPLETE | ✓ phpMyAdmin |
+| 3 | SELECT QUERIES (all 5 queries working) | ✅ COMPLETE | ✓ phpMyAdmin |
+| 4 | UPDATE (3 update operations) | ✅ COMPLETE | ✓ phpMyAdmin |
+| 5 | DELETE (2 delete operations) | ✅ COMPLETE | ✓ phpMyAdmin |
+| 6 | ALTER TABLE (4 alter operations) | ✅ COMPLETE | ✓ phpMyAdmin |
+
+**Overall Status:** 🎉 **ALL ACTIVITIES COMPLETE & VERIFIED**
+
+---
 
 ---
 
