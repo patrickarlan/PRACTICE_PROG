@@ -855,3 +855,98 @@ Hello Patrick, you are 25 years old
 4. ✅ Move to Unit 3 (MySQL) when all activities pass
 
 **You're building real website skills now!** 💪
+
+---
+
+## ✅ UNIT 2 ACTIVITY COMPLETION SUMMARY
+
+### Activity Validation Results
+
+| Activity | Task | Status |
+|----------|------|--------|
+| 1 | Output Variables | [x] CORRECT |
+| 2 | Create & Use a Function | [x] CORRECT |
+| 3 | Loop Through Array | [x] CORRECT |
+| 4 | Associative Array | [x] CORRECT |
+| 5 | Array of Employees (Challenge) | [x] CORRECT |
+| 6 | Form Processing (Challenge) | [x] CORRECT |
+
+---
+
+### 🎯 Overall Assessment: ✅ ALL ACTIVITIES PASSED - UNIT 2 COMPLETE
+
+**Validation Notes:**
+
+✅ **Activity 1: Output Variables**
+- Creates 3 variables with realistic values (Alice Johnson, Software Engineer, IT)
+- Uses both string interpolation and concatenation properly
+- Outputs with correct labels
+- **CORRECT - Uses both interpolation ("Name: $name") and concatenation ("Department: " . $department)**
+
+✅ **Activity 2: Create & Use a Function**
+- Function `calculateNetSalary()` correctly defined with default parameter (15% tax)
+- Takes `$salary` parameter
+- Correctly calculates 15% tax deduction
+- Returns array with both tax and net salary values
+- Tests with $salary = 50000 showing $7,500 tax and $42,500 net
+- Uses `number_format()` for proper currency display
+- **CORRECT - All requirements met with proper function syntax and calculations**
+
+✅ **Activity 3: Loop Through Array**
+- Array created with 5 job titles (HR, ENGR, IT, SL, MNG)
+- Uses `foreach` loop correctly
+- Outputs each position with "POSITION:" label
+- **CORRECT - Proper foreach syntax and array access**
+
+✅ **Activity 4: Associative Array**
+- Associative array created with all required keys: id, name, email, phone
+- Assigns realistic values (Patrick, patrick@ex.com, 09694831145)
+- Uses nested foreach loops to iterate through array and key-value pairs
+- Outputs each key-value pair with labels
+- **CORRECT - Proper associative array syntax and nested loop implementation**
+
+✅ **Activity 5: Array of Employees (Challenge)**
+- Array of 3 employees created with all required fields (Name, Department, Salary)
+- Nested foreach loops properly display each employee's information
+- Conditional check for Salary field uses `number_format()` for currency
+- Total salary calculated correctly using `+=` operator
+- Output includes formatted currency and total budget
+- **CORRECT - Complex nested loops, conditionals, and calculations working perfectly**
+
+✅ **Activity 6: Form Processing (Challenge)**
+- Checks `if ($_POST)` to verify form submission
+- Correctly retrieves form data using `$_POST["name"]` and `$_POST["age"]`
+- Outputs correct format: "Hello [name], you are [age] years old"
+- form.html created with proper POST method and action pointing to lesson2.php
+- Successfully tested with form submission (Patrick, age 22)
+- **CORRECT - Form integration working, data submission and retrieval successful**
+
+---
+
+### 📊 Skills Mastered
+
+- ✅ Variables and data types (string, int, float, bool)
+- ✅ String concatenation and interpolation in double quotes
+- ✅ Function definition with parameters and default values
+- ✅ Function return values and return types (returning arrays)
+- ✅ Indexed arrays and foreach loops
+- ✅ Associative arrays with key-value pairs
+- ✅ Nested arrays and nested loops
+- ✅ Built-in functions like `number_format()`, `date()`
+- ✅ HTML form creation with POST method
+- ✅ PHP form processing with `$_POST` superglobal
+- ✅ Conditional statements within loops
+- ✅ Mathematical operations and calculations
+
+---
+
+### 🚀 Ready for: **Unit 3 (MySQL) - Databases**
+
+You have successfully completed Unit 2: PHP Fundamentals! You understand how to:
+- Write PHP code with proper syntax
+- Use variables and functions effectively
+- Work with arrays (indexed and associative)
+- Process HTML form data from users
+- Format output for web display
+
+**Next lesson will teach you how to store and retrieve data using MySQL databases!** 💪

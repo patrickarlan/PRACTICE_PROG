@@ -26,6 +26,7 @@
             border: 1px solid #ddd;
         }
 
+        /* center button */
         button {
             background-color: #4CAF50;
             color: white;
@@ -33,6 +34,8 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
+            display: block;
+            margin: 10px auto;
         }
 
         button:hover {
@@ -57,6 +60,9 @@
         <!-- TODO: Add name input field here -->
         <!-- TODO: Add age input field here -->
         <!-- TODO: Add submit button here -->
+        <input type="text" name="name" placeholder="Enter Your Name" required>
+        <input type="number" name="age" placeholder="Enter Your Age" required>
+        <button type="submit">Submit</button>
     </form>
 
 </body>
