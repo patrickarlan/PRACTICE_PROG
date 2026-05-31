@@ -28,6 +28,109 @@ You write SQL → MySQL reads it → Database returns answer → You see result
 
 ---
 
+## 🛠️ SETUP: Getting Started with SQLite & Terminal
+
+### Why Terminal?
+Terminal is **faster and more professional** than GUI tools. Real developers use terminal. Plus, it's perfect for exam prep! 💪
+
+### Step 1: Open PowerShell
+1. Press `Win + X` on keyboard
+2. Click **"Windows PowerShell"** (or just search for "PowerShell")
+3. You should see: `PS C:\Users\YourName>`
+
+### Step 2: Navigate to Your Database Folder
+Copy and paste this command:
+```powershell
+cd "C:\Users\HP\Documents\PRACTICE_PROG\CORPORATE LESSONS\TEST"
+```
+
+Press **Enter**. You should now be in the TEST folder.
+
+### Step 3: Open/Create Your Database
+```powershell
+sqlite3 lesson3.db
+```
+
+You'll see:
+```
+SQLite version 3.x.x
+Enter ".help" for usage hints.
+sqlite>
+```
+
+**Congratulations! You're now in SQLite!** 🎉
+
+### Step 4: Format Your Output (Important!)
+Type this to make results look nice:
+```sql
+.mode column
+.headers on
+```
+
+Now results will display in a proper table format instead of cramped text.
+
+### Step 5: Test It Works
+Type:
+```sql
+.tables
+```
+
+If you see no output, you have a fresh database (perfect!). If you see table names, you have existing tables.
+
+### Step 6: You're Ready!
+You can now:
+- ✅ Create tables
+- ✅ Add data
+- ✅ Query data
+- ✅ Update/delete data
+
+---
+
+## 🔑 Quick Terminal Reference
+
+### Exit Database
+```sql
+.exit
+```
+
+### Useful Commands
+| Command | What It Does |
+|---------|-------------|
+| `.tables` | List all tables in database |
+| `.schema` | Show all table structures |
+| `.schema tableName` | Show one table's structure |
+| `.mode column` | Better formatting |
+| `.headers on` | Show column names |
+| `.read lesson3.sql` | Run SQL from a file |
+
+### Example: Your First Query
+```sql
+sqlite> CREATE TABLE test (id INT, name TEXT);
+sqlite> INSERT INTO test VALUES (1, 'Patrick');
+sqlite> SELECT * FROM test;
+```
+
+Output:
+```
+id  name
+--  -------
+1   Patrick
+```
+
+---
+
+## 📝 How to Practice Each Lesson
+
+1. **Read the lesson section** (e.g., "Lesson 3.2: CREATE TABLE")
+2. **Study the example** provided
+3. **Understand what you're doing** (WHY, not just HOW)
+4. **Type the SQL in your terminal** - Don't copy/paste!
+5. **Run it** (Press Enter)
+6. **See the results** immediately
+7. **Move to next lesson**
+
+---
+
 ## Lesson 3.1: MySQL Basics — Understanding Tables
 
 ### 🧠 The Concept
@@ -444,6 +547,130 @@ DELETE FROM employees WHERE hire_date < '2024-01-01';
 
 ---
 
+## Lesson 3.7: ALTER TABLE — Modifying Existing Tables
+
+### 🧠 The Concept
+
+Sometimes after creating a table, you realize:
+- "I forgot to add a phone column!"
+- "I need to change salary from 10 digits to 12 digits"
+- "I want to rename this column"
+
+**ALTER TABLE** lets you **modify an existing table** without deleting it.
+
+### 📝 Adding a New Column
+
+```sql
+ALTER TABLE employees
+ADD COLUMN phone VARCHAR(20);
+```
+
+**Reading Like English:**
+- "Alter the employees table"
+- "Add a new column called phone"
+- "Data type: text up to 20 characters"
+
+**Result:** Now employees table has a new phone column!
+
+### 📝 Removing a Column
+
+```sql
+ALTER TABLE employees
+DROP COLUMN phone;
+```
+
+**Reading Like English:**
+- "Alter the employees table"
+- "Drop (remove) the phone column"
+
+**Warning:** ⚠️ This removes the column AND all its data! Be careful!
+
+### 📝 Changing Column Data Type
+
+```sql
+ALTER TABLE employees
+MODIFY COLUMN salary DECIMAL(12, 2);
+```
+
+**Reading Like English:**
+- "Alter employees table"
+- "Modify the salary column"
+- "Change it to DECIMAL with 12 total digits and 2 after decimal"
+
+### 📝 Renaming a Column
+
+```sql
+ALTER TABLE employees
+CHANGE COLUMN created_at hire_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+```
+
+**Reading Like English:**
+- "Alter employees table"
+- "Change column name from created_at to hire_timestamp"
+- "Keep it as TIMESTAMP type with CURRENT_TIMESTAMP as default"
+
+### 📝 Adding Constraints
+
+```sql
+-- Make a column required (NOT NULL)
+ALTER TABLE employees
+MODIFY COLUMN email VARCHAR(100) NOT NULL;
+
+-- Add a UNIQUE constraint
+ALTER TABLE employees
+ADD CONSTRAINT unique_email UNIQUE (email);
+
+-- Add a DEFAULT value
+ALTER TABLE employees
+MODIFY COLUMN department VARCHAR(50) DEFAULT 'Unassigned';
+```
+
+### 🎬 Real-World Example: Growing Table
+
+**Scenario:** Your company grows, and you need to add more employee info.
+
+**Original table:**
+```sql
+CREATE TABLE employees (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(100) NOT NULL
+);
+```
+
+**Later, you decide to add more columns:**
+```sql
+ALTER TABLE employees ADD COLUMN email VARCHAR(100);
+ALTER TABLE employees ADD COLUMN salary DECIMAL(10, 2);
+ALTER TABLE employees ADD COLUMN hire_date DATE;
+ALTER TABLE employees ADD COLUMN phone VARCHAR(20);
+```
+
+**Result:** Table now has all the columns you need!
+
+### 📋 Common ALTER Commands
+
+| Command | Purpose |
+|---------|---------|
+| `ADD COLUMN` | Add a new column |
+| `DROP COLUMN` | Remove a column |
+| `MODIFY COLUMN` | Change data type or constraints |
+| `CHANGE COLUMN` | Rename a column |
+| `ADD CONSTRAINT` | Add a constraint (UNIQUE, CHECK, etc.) |
+| `DROP CONSTRAINT` | Remove a constraint |
+
+### ⚠️ Important: ALTER is Permanent!
+
+```sql
+-- This deletes all phone data forever!
+ALTER TABLE employees DROP COLUMN phone;
+
+-- Make sure you want to do this!
+```
+
+Always **backup your data** or **test on a copy** first!
+
+---
+
 ## 📝 COMPREHENSIVE ACTIVITIES
 
 ### Activity 1: CREATE TABLE
@@ -534,6 +761,29 @@ Query 5: List ordered by salary DESC
 
 ---
 
+### Activity 6: ALTER TABLE (Modifying Structure)
+
+**Hint:** Use ALTER TABLE with ADD COLUMN, DROP COLUMN, MODIFY COLUMN, or CHANGE COLUMN.
+
+**Task:**
+1. Add a `phone` column to employees table (VARCHAR 20)
+2. Add a `birth_date` column (DATE type)
+3. Make the `email` column NOT NULL (required)
+4. Change salary column to DECIMAL(12, 2) for larger numbers
+
+**Expected Results:**
+- Table has 4 new/modified columns
+- DESCRIBE employees shows all changes
+
+**Verification:**
+```sql
+DESCRIBE employees;
+```
+
+You should see all the new/modified columns!
+
+---
+
 ## 🧠 Key Concepts Summary
 
 | Command | Purpose | Example |
@@ -545,6 +795,7 @@ Query 5: List ordered by salary DESC
 | **ORDER BY** | Sort data | `ORDER BY column DESC` |
 | **UPDATE** | Change data | `UPDATE table SET column = value` |
 | **DELETE** | Remove data | `DELETE FROM table WHERE ...` |
+| **ALTER TABLE** | Modify table structure | `ALTER TABLE table ADD COLUMN ...` |
 | **COUNT** | Count rows | `SELECT COUNT(*) FROM table` |
 
 ---

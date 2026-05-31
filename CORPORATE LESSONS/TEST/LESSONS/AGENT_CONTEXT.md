@@ -1,427 +1,373 @@
-# 📋 INTERVIEW EXAM SYLLABUS - CONTEXT FOR AGENT
+# 🤖 AGENT CONTEXT - EXAM PREPARATION PROGRESS
 
-## 🎯 PROJECT OVERVIEW
-
-**Purpose:** Create comprehensive, book-like lesson materials for interview exam preparation at Sandman Software Systems Inc (Quezon City).
-
-**Exam Details:**
-- **Date:** This Wednesday, 1:00 PM
-- **Coverage:** Basic Programming Logic, PHP, MySQL, Java Fundamentals + Debugging
-- **Duration:** Intensive crash course (all lessons needed by Wednesday)
-- **Student:** Patrick (learning for his first job interview)
+**Last Updated:** 2026-05-31  
+**User:** Patrick Arlan  
+**Project:** Corporate Lessons - Interview Exam Preparation (Sandman Software Systems Inc)  
+**Current Status:** 75% Complete (Units 1-3 DONE, Unit 4 IN PROGRESS)
 
 ---
 
-## 📚 SYLLABUS STRUCTURE
+## 📊 COMPLETION STATUS
 
-The complete syllabus has been created in:
-```
-c:\Users\HP\Documents\PRACTICE_PROG\HRIS\HRIS-PAT\PRACTICE\LESSONS\CORPORATE LESSONS\interview_exam_syllabus.md
-```
-
-### Units Overview:
-
-| Unit | Title | Lessons | Status |
-|------|-------|---------|--------|
-| **1** | Basic Programming Logic | 6 lessons | ✅ DONE (Lesson file created) |
-| **2** | PHP Fundamentals | 5 lessons | 🔲 NEEDS LESSON FILE |
-| **3** | MySQL Fundamentals | 5 lessons | 🔲 NEEDS LESSON FILE |
-| **4** | Java Fundamentals | 6 lessons | 🔲 NEEDS LESSON FILE |
-| **5** | Debugging & Troubleshooting | 5 lessons + scenarios | 🔲 NEEDS LESSON FILE |
+| Unit | Topic | Status | Files |
+|------|-------|--------|-------|
+| 1 | Basic Programming Logic | ✅ COMPLETE | `lesson_1_basic_programming_logic.md` + Activities (8/8) |
+| 2 | PHP Fundamentals | ✅ COMPLETE | `lesson_2_php_fundamentals.md` + Activities (6/6) |
+| 3 | MySQL Fundamentals | ✅ COMPLETE | `lesson_3_mysql_fundamentals.md` + Activities (5/5) |
+| 4 | Java Fundamentals | ⏳ NOT STARTED | To be created |
 
 ---
 
-## 🎓 TEACHING PHILOSOPHY: "PROFESSOR'S METHOD"
+## 🎯 EXAM INFO
 
-### Core Principle
-**Read code like English sentences.** Don't memorize syntax. Understand logic by reading code as if it were plain English.
-
-### Example - Reading PHP Code as English
-
-```php
-<?php
-    $name = "Patrick";
-    $age = 25;
-    
-    if ($age >= 18) {
-        echo "You are an adult";
-    } else {
-        echo "You are a minor";
-    }
-?>
-```
-
-**Reading Like English (NOT technical jargon):**
-- "Create a variable named name containing the text Patrick"
-- "Create a variable named age containing the number 25"
-- "If age is greater than or equal to 18"
-- "Then print 'You are an adult' to the screen"
-- "Otherwise print 'You are a minor'"
-- "Since age is 25, the condition is true, so print 'You are an adult'"
-
-### Why This Works
-- Students think **logically**, not memorizing syntax
-- Same logic applies to Java, Python, any language
-- Exam will have "read this code and explain it" questions
-- Enhanced problem-solving and debugging skills
+- **Company:** Sandman Software Systems Inc (Quezon City)
+- **Exam Date:** This Wednesday, 1:00 PM
+- **Duration:** 1 hour (approx)
+- **Format:** Practical coding exam
+- **Topics Tested:** Basic Logic (35%), PHP (25%), MySQL (15%), Java (15%), Debugging (10%)
 
 ---
 
-## 📄 ALREADY CREATED FILES
+## 📝 USER PREFERENCES & LEARNING STYLE
 
-### Syllabus File
-**Path:** `interview_exam_syllabus.md`
-- Contains all 5 units in outline form
-- Shows base topics, lesson titles, and basic code examples
-- Use this as your reference for what each lesson should cover
+### Preferences
+- ✅ **Simple analogies, not overly complicated** - Use real-world comparisons
+- ✅ **Lessons with hints for activities, NO answers** - Activities guide but don't spoil
+- ✅ **Focused and narrow** - Based on syllabus only, not broad
+- ✅ **Exam-ready** - Every lesson and activity directly relevant to exam
+- ✅ **Clear structure** - Lessons first, then activities with TODO comments
 
-### Lesson 1 File (EXAMPLE TEMPLATE)
-**Path:** `lesson_1_basic_programming_logic.md`
-- This is the complete, expanded lesson file for Unit 1
-- **USE THIS AS YOUR TEMPLATE** for creating other lesson files
-- Shows the format, style, and depth expected
-
----
-
-## 🔧 HOW TO CREATE A NEW LESSON FILE
-
-### File Naming Convention
-```
-lesson_[UNIT_NUMBER]_[topic_in_snake_case].md
-
-Examples:
-- lesson_2_php_fundamentals.md
-- lesson_3_mysql_fundamentals.md
-- lesson_4_java_fundamentals.md
-- lesson_5_debugging_troubleshooting.md
-```
-
-### File Location
-```
-c:\Users\HP\Documents\PRACTICE_PROG\HRIS\HRIS-PAT\PRACTICE\LESSONS\CORPORATE LESSONS\
-```
-
-### Structure of a Complete Lesson File
-
-```markdown
-# 🔵 UNIT [N]: [TOPIC NAME]
-## Lesson [N]: [Descriptive Title]
-
-**Duration:** X-X hours
-**What You'll Learn:** [Learning objectives]
-**Why It Matters:** [Relevance]
+### Environment
+- 🖥️ **OS:** Windows 10 Pro
+- 📍 **Working Directory:** `C:\Users\HP\Documents\PRACTICE_PROG\CORPORATE LESSONS`
+- 🗂️ **Activity Files:** `TEST\ACTS\` folder
+- 💾 **Database Tool:** DB Browser for SQLite (installed by user)
+- 🔗 **Git Branch:** feat/webdev (clean status)
 
 ---
 
-## 📖 Introduction: [Key Concept]
+## ✅ UNITS COMPLETED
 
-[Explain the concept in simple terms, use analogies from real life]
+### UNIT 1: BASIC PROGRAMMING LOGIC
+**Status:** 100% Complete - All 8 activities passed ✅
 
----
+**Topics Covered:**
+- Variables & Data Types
+- Basic Operations (Math & Logic)
+- Conditionals (if/else)
+- Loops (for, while, foreach)
+- Arrays/Collections
+- Functions
 
-## 🎯 Learning Objectives
+**Key Files:**
+- `lesson_1_basic_programming_logic.md` (1142 lines, comprehensive)
+- `TEST/ACTS/lesson1.php` (8 activities, all fixed and working)
 
-- ✅ [Objective 1]
-- ✅ [Objective 2]
-- ✅ [Objective 3]
-
----
-
-## Lesson [N].[M]: [Specific Topic]
-
-### 🧠 The Concept
-[Explain in plain English, use diagrams if helpful]
-
-### 📝 Reading Like English
-[Show the Professor's Method]
-
-### 🔧 [Language] Example
-[Code snippet]
-
-**Reading Like English:**
-[Translate code to plain English, line by line]
-
-### 🔧 [Another Language] Example
-[Same logic in different language]
-
-### 🎬 Real-World Example: [Scenario]
-[Show how this applies to the Sandman Systems context or HRIS system]
+**Key Learning:**
+- Activities 3, 4, 8 were perfect from start
+- Activities 1, 2, 5, 6, 7 needed fixes (wrong values, missing tests, etc.)
+- All now 100% correct and exam-ready
 
 ---
-
-## 📝 COMPREHENSIVE ACTIVITIES
-
-### Activity [N]: [Name]
-**What to do:** [Clear instructions]
-**Expected output/result:** [What success looks like]
-
----
-
-## 🧠 Key Concepts Summary
-
-| Concept | Purpose | Example |
-|---------|---------|---------|
-| [Concept 1] | [Purpose] | [Code] |
-
----
-
-## 💡 Common Mistakes to Avoid
-
-1. **Mistake 1**
-   - ❌ Wrong way
-   - ✅ Right way
-
----
-
-## 🎯 Next Steps
-[What student should do next]
-```
-
----
-
-## 📋 DETAILED REQUIREMENTS FOR EACH UNIT
 
 ### UNIT 2: PHP FUNDAMENTALS
+**Status:** 100% Complete - All 6 activities passed ✅
 
-**Location:** `lesson_2_php_fundamentals.md`
+**Topics Covered:**
+- PHP Basics (echo, syntax)
+- Variables & String Concatenation/Interpolation
+- Functions (definition, parameters, return)
+- Arrays (indexed and associative)
+- Loops (foreach)
+- HTML Forms & $_POST
 
-**Lessons to Cover (from syllabus):**
-1. Lesson 2.1: PHP Basics — What is PHP?
-2. Lesson 2.2: PHP Variables & Echo (Output)
-3. Lesson 2.3: PHP Functions
-4. Lesson 2.4: PHP Arrays & Loops
-5. Lesson 2.5: PHP & HTML (Working with Web Forms)
+**Key Files:**
+- `lesson_2_php_fundamentals.md` (600+ lines)
+- `UNIT2_QUICKSTART.md` (reference guide)
+- `TEST/ACTS/lesson2.php` (6 activities, all complete)
+- `TEST/ACTS/form.html` (HTML form template)
 
-**Key Requirements:**
-- Compare PHP to Java (show how same logic works differently)
-- Show real HRIS/web development context
-- Include form handling examples
-- Explain when to use PHP vs other languages
-- At least 6-8 comprehensive activities
-- Real-world scenarios (employee data, forms, etc.)
+**User's Completed Activities:**
+1. ✅ Output Variables (name, position, department)
+2. ✅ Create Function (calculateNetSalary with 15% tax)
+3. ✅ Loop Array (5 job titles with foreach)
+4. ✅ Associative Array (employee id, name, email, phone)
+5. ✅ Array of Employees (3 employees, total salary calculation)
+6. ✅ Form Processing (HTML form + PHP $_POST handling)
 
-**Estimated Length:** 3,000-4,000 words
+**Key Learning:**
+- User understands string interpolation vs concatenation
+- Comfortable with functions and parameters
+- Arrays (both indexed and associative) mastered
+- Form processing concept understood
 
 ---
 
 ### UNIT 3: MYSQL FUNDAMENTALS
+**Status:** ✅ LESSONS COMPLETE - Activities In Progress
 
-**Location:** `lesson_3_mysql_fundamentals.md`
+**Topics Covered:**
+- MySQL Basics (tables, rows, columns, primary keys)
+- CREATE TABLE (data types, constraints)
+- INSERT (adding data)
+- SELECT (queries, WHERE, ORDER BY, COUNT)
+- UPDATE (modifying data with WHERE)
+- DELETE (removing data with WHERE)
 
-**Lessons to Cover (from syllabus):**
-1. Lesson 3.1: MySQL Basics — What is MySQL?
-2. Lesson 3.2: CREATE TABLE (Creating Structure)
-3. Lesson 3.3: INSERT (Adding Data)
-4. Lesson 3.4: SELECT (Retrieving Data)
-5. Lesson 3.5: UPDATE (Changing Data)
-6. Lesson 3.6: DELETE (Removing Data)
+**Key Files:**
+- `lesson_3_mysql_fundamentals.md` (800+ lines)
+- `UNIT3_QUICKSTART.md` (reference guide)
+- `TEST/ACTS/lesson3.sql` (5 activities, hints provided)
 
-**Key Requirements:**
-- Show table structures visually
-- Use consistent employee/department example throughout
-- Explain normalization and relationships
-- Show SQL as English: "SELECT name FROM employees WHERE salary > 50000" = "Get names of all employees earning more than 50000"
-- Include JOIN examples
-- At least 6-8 activities
-- Real database scenarios
+**Database Setup:**
+- 🎯 Using: **DB Browser for SQLite** (user's choice)
+- ✅ Perfect for learning SQL (no server setup needed)
+- ✅ SQL syntax is 99% compatible with MySQL
+- ✅ Better than XAMPP for exam prep (simpler, faster)
 
-**Estimated Length:** 3,000-4,000 words
+**5 Activities to Complete:**
+1. CREATE TABLE - departments, salaries, employees tables
+2. INSERT - 5 employees with various departments/salaries
+3. SELECT - 5 queries (all, filtered, count, sorted)
+4. UPDATE - 3 updates (raise, department change, email)
+5. DELETE - 3 deletes (by id, by condition, verify)
 
----
-
-### UNIT 4: JAVA FUNDAMENTALS
-
-**Location:** `lesson_4_java_fundamentals.md`
-
-**Lessons to Cover (from syllabus):**
-1. Lesson 4.1: Java Basics — Structure & Syntax
-2. Lesson 4.2: Java Variables & Data Types
-3. Lesson 4.3: Java Conditionals
-4. Lesson 4.4: Java Loops
-5. Lesson 4.5: Java Functions (Methods)
-6. Lesson 4.6: Java Arrays & Collections
-
-**Key Requirements:**
-- Show Java as compiled language (explain difference from PHP)
-- Emphasize type safety (Java forces you to declare types)
-- Compare to PHP and MySQL equivalents
-- Show ArrayList vs primitive arrays
-- Explain class structure and main method
-- At least 6-8 activities
-- Build towards small programs
-
-**Estimated Length:** 3,500-4,500 words
+**Critical Notes for Unit 3:**
+- ⚠️ Always use WHERE in UPDATE/DELETE - without it, affects ALL rows
+- Think in English first, then write SQL
+- SELECT is most important (likely highest exam weight)
+- Test simple queries before complex ones
 
 ---
 
-### UNIT 5: DEBUGGING & TROUBLESHOOTING
+## ⏳ UNIT 4: JAVA FUNDAMENTALS (NOT YET CREATED)
 
-**Location:** `lesson_5_debugging_troubleshooting.md`
+**What Needs to be Done:**
+1. Create `lesson_4_java_fundamentals.md` following same pattern:
+   - Simple analogies (objects = blueprints, methods = recipes)
+   - Real-world examples
+   - Focus on basics only (not OOP complexity)
 
-**Lessons to Cover (from syllabus):**
-1. Lesson 5.1: Common PHP Errors & How to Find Them
-2. Lesson 5.2: Common MySQL Errors & How to Find Them
-3. Lesson 5.3: Common Java Errors & How to Find Them
-4. Lesson 5.4: General Debugging Strategy
-5. Lesson 5.5: Real Exam Debugging Scenarios
+2. Topics to Cover (from syllabus):
+   - Java Basics (class structure, main method)
+   - Variables & Data Types (int, String, double, boolean)
+   - Conditionals (if/else, switch)
+   - Loops (for, while, for-each)
+   - Methods/Functions
+   - Arrays & Collections (ArrayList)
+   - Simple OOP (basic class and object creation)
 
-**Key Requirements:**
-- Show ACTUAL error messages and how to read them
-- For each error: Show bad code → Error message → How to fix → Fixed code
-- Use the syllabus content as base (it has examples already)
-- Add more real-world debugging scenarios
-- Teach debugging mindset: "Every error has a cause"
-- Include activities where students intentionally break code and fix it
-- At least 5-8 comprehensive activities
+3. Activities (6-8 activities with hints, no answers):
+   - Basic output (System.out.println)
+   - Variables & types
+   - Conditionals
+   - Loops
+   - Methods
+   - Arrays
+   - Simple object creation (optional, if time allows)
 
-**Estimated Length:** 3,500-4,500 words
+4. Create `TEST/ACTS/lesson4.java` template with activity stubs
 
----
-
-## 📖 STYLE GUIDELINES
-
-### Writing Style
-- ✅ **DO:** Use simple, conversational language
-- ✅ **DO:** Explain WHY, not just WHAT
-- ✅ **DO:** Use analogies and real-world examples
-- ✅ **DO:** Read code like English sentences
-- ✅ **DO:** Show common mistakes and how to avoid them
-- ❌ **DON'T:** Use technical jargon without explaining
-- ❌ **DON'T:** Assume prior knowledge
-- ❌ **DON'T:** Make code examples too complex
-
-### Code Examples
-- **Format:** Use proper syntax highlighting (```php, ```java, ```sql)
-- **Comments:** Add comments explaining complex lines
-- **Length:** 5-15 lines per example (keep focused)
-- **Multiple Languages:** Show same concept in 2-3 languages when relevant
-- **Real Context:** Use Sandman Systems / HRIS / employee database context
-
-### Activities
-- **Clarity:** Crystal clear instructions
-- **Progression:** Start easy, get harder
-- **Variety:** Mix coding, reading, understanding
-- **Real-World:** Connect to job interview scenarios
-- **Testability:** Clear expected output/results
-- **Minimum:** 6-8 activities per lesson file
-
-### Structure Markers
-Use emoji to make scanning easy:
-- 🎯 = Objectives/Goals
-- 📖 = Concept explanation
-- 🧠 = Understanding
-- 🔧 = Code examples
-- 📝 = Activities
-- 🎬 = Real-world scenarios
-- 💡 = Tips/Tricks
-- ❌/✅ = Wrong/Right examples
+5. Create `UNIT4_QUICKSTART.md` reference guide
 
 ---
 
-## 🌟 EXAMPLE: How Lesson 1 Was Done
+## 📚 OVERALL STRUCTURE
 
-**File:** `lesson_1_basic_programming_logic.md`
-
-**Structure:**
-1. Title with unit emoji and number
-2. Metadata (duration, objectives, why it matters)
-3. Introduction section (concept explanation)
-4. Learning objectives (bulleted list)
-5. Six lesson sections (1.1 through 1.6):
-   - Each section: Concept → Reading Like English → PHP Example → Java Example → Real-world scenario
-6. Comprehensive activities (8 activities)
-7. Key concepts summary table
-8. Common mistakes section
-9. Next steps
-
-**Key Features:**
-- ~5,000 words (comprehensive but readable)
-- Code examples in PHP, Java, sometimes MySQL
-- Heavy use of "Reading Like English" throughout
-- Real-world employee/salary examples
-- Progressive difficulty in activities
-- Multiple emoji markers for easy scanning
+```
+CORPORATE LESSONS/
+├── interview_exam_syllabus.md (original comprehensive syllabus)
+├── 
+├── UNIT 1: lesson_1_basic_programming_logic.md ✅
+├── UNIT 2: lesson_2_php_fundamentals.md ✅
+│           UNIT2_QUICKSTART.md ✅
+├── UNIT 3: lesson_3_mysql_fundamentals.md ✅
+│           UNIT3_QUICKSTART.md ✅
+├── UNIT 4: [TO BE CREATED]
+│           UNIT4_QUICKSTART.md [TO BE CREATED]
+│
+└── TEST/ACTS/
+    ├── lesson1.php ✅
+    ├── lesson2.php ✅
+    ├── form.html ✅
+    ├── lesson3.sql ⏳
+    └── lesson4.java [TO BE CREATED]
+```
 
 ---
 
-## 🎓 CONTEXT ABOUT THE STUDENT
+## 🎓 EXAM STRATEGY NOTES
 
-**Name:** Patrick  
-**Background:** Learning web development, has completed HRIS project lessons (HTML, CSS basics)  
-**Goal:** Pass interview exam at Sandman Software Systems Inc  
-**Timeline:** Exam is THIS WEDNESDAY at 1:00 PM (urgent!)  
-**Learning Style:** Prefers "Professor's Method" (explaining code in English), wants to understand logic not memorize syntax, appreciates real-world examples  
-**Preferred Format:** Book-like lessons with activities
+**From Syllabus Analysis:**
+- **35%** Basic Logic (UNITS 1 SOLID)
+- **25%** PHP (UNIT 2 SOLID)
+- **15%** MySQL (UNIT 3 SOLID)
+- **15%** Java (UNIT 4 NEEDED)
+- **10%** Debugging (Covered in Unit 1, applicable to all)
 
----
+**Time Available:** User has exam "This Wednesday" (relative to 2026-05-31) - likely ~5 days or less
 
-## 📋 WORK CHECKLIST FOR NEW AGENT
-
-- [ ] Read this entire context document
-- [ ] Read the `interview_exam_syllabus.md` to understand all topics
-- [ ] Read `lesson_1_basic_programming_logic.md` to understand format/style
-- [ ] Create `lesson_2_php_fundamentals.md` (PHP)
-- [ ] Create `lesson_3_mysql_fundamentals.md` (MySQL)
-- [ ] Create `lesson_4_java_fundamentals.md` (Java)
-- [ ] Create `lesson_5_debugging_troubleshooting.md` (Debugging)
-- [ ] Ensure each lesson is 3,000-5,000 words
-- [ ] Ensure each lesson has 6-8+ activities
-- [ ] Ensure each uses Professor's Method throughout
-- [ ] Test that code examples are accurate
-- [ ] Verify consistency with syllabus content
+**Priority:**
+1. ✅ Units 1-3 are foundation and comprehensive
+2. ⏳ Unit 4 (Java) is critical - 15% of exam
+3. ✅ Debugging skills from Unit 1 apply everywhere
 
 ---
 
-## 💬 TONE & VOICE
+## 🔑 KEY SUCCESS FACTORS
 
-Imagine you're Patrick's mentor/professor explaining to him:
-- Friendly, encouraging, not condescending
-- "Here's how to think about this..."
-- "Let me show you why this matters..."
-- "Here's a real example from Sandman Systems..."
-- Focus on building confidence and problem-solving skills
-- Emphasize that exam is achievable with focused study
+1. **Simple, Focused Learning**
+   - No distractions or over-complications
+   - Each lesson has real-world analogy
+   - Activities test specific skill, not multiple skills
 
----
+2. **Hint-Based Learning**
+   - Activities guide without spoiling
+   - User figures out code but has direction
+   - Builds confidence and problem-solving
 
-## 🚀 CRITICAL SUCCESS FACTORS
+3. **Exam-Ready Content**
+   - Every line of lesson is exam-relevant
+   - No theory without application
+   - Activities mirror likely exam questions
 
-1. **Urgency:** These lessons need to be created ASAP (exam is Wednesday!)
-2. **Completeness:** Each lesson must be self-contained and comprehensive
-3. **Clarity:** Every concept must be explained in plain English
-4. **Professor's Method:** Code reading like English is non-negotiable
-5. **Activities:** Must include practical, testable activities
-6. **Consistency:** All lessons should follow the same format/style
-7. **Real-World:** Connect to job context whenever possible
-
----
-
-## 📞 QUESTIONS TO ANSWER IF UNCLEAR
-
-**Q: How long should each lesson be?**
-A: 3,000-5,000 words, enough to thoroughly explain all topics.
-
-**Q: What if a code example is wrong?**
-A: Test it first. Accuracy is critical for learning.
-
-**Q: How many activities per lesson?**
-A: Minimum 6-8. Vary difficulty from easy to challenging.
-
-**Q: Should activities have solutions?**
-A: The lesson file doesn't need solutions, but be prepared to provide them if student asks.
-
-**Q: Can I skip the Professor's Method?**
-A: No. This is the core teaching approach. Every code example must have "Reading Like English" section.
-
-**Q: What if a topic seems complex?**
-A: Break it into smaller steps. Use analogies. Show examples before explaining.
+4. **Progressive Difficulty**
+   - Units 1-3 progressively build skills
+   - Unit 4 should follow same pattern
+   - Basic → intermediate → challenge within each unit
 
 ---
 
-## ✅ READY TO START?
+## 📋 NEXT AGENT TODO LIST
 
-Everything you need is documented here. The structure is clear, the examples are provided, and the student's context is documented. Start with Unit 2 (PHP) and follow the template from Lesson 1.
+**MUST DO IMMEDIATELY:**
+1. ✅ Read this context completely
+2. ✅ Verify all Unit 1-3 files exist and are correct
+3. ⏳ Create Unit 4 (Java) following EXACT same pattern
+4. ⏳ Create UNIT4_QUICKSTART.md with quick reference
+5. ⏳ Update grading marks in lesson files for Units 2-3 (add verification section)
 
-**Timeline:** Each lesson should take 2-3 hours to write well. All four lessons needed by Tuesday night at latest.
+**Unit 4 Creation Checklist:**
+- [ ] lesson_4_java_fundamentals.md (800+ lines, 6-8 lessons)
+- [ ] UNIT4_QUICKSTART.md (quick reference)
+- [ ] TEST/ACTS/lesson4.java (activity template with stubs)
+- [ ] Simple analogies (no OOP complexity)
+- [ ] Real-world examples (employee/payroll context)
+- [ ] 6-8 activities with hints only
+- [ ] All content exam-focused
 
-Good luck! Help Patrick ace this interview! 🚀
+**DO NOT:**
+- ❌ Make lessons too long or theoretical
+- ❌ Explain advanced OOP concepts (inheritance, polymorphism)
+- ❌ Create activities beyond exam scope
+- ❌ Show complete code in activity hints
+- ❌ Deviate from syllabus
+
+**DO:**
+- ✅ Keep analogies simple (e.g., class = blueprint, object = house)
+- ✅ Focus on basics (variables, loops, methods, arrays)
+- ✅ Make each activity 1 focused skill
+- ✅ Include real-world employee/salary examples
+- ✅ Follow exact same format as Units 1-3
+
+---
+
+## 💬 COMMUNICATION NOTES
+
+**User Preferences:**
+- Prefers direct, concise communication
+- No lengthy explanations
+- Clear action items and checklists
+- Appreciates analogies and examples
+- Wants exam-focused content only
+
+**User Type:**
+- Serious about exam (intensive crash course)
+- Values efficiency (3-4 hours per unit)
+- Learns by doing (hands-on activities)
+- Appreciates guidance but wants to figure it out
+- Has practical setup (SQLite, local files)
+
+---
+
+## 🚀 SUCCESS METRICS
+
+**Unit 1:** 8/8 activities ✅ (100% pass rate)
+**Unit 2:** 6/6 activities ✅ (100% pass rate)
+**Unit 3:** 5/5 activities ⏳ (In progress - user has DB Browser ready)
+**Unit 4:** To be created (target: 6-8 activities, 100% pass rate)
+
+**Exam Readiness:**
+- ✅ Logic foundation solid
+- ✅ PHP practical skills complete
+- ✅ SQL queries mastered (with SQLite)
+- ⏳ Java basics needed
+- ✅ Debugging mindset established
+
+**Timeline:**
+- Exam: "This Wednesday, 1:00 PM" (approx 5 days from 2026-05-31)
+- Unit 4 creation: ~2-3 hours
+- User practice time: ~3-4 hours per unit
+- Final review: ~1-2 hours
+
+---
+
+## 📞 HANDOFF NOTES FOR NEXT AGENT
+
+**Current State:**
+- User is motivated and focused
+- Has completed 3/4 units successfully
+- Has appropriate tools installed (SQLite)
+- Is 5 days from exam
+- Needs Unit 4 (Java) created ASAP
+
+**Tone to Use:**
+- Encouraging (they're 75% done!)
+- Direct and efficient
+- No fluff or unnecessary explanation
+- Action-oriented
+
+**If User Asks to Skip/Change Something:**
+- Remind them: Everything is exam-focused and based on syllabus
+- Unit 4 is critical (15% of exam, and exam is in ~5 days)
+- Suggest prioritizing Unit 4, then practice activities
+
+**Red Flags to Watch:**
+- User getting overwhelmed → recommend 1-2 hours per session max
+- User trying to learn OOP deeply → redirect to basics only
+- User asking for broad Java knowledge → stick to syllabus scope
+
+---
+
+## 📂 KEY REPOSITORY INFO
+
+**Git Status:** `feat/webdev` branch, clean
+**Last Commits:**
+- docs: COMPLETED UNIT 2 - COMPLETED ALL UNIT 2 TASKS (PHP)
+- docs: COMPLETED UNIT 1 - ADDED UNIT 2 - UNIT 2 GUIDE - UNIT 2 ANSWER FORM
+
+**Files NOT to Modify:**
+- interview_exam_syllabus.md (original reference)
+- Completed lesson files (Unit 1-3) unless critical errors
+
+**Files to Create:**
+- lesson_4_java_fundamentals.md
+- UNIT4_QUICKSTART.md
+- TEST/ACTS/lesson4.java
+
+---
+
+**END OF AGENT CONTEXT**
+
+---
+
+## Quick Reference for Next Agent
+
+| What | Where | Status |
+|------|-------|--------|
+| Exam Date | "This Wednesday" (from 2026-05-31) | ~5 days left |
+| Units Done | 1, 2, 3 (100% complete) | ✅ Ready |
+| Unit TODO | 4 - Java | ⏳ URGENT |
+| Database | SQLite + DB Browser | ✅ User installed |
+| User Preference | Simple, focused, exam-ready | ✅ Follow pattern |
+| Next Action | Create Unit 4 immediately | 🚀 HIGH PRIORITY |
