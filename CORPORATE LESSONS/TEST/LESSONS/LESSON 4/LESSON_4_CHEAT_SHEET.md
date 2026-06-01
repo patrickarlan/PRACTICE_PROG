@@ -3,6 +3,110 @@
 
 ---
 
+## 🔌 USING CLASSES FROM OTHER FILES (Imports)
+
+### The Concept
+Write code once in one file, use it in many files. Like calling a function from another file.
+
+### Creating a Helper Class (File 1: Calculator.java)
+```java
+public class Calculator {
+    public static double calculateBonus(double salary) {
+        return salary * 0.10;  // 10% bonus
+    }
+    
+    public static double calculateTax(double salary) {
+        return salary * 0.15;  // 15% tax
+    }
+}
+```
+
+### Using It in Another File (File 2: Main.java)
+```java
+public class Main {
+    public static void main(String[] args) {
+        double salary = 50000;
+        
+        // Use Calculator's methods from other file!
+        double bonus = Calculator.calculateBonus(salary);
+        double tax = Calculator.calculateTax(salary);
+        
+        System.out.println("Salary: $" + salary);
+        System.out.println("Bonus: $" + bonus);
+        System.out.println("Tax: $" + tax);
+    }
+}
+```
+
+### Compile Both Files
+```powershell
+javac Calculator.java
+javac Main.java
+java Main
+```
+
+### Built-in Imports
+```java
+import java.util.ArrayList;    // Import specific class
+import java.util.HashMap;
+import java.util.Stack;
+import java.util.*;             // Import ALL from java.util
+```
+
+### Public vs Private
+```java
+public class Account {
+    public double balance;      // Other files can access ✅
+    private String pin;         // Only this file ❌
+    
+    public void deposit(double amount) {  // Can be called from other files ✅
+        balance += amount;
+    }
+    
+    private void verifyPin(String pin) {  // Only use inside this class ❌
+        // Check PIN
+    }
+}
+```
+
+### Real Example: Multi-File System
+
+**File 1: Employee.java**
+```java
+public class Employee {
+    public String name;
+    public double salary;
+    
+    public Employee(String name, double salary) {
+        this.name = name;
+        this.salary = salary;
+    }
+}
+```
+
+**File 2: Payroll.java**
+```java
+public class Payroll {
+    public static double calculateNet(double salary) {
+        return salary * 0.85;  // 15% tax
+    }
+}
+```
+
+**File 3: Main.java**
+```java
+public class Main {
+    public static void main(String[] args) {
+        Employee emp = new Employee("Patrick", 50000);
+        double net = Payroll.calculateNet(emp.salary);
+        
+        System.out.println(emp.name + " net: $" + net);
+    }
+}
+```
+
+---
+
 ## 1️⃣ SETUP: INSTALLING JAVA JDK
 
 ### Check If Java Is Installed

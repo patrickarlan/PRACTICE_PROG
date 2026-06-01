@@ -791,6 +791,390 @@ Total Bonus Budget: $15300.0
 
 ---
 
+## Lesson 4.7: Imports & Using Classes From Other Files
+
+### 🧠 The Concept
+
+In real programs, you don't put everything in one file. You split code into multiple files (one class per file), then **import** them when you need them.
+
+**Think of it:** Like a restaurant having separate departments (kitchen, cashier, delivery). You call methods from other departments, you don't do everything yourself.
+
+### 📝 File Organization
+
+**Typical Project Structure:**
+```
+Project/
+├── Calculator.java          (Helper class with calculation methods)
+├── Employee.java            (Helper class with employee data)
+├── Main.java               (Main program that uses other classes)
+└── EmployeePayroll.java    (Another program using same classes)
+```
+
+---
+
+### 📝 Basic Import (Built-in Classes)
+
+**Built-in Java imports** - These come with Java automatically:
+
+```java
+import java.util.ArrayList;    // Import ArrayList from java.util package
+import java.util.HashMap;      // Import HashMap from java.util package
+import java.util.*;            // Import ALL classes from java.util
+
+public class MyProgram {
+    public static void main(String[] args) {
+        ArrayList<String> names = new ArrayList<>();  // Can use ArrayList now
+        HashMap<Integer, String> map = new HashMap<>();
+    }
+}
+```
+
+**Common Imports:**
+```java
+import java.util.ArrayList;     // Dynamic arrays
+import java.util.HashMap;       // Hash maps
+import java.util.List;          // List interface
+import java.util.Set;           // Set interface
+import java.util.Stack;         // Stack
+import java.util.Queue;         // Queue
+```
+
+---
+
+### 📝 Custom Import (Your Own Classes)
+
+**Scenario:** You create multiple files for organization.
+
+**File 1: Calculator.java** (Helper class)
+```java
+public class Calculator {
+    // Methods that other classes can use
+    public static double calculateBonus(double salary) {
+        return salary * 0.10;  // 10% bonus
+    }
+    
+    public static double calculateTax(double salary) {
+        return salary * 0.15;  // 15% tax
+    }
+}
+```
+
+**File 2: Employee.java** (Another helper class)
+```java
+public class Employee {
+    public String name;
+    public int id;
+    public double salary;
+    
+    // Constructor
+    public Employee(String name, int id, double salary) {
+        this.name = name;
+        this.id = id;
+        this.salary = salary;
+    }
+    
+    public void display() {
+        System.out.println("Name: " + name + ", ID: " + id + ", Salary: $" + salary);
+    }
+}
+```
+
+**File 3: PayrollSystem.java** (Main program using both)
+```java
+public class PayrollSystem {
+    public static void main(String[] args) {
+        // Create employee
+        Employee emp = new Employee("Patrick", 1001, 50000);
+        emp.display();  // Use Employee's method
+        
+        // Use Calculator's methods
+        double bonus = Calculator.calculateBonus(emp.salary);
+        double tax = Calculator.calculateTax(emp.salary);
+        
+        System.out.println("Bonus: $" + bonus);
+        System.out.println("Tax: $" + tax);
+        System.out.println("Net: $" + (emp.salary - tax + bonus));
+    }
+}
+```
+
+**How to compile and run:**
+```powershell
+# Compile all files
+javac Calculator.java
+javac Employee.java
+javac PayrollSystem.java
+
+# Run
+java PayrollSystem
+```
+
+**Output:**
+```
+Name: Patrick, ID: 1001, Salary: $50000.0
+Bonus: $5000.0
+Tax: $7500.0
+Net: $47500.0
+```
+
+---
+
+### 📝 Visibility: public vs private
+
+**public:** Can be used from OTHER files  
+**private:** Can ONLY be used inside THIS file
+
+```java
+public class BankAccount {
+    public double balance;        // Other files can access
+    private String pin;           // Only this file can access
+    
+    public void deposit(double amount) {  // Can be called from other files
+        balance += amount;
+    }
+    
+    private void verifyPin(String pin) {  // Only used inside BankAccount
+        // Check if PIN is correct
+    }
+}
+
+// In another file:
+public class ATM {
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount();
+        acc.deposit(1000);              // ✅ Works (public)
+        acc.balance;                    // ✅ Can access (public)
+        acc.verifyPin("1234");          // ❌ ERROR (private)
+        acc.pin;                        // ❌ ERROR (private)
+    }
+}
+```
+
+---
+
+### 📝 Real-World Example: Multi-File System
+
+**File 1: SalaryCalculator.java**
+```java
+public class SalaryCalculator {
+    
+    public static double calculateNetSalary(double gross, double taxRate) {
+        return gross * (1 - taxRate);
+    }
+    
+    public static double calculateBonus(double salary, double rate) {
+        return salary * rate;
+    }
+}
+```
+
+**File 2: Employee.java**
+```java
+public class Employee {
+    private String name;
+    private int id;
+    private double salary;
+    private String department;
+    
+    public Employee(String name, int id, double salary, String department) {
+        this.name = name;
+        this.id = id;
+        this.salary = salary;
+        this.department = department;
+    }
+    
+    public double getNetSalary() {
+        return SalaryCalculator.calculateNetSalary(salary, 0.15);  // Use another class!
+    }
+    
+    public double getBonus() {
+        return SalaryCalculator.calculateBonus(salary, 0.10);  // Use another class!
+    }
+    
+    public void displayInfo() {
+        System.out.println("Name: " + name);
+        System.out.println("ID: " + id);
+        System.out.println("Salary: $" + salary);
+        System.out.println("Department: " + department);
+        System.out.println("Net Salary: $" + getNetSalary());
+        System.out.println("Bonus: $" + getBonus());
+    }
+}
+```
+
+**File 3: Main.java**
+```java
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Employee> employees = new ArrayList<>();
+        
+        employees.add(new Employee("Patrick", 1001, 50000, "Engineering"));
+        employees.add(new Employee("Maria", 1002, 55000, "HR"));
+        employees.add(new Employee("Juan", 1003, 48000, "Sales"));
+        
+        for (Employee emp : employees) {
+            emp.displayInfo();
+            System.out.println("---");
+        }
+    }
+}
+```
+
+**File Structure:**
+```
+Project/
+├── SalaryCalculator.java
+├── Employee.java
+└── Main.java
+```
+
+**Compile & Run:**
+```powershell
+javac SalaryCalculator.java
+javac Employee.java
+javac Main.java
+
+java Main
+```
+
+---
+
+### 📝 Packages (Organizing Into Folders)
+
+**Real projects use packages** to organize code:
+
+```
+Project/
+├── util/
+│   ├── SalaryCalculator.java
+│   └── DateUtils.java
+├── models/
+│   ├── Employee.java
+│   └── Department.java
+└── Main.java
+```
+
+**File: util/SalaryCalculator.java**
+```java
+package util;  // Declare package at top
+
+public class SalaryCalculator {
+    public static double calculateNetSalary(double gross, double taxRate) {
+        return gross * (1 - taxRate);
+    }
+}
+```
+
+**File: models/Employee.java**
+```java
+package models;  // Different package
+
+import util.SalaryCalculator;  // Import from util package
+
+public class Employee {
+    private String name;
+    private double salary;
+    
+    public double getNetSalary() {
+        return SalaryCalculator.calculateNetSalary(salary, 0.15);  // Use imported class
+    }
+}
+```
+
+**File: Main.java**
+```java
+import models.Employee;
+import util.SalaryCalculator;
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        Employee emp = new Employee("Patrick", 50000);
+        System.out.println("Net: $" + emp.getNetSalary());
+    }
+}
+```
+
+---
+
+### 🎬 Real-World Example: Multi-File Employee System
+
+**Step 1: Create SalaryCalculator.java**
+```java
+public class SalaryCalculator {
+    
+    public static double calculateTax(double salary) {
+        return salary * 0.15;  // 15% tax
+    }
+    
+    public static double calculateBonus(double salary, int yearsWorked) {
+        if (yearsWorked >= 5) return salary * 0.15;
+        if (yearsWorked >= 3) return salary * 0.10;
+        return salary * 0.05;
+    }
+    
+    public static boolean isHighEarner(double salary) {
+        return salary > 60000;
+    }
+}
+```
+
+**Step 2: Create Employee.java**
+```java
+public class Employee {
+    public String name;
+    public int id;
+    public double salary;
+    public int yearsWorked;
+    
+    public Employee(String name, int id, double salary, int yearsWorked) {
+        this.name = name;
+        this.id = id;
+        this.salary = salary;
+        this.yearsWorked = yearsWorked;
+    }
+    
+    public void showPayroll() {
+        double tax = SalaryCalculator.calculateTax(salary);
+        double bonus = SalaryCalculator.calculateBonus(salary, yearsWorked);
+        boolean isHigh = SalaryCalculator.isHighEarner(salary);
+        
+        System.out.println("Employee: " + name);
+        System.out.println("Gross: $" + salary);
+        System.out.println("Tax: $" + tax);
+        System.out.println("Bonus: $" + bonus);
+        System.out.println("Net: $" + (salary - tax + bonus));
+        System.out.println("High Earner: " + isHigh);
+    }
+}
+```
+
+**Step 3: Create PayrollSystem.java**
+```java
+import java.util.ArrayList;
+
+public class PayrollSystem {
+    public static void main(String[] args) {
+        ArrayList<Employee> employees = new ArrayList<>();
+        
+        employees.add(new Employee("Patrick", 1001, 50000, 5));
+        employees.add(new Employee("Maria", 1002, 65000, 8));
+        employees.add(new Employee("Juan", 1003, 48000, 2));
+        
+        for (Employee emp : employees) {
+            emp.showPayroll();
+            System.out.println("---");
+        }
+    }
+}
+```
+
+---
+
+---
+
 ## 🧠 Key Concepts Summary
 
 | Concept | Purpose | Example |
