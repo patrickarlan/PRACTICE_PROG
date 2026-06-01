@@ -180,17 +180,27 @@ After Unit 5, you should be able to:
 
 ## 📊 Progress Tracking
 
-### Activity Checklist
-- [ ] Read activity in lesson
-- [ ] Identify all errors (find at least 1!)
-- [ ] Create Activity#.java file
-- [ ] Fix all errors in code
-- [ ] Compile: javac Activity#.java
-- [ ] Run: java Activity#
-- [ ] Output correct? ✅
-- [ ] Move to next activity
+---
 
-**Repeat for all 4 activities**
+## ✅ UNIT 5 COMPLETION SUMMARY
+
+| # | Activity | Focus | Status | Verified |
+|---|----------|-------|--------|----------|
+| 1 | Fix Syntax Errors | Find & fix 3 syntax errors (missing `;`, missing `"`) | ✅ COMPLETE | [x] Correct |
+| 2 | Find Logic Errors | Fix wrong bonus condition (`>= 55000` for 15% bonus) | ✅ COMPLETE | [x] Correct |
+| 3 | Fix Runtime Error | Fix array out-of-bounds (`<=` → `<` in loop condition) | ✅ COMPLETE | [x] Correct |
+| 4 | Complete Debugging Challenge | Fix both errors: loop bounds + `=` vs `==` comparison | ✅ COMPLETE | [x] Correct |
+
+**Overall Status:** 🎉 **ALL ACTIVITIES COMPLETE & VERIFIED**
+
+---
+
+## 📝 ACTIVITY CHECKLIST
+
+- [x] Activity 1: Fix Syntax Errors - COMPLETE
+- [x] Activity 2: Find Logic Errors - COMPLETE
+- [x] Activity 3: Fix Runtime Error - COMPLETE
+- [x] Activity 4: Complete Debugging Challenge - COMPLETE
 
 ---
 
