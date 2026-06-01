@@ -947,37 +947,235 @@ for (String member : teamMembers) {
 
 ---
 
-**📝 Activities for Java:**
+---
 
-1. **Basic output:**
-   - Create Employee class with main method
-   - Create variables: name, age, salary, department
-   - Print all of them
+### Lesson 4.7: Java Imports & Using Classes From Other Files
 
-2. **Conditionals:**
-   - Create a program that checks if salary > 50000
-   - Output "High earner" or "Regular earner"
+**The Concept:**
 
-3. **Loops:**
-   - Print numbers 1 to 10 using for loop
-   - Print only even numbers using while loop
+In real programming, you split code into multiple files (one class per file). When you need code from another file, you **import** it.
 
-4. **Arrays:**
-   - Create array of 5 job titles
-   - Loop through and print each one
+**File Structure:**
+```
+Project/
+├── Calculator.java      (Helper class)
+├── Employee.java        (Helper class)
+└── Main.java           (Main program using others)
+```
 
-5. **Functions:**
-   - Create method calculateTax(salary) that returns 15% of salary
-   - Create method greet(name) that returns "Hello, [name]!"
-   - Test both methods
+**File 1: Calculator.java**
+```java
+public class Calculator {
+    public static double calculateBonus(double salary) {
+        return salary * 0.10;
+    }
+    
+    public static double calculateTax(double salary) {
+        return salary * 0.15;
+    }
+}
+```
 
-6. **Challenge:**
-   - Create Employee class with properties: id, name, salary
-   - Create method giveRaise(percentage) that increases salary
-   - Create array of 3 employees
-   - Give each a 5% raise and print new salaries
+**File 2: Employee.java**
+```java
+public class Employee {
+    public String name;
+    public int id;
+    public double salary;
+    
+    public Employee(String name, int id, double salary) {
+        this.name = name;
+        this.id = id;
+        this.salary = salary;
+    }
+    
+    public void display() {
+        System.out.println("Name: " + name);
+        System.out.println("ID: " + id);
+        System.out.println("Salary: $" + salary);
+    }
+}
+```
+
+**File 3: Main.java - Using Both Classes**
+```java
+public class Main {
+    public static void main(String[] args) {
+        // Create Employee (using Employee class)
+        Employee emp = new Employee("Patrick", 1001, 50000);
+        emp.display();
+        
+        // Use Calculator methods
+        double bonus = Calculator.calculateBonus(emp.salary);
+        double tax = Calculator.calculateTax(emp.salary);
+        
+        System.out.println("Bonus: $" + bonus);
+        System.out.println("Tax: $" + tax);
+    }
+}
+```
+
+**How to Compile & Run:**
+```powershell
+javac Calculator.java
+javac Employee.java
+javac Main.java
+
+java Main
+```
+
+**Output:**
+```
+Name: Patrick
+ID: 1001
+Salary: $50000.0
+Bonus: $5000.0
+Tax: $7500.0
+```
 
 ---
+
+### Built-in Imports (Java Standard Library)
+
+```java
+import java.util.ArrayList;    // Import ArrayList
+import java.util.HashMap;      // Import HashMap
+import java.util.Stack;        // Import Stack
+import java.util.*;            // Import all classes from java.util
+
+public class Program {
+    public static void main(String[] args) {
+        ArrayList<String> names = new ArrayList<>();  // Can use ArrayList now
+        HashMap<Integer, String> map = new HashMap<>();
+    }
+}
+```
+
+---
+
+### Public vs Private (Access Control)
+
+```java
+public class BankAccount {
+    public double balance;       // Other files CAN access
+    private String pin;          // Only THIS file can access
+    
+    public void deposit(double amount) {  // Other files CAN call
+        balance += amount;
+    }
+    
+    private void verifyPin(String p) {   // Only this file can call
+        // Check if PIN is correct
+    }
+}
+
+// In another file:
+public class ATM {
+    public static void main(String[] args) {
+        BankAccount acc = new BankAccount();
+        acc.deposit(1000);           // ✅ Works (public)
+        acc.balance;                 // ✅ Can access (public)
+        acc.verifyPin("1234");       // ❌ ERROR (private)
+    }
+}
+```
+
+---
+
+### Real-World Example: Complete Multi-File System
+
+**File 1: SalaryCalculator.java**
+```java
+public class SalaryCalculator {
+    public static double calculateTax(double salary) {
+        return salary * 0.15;
+    }
+    
+    public static double calculateBonus(double salary, int years) {
+        if (years >= 5) return salary * 0.15;
+        if (years >= 3) return salary * 0.10;
+        return salary * 0.05;
+    }
+}
+```
+
+**File 2: Employee.java**
+```java
+public class Employee {
+    public String name;
+    public double salary;
+    public int yearsWorked;
+    
+    public Employee(String name, double salary, int years) {
+        this.name = name;
+        this.salary = salary;
+        this.yearsWorked = years;
+    }
+    
+    public void showPayroll() {
+        double tax = SalaryCalculator.calculateTax(salary);
+        double bonus = SalaryCalculator.calculateBonus(salary, yearsWorked);
+        
+        System.out.println("Employee: " + name);
+        System.out.println("Gross: $" + salary);
+        System.out.println("Tax: $" + tax);
+        System.out.println("Bonus: $" + bonus);
+        System.out.println("Net: $" + (salary - tax + bonus));
+    }
+}
+```
+
+**File 3: PayrollSystem.java**
+```java
+import java.util.ArrayList;
+
+public class PayrollSystem {
+    public static void main(String[] args) {
+        ArrayList<Employee> employees = new ArrayList<>();
+        
+        employees.add(new Employee("Patrick", 50000, 5));
+        employees.add(new Employee("Maria", 65000, 8));
+        employees.add(new Employee("Juan", 48000, 2));
+        
+        for (Employee emp : employees) {
+            emp.showPayroll();
+            System.out.println("---");
+        }
+    }
+}
+```
+
+---
+
+**📝 Activities for Java (Updated to Include Imports):**
+
+1. **Basic output:**
+   - Create Employee class with properties
+   - Create separate Main class that uses Employee
+
+2. **Conditionals & Methods:**
+   - Create SalaryCalculator class with calculateBonus() method
+   - Use it in Main class
+
+3. **Loops & Arrays:**
+   - Create Employee class with display() method
+   - Create array of employees in separate Main class
+   - Loop through and display all
+
+4. **Multi-file Challenge:**
+   - Calculator.java: calculateTax(), calculateBonus() methods
+   - Employee.java: uses Calculator methods
+   - Main.java: creates employees and shows payroll
+
+5. **Complete System:**
+   - SalaryCalculator.java: calculation methods
+   - Employee.java: employee data and methods
+   - PayrollSystem.java: create/manage employees
+   - Shows how professional code is organized
+
+---
+
+
 
 ## 🎯 EXAM STRATEGY & TIPS
 
@@ -1660,7 +1858,231 @@ public class Calculator {
 
 ---
 
-## 🎯 FINAL EXAM STRATEGY & TIPS
+## 🟣 UNIT 5: DEBUGGING & TROUBLESHOOTING (Critical Exam Skill)
+*Most exams include "fix the error" questions. This unit teaches you to think like a detective and solve any bug.*
+
+---
+
+### Lesson 5.1: Error Types — Understanding the Problem
+
+**The Concept:**
+
+There are three main types of errors:
+
+1. **Syntax Errors** - Code breaks grammar rules (won't compile)
+2. **Logic Errors** - Code runs but solves wrong problem (wrong output)
+3. **Runtime Errors** - Code crashes while running (crashes mid-execution)
+
+**Think of it:** Like writing:
+- **Syntax:** "I am going to the store." (breaks grammar rules)
+- **Logic:** "I am going to the trash can to sleep." (correct grammar, wrong meaning)
+- **Runtime:** "I am eating water with a fork." (following rules, impossible situation)
+
+---
+
+### Lesson 5.2: Debugging Strategy
+
+**The Method:**
+
+1. **Read the error message** (top to bottom)
+2. **Find the line number** (where error occurred)
+3. **Examine the code** at that line
+4. **Trace backward** to understand what led here
+5. **Add debug output** (print statements to see values)
+6. **Test with examples** (verify behavior)
+7. **Fix the issue** (change code)
+8. **Retest** to confirm fix works
+
+---
+
+### Lesson 5.3: Common Java Errors
+
+**Syntax Errors (Won't Compile):**
+
+```java
+// Missing semicolon
+int age = 25  // ❌ WRONG
+int age = 25; // ✅ RIGHT
+
+// Type mismatch
+int age = "twenty-five"; // ❌ WRONG
+int age = 25;            // ✅ RIGHT
+
+// Undefined variable
+System.out.println(name); // ❌ WRONG (name not defined)
+String name = "Patrick";  // ✅ RIGHT (define first)
+System.out.println(name);
+```
+
+**Logic Errors (Wrong Output):**
+
+```java
+// Wrong comparison
+int salary = 50000;
+if (salary > 50000) {     // ❌ WRONG (50000 is NOT > 50000)
+    System.out.println("High earner");
+}
+
+if (salary >= 50000) {    // ✅ RIGHT (50000 IS >= 50000)
+    System.out.println("High earner");
+}
+
+// Off-by-one in loop
+String[] names = {"Patrick", "Maria", "Juan"};  // Indices: 0, 1, 2
+for (int i = 0; i <= names.length; i++) {  // ❌ Goes to 3, crashes!
+    System.out.println(names[i]);
+}
+
+for (int i = 0; i < names.length; i++) {   // ✅ Stops at 2
+    System.out.println(names[i]);
+}
+```
+
+**Runtime Errors (Crashes):**
+
+```java
+// NullPointerException
+String name = null;
+System.out.println(name.length());  // ❌ null has no length!
+
+if (name != null) {                 // ✅ Check first
+    System.out.println(name.length());
+}
+
+// ArrayIndexOutOfBounds
+int[] numbers = {10, 20, 30};  // Only indices 0, 1, 2
+System.out.println(numbers[5]); // ❌ Index 5 doesn't exist!
+
+if (numbers.length > 5) {       // ✅ Check bounds
+    System.out.println(numbers[5]);
+}
+```
+
+---
+
+### Lesson 5.4: Real Debugging Scenarios
+
+**Scenario 1: Syntax Error**
+
+```java
+// Given code won't compile
+public class Employee {
+    public static void main(String[] args) {
+        String name = "Patrick"  // Missing semicolon!
+        System.out.println(name);
+    }
+}
+
+// Error message:
+// error: ';' expected at line 3
+
+// Fix: Add semicolon
+String name = "Patrick";  // ✅
+```
+
+**Scenario 2: Logic Error**
+
+```java
+// Given code runs but wrong output
+int score = 85;
+if (score > 90) {
+    System.out.println("Grade: A");
+} else if (score > 80) {
+    System.out.println("Grade: B");  // Should be A for 85!
+}
+
+// Problem: Boundary value 90 treated wrong
+// Fix: Use >= for boundary cases
+if (score >= 90) {  // ✅
+    System.out.println("Grade: A");
+}
+```
+
+**Scenario 3: Runtime Error**
+
+```java
+// Given code compiles but crashes
+String[] names = {"Patrick", "Maria", "Juan"};
+for (int i = 0; i <= names.length; i++) {
+    System.out.println(names[i]);  // Crashes at i=3
+}
+
+// Error: ArrayIndexOutOfBoundsException: 3
+
+// Problem: Loop goes one step too far
+// Fix: Use < instead of <=
+for (int i = 0; i < names.length; i++) {  // ✅
+    System.out.println(names[i]);
+}
+```
+
+---
+
+### Lesson 5.5: Testing & Verification
+
+**Test with Boundary Values:**
+
+```java
+// Don't just test middle values, test edges!
+public static String getGrade(int score) {
+    if (score >= 90) return "A";
+    if (score >= 80) return "B";
+    if (score >= 70) return "C";
+    return "F";
+}
+
+// Test these:
+getGrade(89);  // Boundary: just below A
+getGrade(90);  // Boundary: exactly A threshold
+getGrade(91);  // Boundary: just above A
+```
+
+**Use Debug Output:**
+
+```java
+int salary = 50000;
+
+// Add debug prints
+System.out.println("DEBUG: salary = " + salary);
+System.out.println("DEBUG: salary > 60000? " + (salary > 60000));
+
+if (salary > 60000) {
+    System.out.println("DEBUG: High earner path");
+} else {
+    System.out.println("DEBUG: Regular earner path");
+}
+```
+
+---
+
+**📝 Activities for Debugging:**
+
+1. **Fix Syntax Errors:**
+   - Given: Code with 3 syntax errors
+   - Fix: Add missing semicolons, quotes, braces
+   - Verify: Code compiles
+
+2. **Find Logic Errors:**
+   - Given: Code that compiles but gives wrong output
+   - Find: Wrong condition or calculation
+   - Fix: Correct the logic
+   - Verify: Output matches expected
+
+3. **Fix Runtime Error:**
+   - Given: Code that crashes (ArrayIndexOutOfBoundsException)
+   - Find: Loop bounds or array access issue
+   - Fix: Correct bounds checking
+   - Verify: Program runs without crashing
+
+4. **Complete Challenge:**
+   - Given: Code with multiple error types
+   - Find: All 3 error types
+   - Fix: Each error
+   - Verify: Code compiles, runs, produces correct output
+
+---
+
+
 
 **What the Exam Likely Tests (Revised):**
 
