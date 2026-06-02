@@ -1,3 +1,39 @@
+# 📊 ATTEMPT 1 — GRADING SUMMARY
+> **Date:** 2026-06-02 | **Examiner:** Professor AI
+
+| Section | Topic | Score | Status |
+|---------|-------|-------|--------|
+| 🟢 A | Basic Programming Logic | 8 / 8 | ✅ PERFECT |
+| 🔵 B | PHP Fundamentals | 5 / 8 | ❌ Q10, Q13, Q16 wrong |
+| 🟠 C | MySQL Fundamentals | 7 / 8 | ❌ Q21 wrong |
+| 🔴 D | Java Fundamentals | 10 / 10 | ✅ PERFECT |
+| 🟣 E | Debugging & Logical | 5 / 6 | ⚠️ Q35 & Q36 partial (fix ✅, error type ❌) |
+| 🟡 F | Coding Challenge | 2 / 3 | ⚠️ Method signature + output format off |
+| | **TOTAL** | **37 / 40** | **✅ 92.5% — EXCELLENT PASS** |
+
+**Items to retry:** Q10, Q13, Q16, Q21 → see [EXAM_RETRY.md](EXAM_RETRY.md)  
+**Full feedback:** see [EXAM_ANSWER_GRADED.md](EXAM_ANSWER_GRADED.md)
+
+---
+
+## 🏆 RETRY — GRADING SUMMARY
+> **Retry Date:** 2026-06-02 | All imperfect items re-answered
+
+| Item | Topic | Result |
+|------|-------|--------|
+| Q10 | PHP output syntax | ✅ CORRECT — D) Both A and B |
+| Q13 | PHP concatenation | ✅ CORRECT — FALSE |
+| Q16 | PHP function with $ | ✅ CORRECT — `$sal` properly used |
+| Q21 | UPDATE/DELETE WHERE | ✅ CORRECT — FALSE |
+| Q35 | Runtime error type | ✅ CORRECT — Runtime Error |
+| Q36 | Syntax error type | ✅ CORRECT — Syntax Error |
+| Q40 | Full Java program | ✅ CORRECT — 1-param method + exact output format |
+| | **RETRY TOTAL** | **🏆 7/7 — 100% PERFECT** |
+
+---
+
+
+
 # 📋 COMPREHENSIVE PRACTICE EXAM
 ## Interview Exam Preparation - Final Mock Exam
 
