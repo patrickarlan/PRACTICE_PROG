@@ -2131,4 +2131,34 @@ if (salary > 60000) {
 5. Do **Unit 5.5** (Real Scenarios) as final practice
 6. **Review this entire syllabus Tuesday night** before exam
 
-**You've got this! Debugging is a superpower! 🚀**
+---
+
+## 🚀 UNIT 6: POST-EXAM ADVANCED TOPICS
+*Topics discovered from the actual exam that we need to master next.*
+
+### Lesson 6.1: Database Normalization (1NF, 2NF, 3NF)
+- Eliminating data redundancy
+- Primary Keys and Foreign Keys
+- Breaking unnormalized data into structured tables
+
+### Lesson 6.2: Table JOINs in SQL
+- `INNER JOIN` (Matching records only)
+- `LEFT JOIN` (All from left + matches from right)
+- `RIGHT JOIN` (All from right + matches from left)
+- `FULL OUTER JOIN` (Everything from both)
+
+### Lesson 6.3: Master CRUD Operations
+- Deep dive into `CREATE`, `READ`, `UPDATE`, `DELETE`
+- Safe updating and deleting practices (always use `WHERE`)
+
+### Lesson 6.4: The FizzBuzz Algorithm
+- Modulo operator `%` mastery
+- Logic ordering (Why the most specific condition must go first)
+- Implementing FizzBuzz in PHP and Java
+
+### Lesson 6.5: Finding Min/Max in Arrays (Without Built-ins)
+- Looping logic to find extreme values
+- Setting the correct baseline (`array[0]`)
+- Array boundary limits and comparisons
+
+**You've got this! Every failure is just a map to future success! 🚀**
