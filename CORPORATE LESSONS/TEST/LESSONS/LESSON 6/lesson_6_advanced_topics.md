@@ -32,6 +32,160 @@ These are not new languages — they build on what you already know.
 
 ---
 
+### 📖 The Normal Forms — Definitions First
+
+Before we look at examples, understand what each Normal Form (NF) is trying to solve. They are **levels of database cleanliness**, applied in order — you cannot skip levels.
+
+---
+
+#### 🔴 0NF — Unnormalized Form: "The Junk Drawer"
+
+**Analogy:** Imagine a junk drawer in your kitchen where you throw everything — receipts, batteries, a pen, your old phone, chopsticks, rubber bands. It's all in one place, nothing is organized, and some bags have multiple items crammed inside them.
+
+**That's 0NF.** One massive table where everything is thrown together.
+
+**Signs you are in 0NF:**
+- A cell contains multiple values separated by commas: `"PHP, Java, SQL"`
+- The same person's name, phone, address repeats in 10 different rows
+- There is no clear Primary Key to identify rows uniquely
+
+**The problem:** You can't reliably find, update, or delete anything without risking breaking something else.
+
+---
+
+#### 🟡 1NF — First Normal Form: "One Thing Per Box"
+
+**Analogy:** Think of a lunch box with compartments — rice in one compartment, viand in another, fruit in another. Each compartment holds exactly ONE type of thing. You would never cram your rice AND your fruit AND your drink all into one compartment.
+
+**That's 1NF.** Each cell (compartment) holds exactly ONE piece of data.
+
+**The Rule:**
+1. **No comma-separated values in a single cell** — "PHP, Java" must become two separate rows
+2. **Every row must have a unique identifier** (Primary Key) so the database knows which row is which
+
+**Before 1NF ❌**
+| EmpID | EmpName | Skills |
+|-------|---------|--------|
+| 1 | Patrick | PHP, Java, SQL |
+
+*Problem: THREE skills are crammed into ONE cell. You can't search for "Java" employees without messy workarounds.*
+
+**After 1NF ✅**
+| EmpID | EmpName | Skill |
+|-------|---------|-------|
+| 1 | Patrick | PHP |
+| 1 | Patrick | Java |
+| 1 | Patrick | SQL |
+
+*Fix: One skill per row. Now you can easily search for "Java" employees.*
+
+**Key rule to memorize:** 👉 *"If you see a comma inside a cell, it's a 1NF violation. Always."*
+
+---
+
+#### 🟠 2NF — Second Normal Form: "Each Column Must Be About the WHOLE ID"
+
+**Analogy:** Imagine you are filling out a school report card. The report card's main ID is `(Student_ID + Subject_ID)` — because one student can have grades in many subjects.
+
+Now imagine someone puts the student's home address on the report card. Does the home address belong to the Student+Subject combination? **No!** The address is only about the Student. It doesn't care about which subject you're in.
+
+**That's a 2NF violation** — a column that only describes PART of the ID (just the Student), not the WHOLE ID (Student + Subject).
+
+**The Rule:**
+- Must already be in 1NF
+- Every column must describe the **ENTIRE** primary key — not just one part of it
+- This only matters when the primary key is made of **two or more columns** (composite key)
+
+**Before 2NF ❌** *(Primary Key = EmpID + ProjectID)*
+| EmpID | ProjectID | EmpName | Department | ProjectDeadline |
+|-------|-----------|---------|------------|-----------------|
+| 1 | P1 | Patrick | IT | Dec 2026 |
+| 1 | P2 | Patrick | IT | Mar 2027 |
+
+*Problem: `EmpName` and `Department` only describe `EmpID`. They have nothing to do with `ProjectID`. So every time Patrick gets a new project, we repeat his name and department.*
+
+**After 2NF ✅** — Split into focused tables:
+
+**Employees Table** *(EmpID is the PK — EmpName belongs here)*
+| EmpID | EmpName | Department |
+|-------|---------|------------|
+| 1 | Patrick | IT |
+
+**Projects Table** *(ProjectID is the PK — Deadline belongs here)*
+| ProjectID | ProjectDeadline |
+|-----------|-----------------|
+| P1 | Dec 2026 |
+| P2 | Mar 2027 |
+
+**Assignments Table** *(Links them together)*
+| EmpID | ProjectID |
+|-------|-----------|
+| 1 | P1 |
+| 1 | P2 |
+
+**Key rule to memorize:** 👉 *"Ask each column: 'Are you describing the FULL primary key, or just part of it?' If it's only part — move it out."*
+
+> 💡 **Shortcut:** If your table has only ONE primary key column (not two), it automatically passes 2NF. Skip straight to checking 3NF.
+
+---
+
+#### 🟢 3NF — Third Normal Form: "Columns Must Report to the ID, Not to Each Other"
+
+**Analogy:** Imagine an office where all employees report directly to the CEO (Primary Key). That's clean.
+
+Now imagine Employee A tells Employee B what to do, and Employee B tells Employee C — and the CEO doesn't directly manage B or C. That's a chain of command that bypasses the CEO. In database terms, that chain is called a **transitive dependency**, and it's a 3NF violation.
+
+**The Rule:**
+- Must already be in 2NF
+- No column should be determined by (depend on) another non-key column
+- Every column must describe ONLY the Primary Key, and NOTHING ELSE
+
+**The Classic Sign:** Column A → Column B → Primary Key (chain of 2 steps = problem!)
+*It should always be: Column → Primary Key directly (1 step only)*
+
+**Before 3NF ❌**
+| EmpID | EmpName | SalaryLevel | BaseSalary |
+|-------|---------|-------------|------------|
+| 1 | Patrick | Level 2 | 50000 |
+| 2 | Maria | Level 3 | 75000 |
+| 3 | Juan | Level 2 | 50000 |
+
+*Problem: `BaseSalary` doesn't describe the `EmpID` directly. It describes the `SalaryLevel`. The chain is: `EmpID` → `SalaryLevel` → `BaseSalary`. That extra step is the transitive dependency!*
+
+*Also notice Juan and Patrick both have Level 2 / 50000 — repeating data! If Level 2 salary changes, you have to update two rows.*
+
+**After 3NF ✅** — Pull the chain apart:
+
+**Employees Table**
+| EmpID | EmpName | SalaryLevel |
+|-------|---------|-------------|
+| 1 | Patrick | Level 2 |
+| 2 | Maria | Level 3 |
+| 3 | Juan | Level 2 |
+
+**Pay Scales Table** *(Now SalaryLevel → BaseSalary is its own table)*
+| SalaryLevel | BaseSalary |
+|-------------|------------|
+| Level 2 | 50000 |
+| Level 3 | 75000 |
+
+*Fix: If Level 2 salary changes to 55000, update ONE row in Pay Scales. Done.*
+
+**Key rule to memorize:** 👉 *"Ask each column: 'Am I describing the Primary Key, or am I describing another column?' If it's another column — move it out."*
+
+---
+
+### 📊 Quick NF Summary Table
+
+| Normal Form | Analogy | The Rule | Key Question |
+|-------------|---------|----------|--------------|
+| **0NF** | Junk drawer | No rules at all | "Is this a complete mess?" |
+| **1NF** | Lunch box compartments | One value per cell, every row has a unique ID | "Does any cell have more than one value?" |
+| **2NF** | Report card (Student+Subject) | Every column describes the WHOLE primary key | "Does any column describe only PART of the primary key?" |
+| **3NF** | CEO chain of command | Every column reports to the PK directly — no chains | "Does any column describe another column instead of the PK?" |
+
+---
+
 ### 📝 The Problem: Unnormalized Table (0NF)
 
 Imagine a company stores all its data in ONE giant table:
@@ -42,12 +196,108 @@ Imagine a company stores all its data in ONE giant table:
 | 1 | Patrick | 555-1234 | Mouse | 50 | Engineering |
 | 2 | Maria | 555-5678 | Keyboard | 80 | HR |
 
-**Problems:**
-- Patrick's phone appears twice — updating it means changing multiple rows
-- If Patrick has no orders yet, we can't store his contact info at all
-- Deleting an order might accidentally delete customer info
+**Problems (Database Anomalies):**
+When data is not normalized, you encounter three major problems, known as **Database Anomalies**:
 
-This is what we fix with normalization.
+1. **Insertion Anomaly (Can't Add Data):** You want to insert data, but you can't because another piece of data is missing. 
+   *Example:* If a new department is created, but no employee is assigned yet, you can't add the department to this table because every row requires an employee!
+
+2. **Deletion Anomaly (Accidental Loss):** You delete one thing, and accidentally lose something else entirely.
+   *Example:* If we delete Patrick's only order, his phone number is deleted from the database entirely. We just lost our customer's contact info!
+
+3. **Update Anomaly (Inconsistent Data):** You update data in one place, but forget to update it elsewhere.
+   *Example:* Patrick gets a new phone number. You update it on his "Laptop" row, but forget to update his "Mouse" row. Now Patrick has two different phone numbers, and the database is broken.
+
+This is exactly why we need Normalization — to eliminate these anomalies!
+
+---
+
+### 🎯 Deep Dive: The Employee_Department Anomalies (GeeksforGeeks Example)
+
+Let's look at another classic example of an unnormalized table that suffers from all three anomalies.
+
+**Before Normalization (The Messy Table):**
+
+| Emp_ID | Emp_Name | Department | Dept_Location | Emp_Skills |
+|--------|----------|------------|---------------|------------|
+| 101 | Nick Wise | HR | London | Recruitment, Payroll |
+| 102 | John Cader | Finance | Australia | Budgeting |
+| 103 | Lily Case | HR | London | Recruitment |
+| 104 | Ford Dawid | IT | Chicago | Programming, Testing |
+
+**Why is this table bad?**
+1. **Insertion Anomaly:** If the company creates a new "Marketing" department in "New York", but hasn't hired anyone yet, we **cannot** add the Marketing department to this database! The system requires an `Emp_ID` to save a row.
+2. **Deletion Anomaly:** Ford Dawid (104) is the only person in the IT department. If Ford quits and we delete his row, we accidentally delete the fact that the IT department is located in Chicago!
+3. **Update Anomaly:** If the HR department moves from London to Paris, we have to update multiple rows (Nick Wise AND Lily Case). If we update Nick but forget Lily, the database becomes inconsistent (HR is in two places at once).
+4. **1NF Violation:** Nick and Ford have multiple skills separated by commas in the `Emp_Skills` column.
+
+---
+
+#### 🔍 STEP 1 — ANALYZE: Which Rules Are Violated?
+
+Before touching anything, you scan the table and check each Normal Form rule one by one:
+
+| Check | Question to Ask | Result for This Table |
+|-------|----------------|-----------------------|
+| **1NF** | Does any cell have more than one value (commas)? | ❌ YES — `Emp_Skills` has "Recruitment, Payroll" and "Programming, Testing" |
+| **2NF** | Does any column depend on only PART of the primary key? | ❌ YES — `Dept_Location` depends on `Department`, not on `Emp_ID` |
+| **3NF** | Does any column depend on another non-key column? | ❌ YES — `Dept_Location` is determined by `Department` (not the primary key directly) |
+
+**Conclusion:** This table violates ALL three — 1NF, 2NF, and 3NF. We must fix them all.
+
+---
+
+#### 📋 STEP 2 — PLAN: What Tables Will We Create?
+
+Now that we know the violations, we plan how to split the table:
+
+| Problem Found | Solution |
+|--------------|---------|
+| `Emp_Skills` has comma values (1NF) | Move Skills into its own table: **Employee_Skills** (one row per skill) |
+| `Department` + `Dept_Location` repeat for every employee (2NF/3NF) | Move Department data into its own table: **Department** |
+| Employees still need to know their department (link needed) | Add a `Dept_ID` column to the Employee table as a Foreign Key |
+
+**Plan: Create 3 tables**
+- **Employee** — stores each person's ID, name, and their department reference (`Dept_ID`)
+- **Department** — stores each department's ID, name, and location
+- **Employee_Skills** — stores each skill on its own row, linked by `Emp_ID`
+
+---
+
+#### ⚙️ STEP 3 — EXECUTE: Build the Normalized Tables
+
+**1. Employee Table** *(only employee-specific data, with a link to Department)*
+| Emp_ID | Emp_Name | Dept_ID |
+|--------|----------|---------|
+| 101 | Nick Wise | D1 |
+| 102 | John Cader | D2 |
+| 103 | Lily Case | D1 |
+| 104 | Ford Dawid | D3 |
+
+**2. Department Table** *(department-specific data only)*
+| Dept_ID | Department | Dept_Location |
+|---------|------------|---------------|
+| D1 | HR | London |
+| D2 | Finance | Australia |
+| D3 | IT | Chicago |
+
+*(Insertion Anomaly fixed! We can now add `D4 | Marketing | New York` even with zero employees!)*
+*(Deletion Anomaly fixed! If Ford quits, IT's location stays safe in this table!)*
+*(Update Anomaly fixed! If HR moves to Paris, we update ONE row here — done!)*
+
+**3. Employee Skills Table** *(one skill per row — 1NF fixed!)*
+| Emp_ID | Emp_Skills |
+|--------|------------|
+| 101 | Recruitment |
+| 101 | Payroll |
+| 102 | Budgeting |
+| 103 | Recruitment |
+| 104 | Programming |
+| 104 | Testing |
+
+*(No more commas! Every cell holds exactly one value!)*
+
+> ✅ **Result:** Three clean tables, all anomalies eliminated, all Normal Form rules satisfied.
 
 ---
 
@@ -75,6 +325,57 @@ This is what we fix with normalization.
 *Fix: One value per cell, one row per item.*
 
 **Reading Like English:** "Each cell contains only one piece of information."
+
+---
+
+### 🎯 Exam-Style 1NF Example (This is what appeared in the actual exam!)
+
+You are given a table with employees, but some columns contain **two values separated by a comma** inside a single cell. This is a **1NF violation**.
+
+**The Problematic Table (what you'd see in the exam):**
+
+| EmpID | EmpName | PhoneNumbers | Skills |
+|-------|---------|--------------|--------|
+| 1 | Patrick | 555-1234, 555-9999 | PHP, Java |
+| 2 | Maria | 555-5678 | SQL |
+| 3 | Juan | 555-1111, 555-2222 | Java, Python |
+
+**Violations spotted:**
+- `PhoneNumbers` — Patrick has TWO phone numbers in one cell
+- `PhoneNumbers` — Juan has TWO phone numbers in one cell
+- `Skills` — Patrick has TWO skills in one cell
+- `Skills` — Juan has TWO skills in one cell
+
+> ⚠️ **Rule:** One cell = One value. Always. No commas separating multiple values in a single cell.
+
+**How to fix it — apply 1NF:**
+
+Split each multi-value cell into its own row. The employee info repeats, but each cell now holds exactly ONE value.
+
+**Fixed Employees Table (1NF compliant):**
+
+| EmpID | EmpName | Phone |
+|-------|---------|-------|
+| 1 | Patrick | 555-1234 |
+| 1 | Patrick | 555-9999 |
+| 2 | Maria | 555-5678 |
+| 3 | Juan | 555-1111 |
+| 3 | Juan | 555-2222 |
+
+**Fixed Skills Table (1NF compliant):**
+
+| EmpID | Skill |
+|-------|-------|
+| 1 | PHP |
+| 1 | Java |
+| 2 | SQL |
+| 3 | Java |
+| 3 | Python |
+
+**Why split Skills into a separate table?**
+Because an employee can have many skills and a skill can belong to many employees. Keeping them together would create more repetition.
+
+> 💡 **Exam tip:** When you see a column with "value1, value2" in a cell — that is ALWAYS a 1NF violation. The fix is always: split into multiple rows (or a separate table), one value per row.
 
 ---
 
@@ -113,6 +414,45 @@ This is what we fix with normalization.
 
 ---
 
+### 🎯 Exam-Style 2NF Example
+You are given a table tracking which employees are assigned to which projects, and the department the employee belongs to. The Primary Key is a combination of `(EmpID, ProjectID)`.
+
+| EmpID | ProjectID | EmpName | Department | ProjectName |
+|-------|-----------|---------|------------|-------------|
+| 1 | P1 | Patrick | IT | Website |
+| 1 | P2 | Patrick | IT | Mobile App |
+| 2 | P1 | Maria | HR | Website |
+
+**Violations spotted:**
+- `EmpName` and `Department` depend ONLY on `EmpID`, not on the `ProjectID`. 
+- Every time Patrick is assigned to a new project, we have to type out his name and department again (Partial Dependency).
+
+**How to fix it — apply 2NF:**
+Split into tables where columns depend on the WHOLE primary key.
+
+**Employees Table:**
+| EmpID | EmpName | Department |
+|-------|---------|------------|
+| 1 | Patrick | IT |
+| 2 | Maria | HR |
+
+**Projects Table:**
+| ProjectID | ProjectName |
+|-----------|-------------|
+| P1 | Website |
+| P2 | Mobile App |
+
+**Assignments Table (The link between them):**
+| EmpID | ProjectID |
+|-------|-----------|
+| 1 | P1 |
+| 1 | P2 |
+| 2 | P1 |
+
+> 💡 **Exam tip:** If a table uses two IDs as its primary key (like EmpID + ProjectID), but a column only describes ONE of those IDs (like EmpName only describing EmpID), it's a 2NF violation!
+
+---
+
 ### 📝 Third Normal Form (3NF)
 
 **Rule:**
@@ -142,6 +482,39 @@ In our Customers table, what if we add a ZipCode and City?
 | 1100 | Quezon City |
 
 **Reading Like English:** "Every column describes the primary key, and nothing but the primary key."
+
+---
+
+### 🎯 Exam-Style 3NF Example
+You are given a table tracking employee payroll. The Primary Key is `EmpID`.
+
+| EmpID | EmpName | JobTitle | SalaryLevel | BaseSalary |
+|-------|---------|----------|-------------|------------|
+| 1 | Patrick | Developer | Level 2 | 50000 |
+| 2 | Maria | Manager | Level 3 | 75000 |
+| 3 | Juan | Tester | Level 2 | 50000 |
+
+**Violations spotted:**
+- `BaseSalary` depends on the `SalaryLevel`, not directly on the `EmpID`.
+- If Patrick gets promoted to Level 3, we have to manually update his BaseSalary to 75000. If we forget, he's a Level 3 making Level 2 money (Update Anomaly!).
+
+**How to fix it — apply 3NF:**
+Move the transitive dependency into its own table.
+
+**Employees Table:**
+| EmpID | EmpName | JobTitle | SalaryLevel |
+|-------|---------|----------|-------------|
+| 1 | Patrick | Developer | Level 2 |
+| 2 | Maria | Manager | Level 3 |
+| 3 | Juan | Tester | Level 2 |
+
+**Pay Scales Table:**
+| SalaryLevel | BaseSalary |
+|-------------|------------|
+| Level 2 | 50000 |
+| Level 3 | 75000 |
+
+> 💡 **Exam tip:** If Column A determines Column B, but neither are the Primary Key, it's a 3NF violation (called a transitive dependency). Split them out!
 
 ---
 
@@ -196,6 +569,64 @@ CREATE TABLE projects (
 | **1NF** | One value per cell. Every row is unique. |
 | **2NF** | Non-key columns depend on the WHOLE primary key. |
 | **3NF** | Non-key columns depend ONLY on the primary key, not on each other. |
+
+---
+
+### 💡 How Far Should You Normalize? (When to Stop)
+
+This is a great real-world question. More tables does NOT always mean a better database. Here is the honest answer:
+
+**The general rule in most companies: Stop at 3NF.**
+
+3NF eliminates virtually all practical data problems. Going further (4NF, 5NF...) exists in theory, but most real applications never need it, and it makes the database harder to work with.
+
+---
+
+### ⚠️ The Danger of Over-Normalization
+
+Yes — you CAN split a database too much. This is called **over-normalization**, and it creates its own problems:
+
+| Problem | What It Means |
+|---------|---------------|
+| **Too many JOINs** | Every query needs 5–10 JOINs just to get basic data. Queries become slow and hard to write. |
+| **Harder to read** | Even simple reports become complex queries that are difficult for any developer to understand. |
+| **Slower performance** | The more tables you JOIN together, the longer the database takes to respond. |
+
+**Example of over-normalization:**
+Splitting a person's `first_name` and `last_name` into their own separate table is extreme and pointless. They always appear together, they belong together.
+
+---
+
+### ✅ The Checklist: Should You Normalize This?
+
+Before splitting data into a new table, ask yourself these questions:
+
+| Question | If YES → | If NO → |
+|----------|----------|---------|
+| Does this data repeat in multiple rows? | Normalize it (move it to its own table) | Leave it where it is |
+| Will this data be updated independently? | Normalize it | Leave it where it is |
+| Does this cell contain multiple values (commas)? | Normalize it (1NF violation!) | Leave it where it is |
+| Do I need to look up this data separately? | Normalize it | Leave it where it is |
+| Is this data tiny and always tied to one record? | Leave it where it is | — |
+
+---
+
+### 📌 Real-World Guidance
+
+Think of it like organizing your room:
+- **Under-normalized (messy):** Everything thrown on the floor — hard to find things, messy to maintain.
+- **Properly normalized (3NF):** A shelf for books, a drawer for clothes, a box for cables — organized and easy to update.
+- **Over-normalized:** Every single shirt in its own labeled box, every shoe in its own drawer, every page of a book in its own folder — technically organized, but insane to use.
+
+**Practical guidelines that most developers follow:**
+
+1. **Always reach 1NF** — Never allow commas in a cell. No exceptions.
+2. **Always reach 2NF** — If a column doesn't describe the primary key, move it to its own table.
+3. **Reach 3NF for important, frequently-changing data** (e.g., Department location, Employee salary grade, Product prices).
+4. **Stop at 3NF for data that rarely changes or is always tied to one record** (e.g., a person's birthday, a product's creation date).
+5. **Never split atomic values** — Don't separate `first_name` and `last_name` into different tables. That is too far.
+
+> 💡 **Summary:** Normalize to remove real problems (repeating data, anomalies). Stop when splitting would create more complexity than it solves. **3NF is almost always the sweet spot.**
 
 ---
 

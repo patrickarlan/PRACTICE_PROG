@@ -1,0 +1,15 @@
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\bin\Debug\net10.0\selflearning.exe
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\bin\Debug\net10.0\selflearning.deps.json
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\bin\Debug\net10.0\selflearning.runtimeconfig.json
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\bin\Debug\net10.0\selflearning.dll
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\bin\Debug\net10.0\selflearning.pdb
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\obj\Debug\net10.0\selflearning.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\obj\Debug\net10.0\selflearning.AssemblyInfoInputs.cache
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\obj\Debug\net10.0\selflearning.AssemblyInfo.cs
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\obj\Debug\net10.0\selflearning.csproj.CoreCompileInputs.cache
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\obj\Debug\net10.0\selflearning.sourcelink.json
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\obj\Debug\net10.0\selflearning.dll
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\obj\Debug\net10.0\refint\selflearning.dll
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\obj\Debug\net10.0\selflearning.pdb
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\obj\Debug\net10.0\selflearning.genruntimeconfig.cache
+C:\Users\HP\Documents\PRACTICE_PROG\C LANG\C#\selflearning\obj\Debug\net10.0\ref\selflearning.dll
