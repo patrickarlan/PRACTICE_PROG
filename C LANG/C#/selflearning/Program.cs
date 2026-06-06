@@ -1,12 +1,9 @@
-﻿string[] orderId = { "B123", "C234", "A345", "C15", "B177", "G3003", "C235", "B179" };
-
-string? name = Console.ReadLine();
-if (name is null || name.Length == 0) return;
-
-foreach (string orders in orderId)
+﻿using System;
+class Program
 {
-    if (orders.StartsWith(name[0].ToString(), StringComparison.OrdinalIgnoreCase))
+    static void Main(string[] args)
     {
-        Console.WriteLine(orders);
+        // connect to practice1.cs
+        Practice.Run(args);
     }
 }
