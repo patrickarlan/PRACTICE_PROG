@@ -42,3 +42,4 @@ CREATE TABLE orders(
 ```
 
 # LESSON 6.2 ACTIVITIES
+
