@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\HP\\Documents\\PRACTICE_PROG\\C LANG\\C#\\selflearning\\selflearning.csproj": {}
+    "c:\\Users\\HP\\Documents\\PRACTICE_PROG\\C LANG\\C#\\selflearning\\selflearning.csproj": {}
   },
   "projects": {
-    "C:\\Users\\HP\\Documents\\PRACTICE_PROG\\C LANG\\C#\\selflearning\\selflearning.csproj": {
+    "c:\\Users\\HP\\Documents\\PRACTICE_PROG\\C LANG\\C#\\selflearning\\selflearning.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\HP\\Documents\\PRACTICE_PROG\\C LANG\\C#\\selflearning\\selflearning.csproj",
+        "projectUniqueName": "c:\\Users\\HP\\Documents\\PRACTICE_PROG\\C LANG\\C#\\selflearning\\selflearning.csproj",
         "projectName": "selflearning",
-        "projectPath": "C:\\Users\\HP\\Documents\\PRACTICE_PROG\\C LANG\\C#\\selflearning\\selflearning.csproj",
+        "projectPath": "c:\\Users\\HP\\Documents\\PRACTICE_PROG\\C LANG\\C#\\selflearning\\selflearning.csproj",
         "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\HP\\Documents\\PRACTICE_PROG\\C LANG\\C#\\selflearning\\obj\\",
+        "outputPath": "c:\\Users\\HP\\Documents\\PRACTICE_PROG\\C LANG\\C#\\selflearning\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
