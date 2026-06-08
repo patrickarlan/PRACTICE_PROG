@@ -1,4 +1,4 @@
-﻿# 📘 Full-Stack Web Development: From Zero to HRIS
+# 📘 Full-Stack Web Development: From Zero to HRIS
 **Professor:** Antigravity AI  
 **Student:** Patrick  
 **Goal:** Learn web development with C#, React.js, TypeScript, Tailwind CSS, Shadcn UI, and PostgreSQL — from scratch, hands-on, using the HRIS project as your blueprint.
@@ -1298,6 +1298,12 @@ npm run dev
 ## ══════════════════════════════════════
 *React is the JavaScript library used to build the HRIS frontend. It turns code into a living, interactive user interface.*
 
+> 🏆 **Capstone Project: Your Portfolio**  
+> Starting in Unit 5, your activities will no longer be random files. You will use the concepts you learn to build your **Full-Stack Developer Portfolio** inside the `PRACTICE/PORTFOLIO/` folder.  
+> - **Unit 5:** You will build the React Frontend (UI, Routing, Components).  
+> - **Unit 6 & 7:** You will build the C# ASP.NET Core Backend (API, Database) and connect it.
+> - **Unit 15:** The Final Capstone where we tie everything together and deploy it!
+
 ---
 
 ### Lesson 5.0: Frontend File & Folder Structure (The Blueprint)
@@ -1338,7 +1344,7 @@ npm run dev
 - **Component file naming conventions**: PascalCase for components (`EmployeeCard.tsx`), camelCase for hooks and utils (`useEmployee.ts`, `formatDate.ts`).
 
 **📝 Activities:**
-1. In your `PRACTICE/frontend/` React app, set up the proper folder structure: `src/components/`, `src/features/`, `src/hooks/`, `src/lib/`.
+1. In your `PORTFOLIO/` React app, ensure you have the proper folder structure inside `src/`: `components/`, `sections/`, `assets/`.
 2. Create a component called `EmployeeCard.tsx` inside `src/components/`. It should display a name and a department.
 3. Render 3 `<EmployeeCard />` components in your `App.tsx`, each with different data passed as `props`.
 4. Create a `Navbar.tsx` component with a logo text and 3 navigation links.
