@@ -1344,7 +1344,7 @@ npm run dev
 - **Component file naming conventions**: PascalCase for components (`EmployeeCard.tsx`), camelCase for hooks and utils (`useEmployee.ts`, `formatDate.ts`).
 
 **📝 Activities:**
-1. In your `PORTFOLIO/` React app, ensure you have the proper folder structure inside `src/`: `components/`, `sections/`, `assets/`.
+1. In your `PORTFOLIO/src/` React app, set up the proper folder structure: `components/`, `features/`, `hooks/`, `lib/`.
 2. Create a component called `EmployeeCard.tsx` inside `src/components/`. It should display a name and a department.
 3. Render 3 `<EmployeeCard />` components in your `App.tsx`, each with different data passed as `props`.
 4. Create a `Navbar.tsx` component with a logo text and 3 navigation links.
