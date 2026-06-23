@@ -1,120 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
+// portfolio activity
 import './App.css'
+import { Navbar } from './components/Navbar'
+import { Footer } from './components/Footer'
+import { ProjectCard } from './components/ProjectCard'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
+      <Navbar />
+
+      {/* hero between Navbar and the grid welcoming users   */}
+      <section className="m-2">
+        <h1 className="text-2xl font-bold">Hi! These are my projects!</h1>
+        <p className="m-2 text-zinc-400">
+          I am a Computer Engineering Student with the passion to build mini projects!
+        </p>
       </section>
 
-      <div className="ticks"></div>
+      {/*main grid for project cards */}
+      <main className="flex-1 max-w-6xl mx-auto py-12 px-6">
+        <h2 id="projects" className="text-3xl font-bold mb-8">Projects</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <ProjectCard
+            title="AFICS (CAPSTONE PROJECT)"
+            description="This is a description of my first project."
+            tags={["Python1", " tkinter", "CSS"]}
+            projectUrl="https://github.com/"
+          />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+          <ProjectCard
+            title="HRIS WEB APP"
+            description="This is a description of my second project."
+            tags={["React", "C#", "HTML", "CSS"]}
+            projectUrl="https://github.com/"
+          />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+          <ProjectCard
+            title="HOMELAB SERVER"
+            description="This is a description of my third project."
+            tags={["Ubuntu", "Linux", "OpenSSH"]}
+            projectUrl="https://github.com/"
+          />
+        </div>
+      </main>
+      <Footer />
     </>
   )
 }
