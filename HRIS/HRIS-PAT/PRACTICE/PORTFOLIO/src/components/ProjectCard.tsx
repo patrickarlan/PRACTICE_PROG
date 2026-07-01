@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 // interface ProjectCard
 interface ProjectCardProps {
     title: string;
@@ -6,7 +8,10 @@ interface ProjectCardProps {
     projectUrl: string;
 }
 
+
 export function ProjectCard({ title, description, tags, projectUrl }: ProjectCardProps) {
+    const [isExpanded, setIsExpanded] = useState(false);
+
     return (
         <article className="card hover:scale-105 transition-transform duration-300 
         m-2 p-6 bg-zinc-900 border border-zinc-800 text-zinc-100 rounded-xl shadow-lg">
@@ -22,6 +27,35 @@ export function ProjectCard({ title, description, tags, projectUrl }: ProjectCar
                     font-semibold text-sky-400 hover:underline">
                 Link to project &rarr;
             </a>
+
+            {/* Task 2: Expandable Details (Toggle Card) */}
+            <div className="mt-2">
+                {isExpanded && (
+                    <>
+                        <p className="text-white mt-2 text-sm">
+                            Tech stack details, architecture design patterns, and highlights.
+                        </p>
+                        <div className="mt-2">
+                            <button
+                                onClick={() => setIsExpanded(false)}
+                                className="mt-2 px-4 py-2 bg-blue-500 text-white 
+                                font-semibold rounded hover:bg-blue-600 cursor-pointer transition-colors">
+                                Hide Details
+                            </button>
+                        </div>
+                    </>
+                )}
+                {!isExpanded && (
+                    <div className="mt-2">
+                        <button
+                            onClick={() => setIsExpanded(true)}
+                            className="mt-2 px-4 py-2 bg-blue-500 text-white 
+                            font-semibold rounded hover:bg-blue-600 cursor-pointer transition-colors">
+                            Show Details
+                        </button>
+                    </div>
+                )}
+            </div>
         </article>
     )
 }
