@@ -5,6 +5,7 @@ import { Footer } from './components/Footer'
 import { ProjectCard } from './components/ProjectCard'
 import { useEffect, useState } from 'react'
 import { useProjects } from './hooks/useProjects'
+import { GitHubCard } from './components/GitHubCard'
 
 function App() {
   const [likes, setLikes] = useState(0)
@@ -40,6 +41,11 @@ function App() {
             👍 Like Portfolio
           </button>
         </div>
+      </section>
+
+      <section id="about" className='flex flex-col items-center py-12 px-6'>
+        <h2 className="text-3xl font-bold mb-6 text-zinc-50">About Me</h2>
+        <GitHubCard />
       </section>
 
       {/*main grid for project cards */}
