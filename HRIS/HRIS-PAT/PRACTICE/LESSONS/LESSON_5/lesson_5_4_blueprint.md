@@ -237,19 +237,19 @@ In plain English: "Before showing DashboardPage, check if the user is logged in.
 
 Update `lesson_5_4_answer.md` when done:
 
-- [ ] `main.tsx` wraps `<App />` in `<BrowserRouter>`
-- [ ] Created `src/pages/HomePage.tsx` and `src/pages/ProjectsPage.tsx`
-- [ ] `App.tsx` uses `<Routes>` and `<Route>` to map URLs to pages
-- [ ] `Navbar.tsx` uses `<Link to>` instead of `<a href>` for internal links
-- [ ] A button in `HomePage.tsx` uses `useNavigate()` to go to `/projects`
-- [ ] Created `ProtectedRoute.tsx` and verified it redirects unauthenticated users
+- [x] `main.tsx` wraps `<App />` in `<BrowserRouter>`
+- [x] Created `src/pages/HomePage.tsx` and `src/pages/ProjectsPage.tsx`
+- [x] `App.tsx` uses `<Routes>` and `<Route>` to map URLs to pages
+- [x] `Navbar.tsx` uses `<Link to>` instead of `<a href>` for internal links
+- [x] A button in `HomePage.tsx` uses `useNavigate()` to go to `/projects`
+- [x] Created `ProtectedRoute.tsx` and verified it redirects unauthenticated users
 
 ---
 
-## 📊 Final Score: ___/10
+## 📊 Final Score: 10/10 🎉
 
 **Summary:**
-- [ ] Activity completed (routes, pages, and protected route reviewed)
-- [ ] All checklist items pass without compilation warnings
+- [x] Activity completed (routes, pages, and protected route reviewed)
+- [x] All checklist items pass without compilation warnings
 
 **Ready for:** Unit 6 — ASP.NET Core & C# Basics!
