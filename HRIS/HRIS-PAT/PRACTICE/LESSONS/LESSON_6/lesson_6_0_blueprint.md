@@ -2,138 +2,185 @@
 
 ## Lesson 6.0: Backend File & Folder Structure (The Blueprint)
 
-Before writing a single line of C# code, you need to understand **how a professional backend is organized**. Just like how you learned the React `src/` folder pattern before writing components, this lesson maps out the terrain of the backend.
+Before writing your first line of C# code, you need to understand **how a professional backend is organized**. 
 
-You already have a real, working example right in front of you — the HRIS backend at `HRIS-PAT/backend/`. We will use it as the reference.
+In React, you learned that components go into `components/`, pages go into `pages/`, and hooks go into `hooks/`. 
+The backend works the exact same way — it has dedicated folders for each job.
+
+You already have a real, production-ready backend in front of you: the HRIS backend at `HRIS-PAT/backend/`. We will use it as our reference guide.
 
 ---
 
 ## Part 1: The Big Picture — Where Does the Backend Fit?
 
 ```
-BROWSER (React App)
-      |
-      |  HTTP Requests (GET, POST, PUT, DELETE)
-      |
-      v
-+-------------------------------------+
-|        ASP.NET CORE BACKEND         |
-|  (runs on localhost:5107)           |
-|                                     |
-|  Program.cs  <- starts everything  |
-|      |                              |
-|      +-- Controllers/               |
-|      +-- Services/                  |
-|      +-- Models/                    |
-|      +-- DTOs/                      |
-|      +-- Interfaces/                |
-|      +-- Migrations/                |
-+----------------+--------------------+
-                 |
-                 v
-         PostgreSQL Database
+┌────────────────────────────────────────────────────────┐
+│                   BROWSER (React App)                  │
+│               Runs at http://localhost:5173            │
+└───────────────────────────┬────────────────────────────┘
+                            │
+                            │ 1. HTTP Request (e.g. GET /api/employees)
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│                 ASP.NET CORE WEB API                   │
+│               Runs at http://localhost:5107            │
+│                                                        │
+│   Program.cs  <-- The engine ignition (starts server)  │
+│       │                                                │
+│       ├── Controllers/  <-- Receptionist (gets request)│
+│       ├── Services/     <-- The Brain (business logic) │
+│       ├── Models/       <-- Database Table blueprints  │
+│       ├── DTOs/         <-- Clean packages for frontend│
+│       ├── Interfaces/   <-- Rulebooks & Contracts      │
+│       └── Migrations/   <-- Database change history    │
+└───────────────────────────┬────────────────────────────┘
+                            │
+                            │ 2. SQL Queries (SELECT * FROM Employees)
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│                  POSTGRESQL DATABASE                   │
+│          Stores real tables with rows & columns        │
+└────────────────────────────────────────────────────────┘
 ```
 
-The backend is a **middleman**. The React frontend never talks to the database directly -- it always goes through the backend API.
+> **The Golden Rule**: The React frontend **NEVER** talks to the database directly. If it did, anyone could open DevTools and steal or delete all your company data!
+> The backend acts as a **secure security guard and middleman**.
 
 ---
 
-## Part 2: The Layered Architecture -- The 6 Folders You Must Know
+## Part 2: The Layered Architecture — The 6 Folders
 
-Think of building a house. There are separate teams: architects, electricians, plumbers. Each team has ONE job and doesn't interfere with the others. A backend works the same way.
-
-```
-HTTP REQUEST comes in
-        |
-        v
-+------------------+
-|  CONTROLLERS/    |  <- The "Reception Desk"
-|                  |    Receives the request.
-|                  |    Validates inputs.
-|                  |    Calls the Service.
-|                  |    Returns the response.
-|                  |    NO business logic here!
-+--------+---------+
-         | calls
-         v
-+------------------+
-|   SERVICES/      |  <- The "Brain"
-|                  |    All business logic lives here.
-|                  |    Decides WHAT to do.
-|                  |    Calls the database.
-|                  |    Throws errors if rules are broken.
-+--------+---------+
-         | talks to
-         v
-+------------------+
-|   DATABASE       |  <- Via Entity Framework (EF Core)
-|  (PostgreSQL)    |    using Models/ and Migrations/
-+------------------+
-```
-
-### The 6 Folders Explained
-
-| Folder | Job | Analogy |
-| :--- | :--- | :--- |
-| `Controllers/` | Receives HTTP requests, returns responses | The waiter taking your order |
-| `Services/` | Contains all business logic | The chef cooking your food |
-| `Models/` | C# classes that map to database tables | The ingredient list |
-| `DTOs/` | Simplified data objects sent to the frontend | The plated dish (only what the customer sees) |
-| `Interfaces/` | Contracts that define what a Service must do | A job description |
-| `Migrations/` | Auto-generated DB schema change history | Git history, but for your database |
+Think of a high-end restaurant:
+- **`Controllers/`** = The **Waiter**. Smiles at the customer, takes the order ticket, brings back the plate. The waiter **never** cooks!
+- **`Services/`** = The **Chef in the kitchen**. Knows all the recipes, checks if ingredients are fresh, cooks the meal.
+- **`Models/`** = The **Pantry Inventory**. Every box in the pantry has an exact label and expiration date.
+- **`DTOs/`** = The **Plated Dish**. You don't serve the customer raw onion peels or the wholesale invoice; you only serve the finished meal on a clean plate.
+- **`Interfaces/`** = The **Job Description**. Lists what skills the chef and waiter must have.
+- **`Migrations/`** = The **Kitchen Renovation Log**. A written history of every shelf added or removed over time.
 
 ---
 
-## Part 3: Deep Dive -- What Each File Actually Looks Like
+## Part 3: Deep Dive — Understanding the Code Snippets Line-by-Line
 
-### Models/ -- The Database Blueprint
-A Model is a plain C# class that maps to a database table. Every property becomes a column.
+When you look at C# code for the first time, words like `public`, `class`, `{ get; set; }`, `Task<IActionResult>`, and `[HttpGet]` can look intimidating. Let's demystify every single one of them!
+
+---
+
+### Snippet 1: `Models/` — The Database Blueprint
+
+A **Model** represents a single table in PostgreSQL. Each property inside it represents a column.
 
 ```csharp
 // Models/Employee.cs
 public class Employee
 {
-    public int Id { get; set; }           // column: "Id" (primary key)
-    public string FullName { get; set; }  // column: "FullName"
-    public string Department { get; set; }
+    public int Id { get; set; }
+    public string FullName { get; set; } = string.Empty;
+    public string Department { get; set; } = string.Empty;
     public bool IsActive { get; set; }
     public DateTime CreatedAt { get; set; }
 }
 ```
 
-### DTOs/ -- What Gets Sent to the Frontend
-A DTO (Data Transfer Object) is what you ACTUALLY send to React. It is a trimmed-down version of the Model.
-You NEVER send the raw Model directly -- it might contain passwords or internal data the frontend shouldn't see.
+#### 🔍 What is happening here? (Line-by-Line)
+
+| Line of Code | Plain-English Explanation |
+| :--- | :--- |
+| `public class Employee` | `public` means this file can be seen by other files in our project. `class Employee` is the blueprint name. In PostgreSQL, this will become the **"Employees" table**. |
+| `public int Id { get; set; }` | `int` means whole number (1, 2, 3). This is the row's unique ID (Primary Key). `{ get; set; }` means C# is allowed to read (`get`) and update (`set`) this value. |
+| `public string FullName { get; set; }` | `string` means text. In PostgreSQL, this becomes a text column called `FullName`. |
+| `public bool IsActive { get; set; }` | `bool` means true or false (`true` = currently working, `false` = resigned). |
+| `public DateTime CreatedAt { get; set; }` | `DateTime` stores both the calendar date and timestamp when the employee was hired. |
+
+```
+                 HOW C# MAPS TO POSTGRESQL:
+        C# Model                           PostgreSQL Table
+┌─────────────────────────┐           ┌───────┬────────────┬──────────┐
+│ public int Id           │ ────────> │  Id   │  FullName  │ IsActive │
+│ public string FullName  │ ────────> ├───────┼────────────┼──────────┤
+│ public bool IsActive    │ ────────> │   1   │  Patrick   │   true   │
+└─────────────────────────┘           └───────┴────────────┴──────────┘
+```
+
+---
+
+### Snippet 2: `DTOs/` — Data Transfer Object (What Frontend Sees)
+
+**DTO** stands for **Data Transfer Object**. It is a simplified version of the Model specifically formatted for your React frontend.
 
 ```csharp
 // DTOs/EmployeeDto.cs
 public class EmployeeDto
 {
     public int Id { get; set; }
-    public string FullName { get; set; }
-    public string Department { get; set; }
-    // Notice: no "IsActive" or "CreatedAt" -- the frontend doesn't need those
+    public string FullName { get; set; } = string.Empty;
+    public string Department { get; set; } = string.Empty;
 }
 ```
 
-**Why bother?** Imagine your Model has a `PasswordHash` field.
-If you returned the raw Model, you'd send the password hash to every browser. DTOs prevent that.
+#### 🔍 Why do we create DTOs instead of just sending the Model?
 
-### Services/ -- The Business Logic
-The Service contains all the "rules" of your application.
+1. **Security (Hiding Private Data):**
+   Imagine your `Employee` model had a `PasswordHash` or `SocialSecurityNumber` column for authentication. If you returned the Model directly, React would receive every employee's password hash in the browser network tab! A DTO only includes safe fields.
+2. **Bandwidth & Speed:**
+   If a table has 40 columns, but the React dropdown only needs `Id` and `FullName`, sending only 2 columns is 20x faster.
+
+```
+PostgreSQL Row (Model)                 Safe DTO (Sent to React)
+┌───────────────────────────┐         ┌───────────────────────────┐
+│ Id: 1                     │         │ Id: 1                     │
+│ FullName: "Patrick"       │ ──────> │ FullName: "Patrick"       │
+│ Department: "Engineering" │         │ Department: "Engineering" │
+│ PasswordHash: "x8f#291a!" │ ──❌──  └───────────────────────────┘
+│ InternalNotes: "Secret"   │ ──❌──  (React never sees secrets!)
+└───────────────────────────┘
+```
+
+---
+
+### Snippet 3: `Interfaces/` — The Contract (Job Description)
+
+Before building a service, we write an **Interface**. It has a capital `I` at the beginning (e.g., `IEmployeeService`).
+Notice that it **has no code inside** — only method names followed by semicolons!
+
+```csharp
+// Interfaces/IEmployeeService.cs
+public interface IEmployeeService
+{
+    Task<List<EmployeeDto>> GetAllEmployeesAsync();
+    Task<EmployeeDto?> GetByIdAsync(int id);
+}
+```
+
+#### 🔍 What is happening here? (Line-by-Line)
+
+| Line of Code | Plain-English Explanation |
+| :--- | :--- |
+| `public interface IEmployeeService` | Declares a **rulebook**. It says: "Whoever claims to be an `EmployeeService` MUST fulfill these promises." |
+| `Task<List<EmployeeDto>>` | **`Task`** is C#'s version of JavaScript's `Promise`. It means "this will take some time, so wait for it asynchronously."<br>**`List<EmployeeDto>`** means an array of employee DTOs. |
+| `GetAllEmployeesAsync();` | The name of the method. The word `Async` at the end is a standard C# convention telling developers this method must be `await`ed. |
+| `;` (Semicolon, no `{}`) | Interfaces do not do the work; they only state **what** must be done, not **how**. |
+
+---
+
+### Snippet 4: `Services/` — The Brain & Business Logic
+
+The Service is the class that **actually does the heavy lifting**: reading from PostgreSQL, calculating salaries, checking rules, and packaging data into DTOs.
 
 ```csharp
 // Services/EmployeeService.cs
 public class EmployeeService : IEmployeeService
 {
+    // 1. Storage box for database connection
     private readonly AppDbContext _context;
 
-    // Database is "injected" through the constructor (Dependency Injection!)
+    // 2. Constructor: "Injects" the database connection
     public EmployeeService(AppDbContext context)
     {
         _context = context;
     }
 
+    // 3. The actual worker method
     public async Task<List<EmployeeDto>> GetAllEmployeesAsync()
     {
         return await _context.Employees
@@ -147,9 +194,23 @@ public class EmployeeService : IEmployeeService
 }
 ```
 
-### Controllers/ -- The Entry Point
-The Controller receives the HTTP request and delegates the work to the Service.
-It should be thin -- no logic, just coordination.
+#### 🔍 What is happening here? (Line-by-Line)
+
+| Line of Code | Plain-English Explanation |
+| :--- | :--- |
+| `: IEmployeeService` | The colon `:` means **implements**. It tells C#: "This class is signing the contract to fulfill the `IEmployeeService` job description." |
+| `private readonly AppDbContext _context;` | `AppDbContext` is the master bridge to PostgreSQL. `private readonly` means this database link is locked and cannot be accidentally deleted or overwritten by mistake. |
+| `public EmployeeService(AppDbContext context)` | This is a **Constructor** (runs automatically when the service starts). ASP.NET automatically hands the open database connection to `_context`. This pattern is called **Dependency Injection (DI)**. |
+| `public async Task<...>` | Just like in JavaScript `async function()`, this allows us to use `await` so our server never freezes while waiting for PostgreSQL. |
+| `_context.Employees` | Tells Entity Framework: "Go look at the `Employees` table in the database." |
+| `.Select(e => new EmployeeDto { ... })` | This is **LINQ** (Language Integrated Query). It transforms each database row `e` into a safe `EmployeeDto`. In JavaScript, this is identical to `.map(e => ({ id: e.id, ... }))`! |
+| `.ToListAsync();` | Executes the SQL command on PostgreSQL and converts the rows into a C# list. |
+
+---
+
+### Snippet 5: `Controllers/` — The Receptionist / Waiter
+
+The Controller is the public door of your backend. When your React app makes a `fetch()` or `axios.get()` call, it hits a Controller method.
 
 ```csharp
 // Controllers/EmployeesController.cs
@@ -159,160 +220,155 @@ public class EmployeesController : ControllerBase
 {
     private readonly IEmployeeService _employeeService;
 
+    // Injecting the service contract
     public EmployeesController(IEmployeeService employeeService)
     {
         _employeeService = employeeService;
     }
 
-    // Handles: GET /api/employees
+    // Listens for: GET http://localhost:5107/api/employees
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
         var employees = await _employeeService.GetAllEmployeesAsync();
-        return Ok(employees); // 200 OK
+        return Ok(employees); // Sends HTTP 200 OK with JSON data
     }
 }
 ```
 
-In plain English: "When a GET request arrives at /api/employees, ask the Service to get all employees, then return them."
+#### 🔍 What is happening here? (Line-by-Line)
 
-### Interfaces/ -- The Job Description
-An Interface is a contract. It says "any class that implements me MUST have these methods."
-
-```csharp
-// Interfaces/IEmployeeService.cs
-public interface IEmployeeService
-{
-    Task<List<EmployeeDto>> GetAllEmployeesAsync();
-    Task<EmployeeDto> GetByIdAsync(int id);
-    Task CreateAsync(EmployeeDto dto);
-}
-```
+| Line of Code | Plain-English Explanation |
+| :--- | :--- |
+| `[ApiController]` | The square brackets `[...]` are called **Attributes** in C# (similar to decorators). This tells ASP.NET: "This class handles web HTTP requests and automatically turns JSON into C# objects." |
+| `[Route("api/[controller]")]` | Sets the URL endpoint. The token `[controller]` is automatically replaced by the class name minus the word "Controller". Since the class is `EmployeesController`, the URL becomes: **`/api/employees`**! |
+| `: ControllerBase` | Inherits built-in helper tools from ASP.NET (like `Ok()`, `NotFound()`, `BadRequest()`, and `Unauthorized()`). |
+| `[HttpGet]` | Specifies that this method ONLY responds to **HTTP GET** requests (when React fetches data). If React sends a POST or DELETE, this method will ignore it. |
+| `Task<IActionResult>` | `IActionResult` represents an **HTTP Response** (status code + headers + data). |
+| `var employees = await _employeeService.GetAllEmployeesAsync();` | The controller **does zero database work itself**. It politely asks `_employeeService` to fetch the data. |
+| `return Ok(employees);` | Packages the data into a **Status 200 OK** response and serializes `employees` into JSON for React. |
 
 ---
 
-## Part 4: Program.cs -- Where Everything Is Wired Together
+### Snippet 6: `Program.cs` — The Master Blueprint & Power Switch
 
-`Program.cs` is the first file that runs. It registers all the services and configures middleware.
+`Program.cs` is the **very first file** that executes when you type `dotnet run`. It configures all your tools and starts the web server.
 
 ```csharp
-// Program.cs (simplified)
+// Program.cs
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Register services (Dependency Injection)
+// 1. Dependency Injection: Register our Service
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
-// 2. Configure CORS so the React frontend can talk to this backend
+// 2. CORS Policy: Allow React (port 5173) to connect
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins("http://localhost:5173").AllowAnyMethod().AllowAnyHeader());
+        policy.WithOrigins("http://localhost:5173")
+              .AllowAnyMethod()
+              .AllowAnyHeader());
 });
 
 var app = builder.Build();
 
-// 3. Apply middleware
+// 3. Middlewares (The Pipeline)
 app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 
-app.Run(); // 4. Start the server
+app.Run(); // 4. Ignition: Starts listening on port 5107!
+```
+
+#### 🔍 What is happening here? (Line-by-Line)
+
+| Line of Code | Plain-English Explanation |
+| :--- | :--- |
+| `WebApplication.CreateBuilder(args);` | Initializes the server container and reads configuration files (like `appsettings.json` and `.env`). |
+| `builder.Services.AddScoped<IEmployeeService, EmployeeService>();` | **Dependency Injection Registration**: Teaches ASP.NET: *"Whenever a Controller asks for `IEmployeeService`, automatically create and provide a new instance of `EmployeeService`."* |
+| `builder.Services.AddCors(...)` | **CORS (Cross-Origin Resource Sharing)**: By default, browsers block web pages on port `5173` from calling APIs on port `5107`. This rule grants official permission to `http://localhost:5173`. |
+| `var app = builder.Build();` | Freezes the configuration and builds the actual web application. |
+| `app.UseCors(...)`, `app.UseAuthentication(...)` | **Middleware Pipeline**: Every incoming HTTP request must pass through these filters in order before reaching your Controller (check CORS &rarr; verify JWT token &rarr; check user permissions). |
+| `app.MapControllers();` | Scans the whole project for classes with `[ApiController]` and turns their routes into active URLs. |
+| `app.Run();` | Fires up the server and begins listening for incoming requests! |
+
+---
+
+## Part 4: The Full Request Cycle in Action
+
+Let's watch what happens when you open your browser and view your employees:
+
+```
+1. YOU click "Employees" in your React app.
+   React runs: fetch("http://localhost:5107/api/employees")
+                                  │
+                                  ▼
+2. Request hits ASP.NET Core Middleware Pipeline (Program.cs)
+   - Checks CORS: "Is port 5173 allowed?" -> YES!
+   - Checks Auth: "Is the user logged in?" -> YES!
+                                  │
+                                  ▼
+3. Request reaches EmployeesController.cs
+   - Method with [HttpGet] triggers.
+   - Calls: await _employeeService.GetAllEmployeesAsync()
+                                  │
+                                  ▼
+4. EmployeeService.cs runs business logic
+   - Asks PostgreSQL via EF Core: SELECT "Id", "FullName", "Department" FROM "Employees";
+   - Maps database rows to safe EmployeeDto objects.
+                                  │
+                                  ▼
+5. EmployeesController packages the result
+   - Runs: return Ok(employees);
+   - Sends HTTP 200 OK + JSON payload back across the wire.
+                                  │
+                                  ▼
+6. React receives the JSON:
+   [ { "id": 1, "fullName": "Patrick", "department": "Engineering" } ]
+   and renders it into beautiful Tailwind cards!
 ```
 
 ---
 
-## Part 5: The Full Request Journey
+## 📝 Activities: Explore the Real HRIS Backend
 
-This is the most important diagram. Memorize this flow:
-
-```
-React Frontend sends: GET http://localhost:5107/api/employees
-                                        |
-                                        v
-                             [ EmployeesController ]
-                             Receives the HTTP request.
-                             Calls _employeeService.GetAllEmployeesAsync()
-                                        |
-                                        v
-                             [ EmployeeService ]
-                             Queries the database:
-                             _context.Employees.ToListAsync()
-                             Maps results to EmployeeDto objects
-                                        |
-                                        v
-                             [ PostgreSQL Database ]
-                             Returns rows from "Employees" table
-                                        |
-                              (back up the chain)
-                                        |
-                                        v
-                             [ EmployeesController ]
-                             return Ok(employees);
-                                        |
-                                        v
-              React Frontend receives JSON: [{ "id": 1, "fullName": "..." }, ...]
-```
-
----
-
-## Part 6: Naming Conventions in C#
-
-| Thing | Convention | Example |
-| :--- | :--- | :--- |
-| Classes | PascalCase | `EmployeeService` |
-| Methods | PascalCase | `GetAllEmployeesAsync()` |
-| Properties | PascalCase | `public string FullName` |
-| Variables | camelCase | `var employeeCount = 5;` |
-| Private fields | _camelCase | `private readonly AppDbContext _context;` |
-| Interfaces | IPascalCase | `IEmployeeService` |
-
----
-
-## Activities: Explore the HRIS Backend
-
-All activities use the REAL backend code at `HRIS-PAT/backend/`. You are a code archaeologist today.
+Now that you understand what all these keywords mean, let's explore your actual backend codebase at `HRIS-PAT/backend/`!
 
 ### Task 1: Map the Backend Folder Structure
-1. Open the `HRIS-PAT/backend/` folder in VS Code.
-2. In `backend-notes.md`, draw a text tree of all the subfolders you see.
-3. Write ONE sentence next to each folder describing what it contains.
+1. Open the `HRIS-PAT/backend/` folder in your file explorer or terminal.
+2. In `backend-notes.md` (or your answer sheet), list the subfolders you see:
+   - `Controllers/`
+   - `Services/`
+   - `Models/`
+   - `DTOs/`
+   - `Data/`
+3. Write one plain-English sentence next to each folder explaining its responsibility.
 
-### Task 2: Trace a Request
-1. Open `Controllers/EmployeesController.cs`.
-2. Find any method decorated with `[HttpGet]`.
-3. Identify which Service method it calls.
-4. Open that Service file and find what the Service does.
-5. Write the full journey: Controller method -> Service method -> DB query.
+### Task 2: Trace a Controller Method
+1. Open `backend/Controllers/EmployeesController.cs`.
+2. Find any method marked with `[HttpGet]`.
+3. Look at its return statement: what Service method does it call?
+4. Open that corresponding Service file in `backend/Services/` and find the database query line containing `_context`.
 
-### Task 3: Compare Model vs. DTO
-1. Find any file inside `Models/` (e.g., `Employee.cs`).
-2. Find its corresponding DTO file inside `DTOs/`.
-3. List 3 differences between them.
-4. Write one sentence explaining WHY those fields were left out of the DTO.
+### Task 3: Compare a Model vs its DTO
+1. Open `backend/Models/AccomplishmentReport.cs` (or `Employee.cs`).
+2. Open the matching file in `backend/DTOs/`.
+3. List 2 fields that exist in the Model but were intentionally left out of the DTO.
+4. Why do you think those fields were left out?
 
-### Task 4: Read Program.cs
-1. Open `Program.cs` in the HRIS backend.
-2. Find where services are registered (`builder.Services.AddScoped...`).
-3. List 5 services you see being registered.
-4. Find where `UseCors` is called and note what origins are allowed.
+### Task 4: Inspect Program.cs
+1. Open `backend/Program.cs`.
+2. Find where `builder.Services.AddScoped` is called.
+3. List 3 Services registered there.
+4. Find `app.UseCors(...)` and see which frontend URL is permitted.
 
 ---
 
-## Test Checklist
+## 🧪 Test Checklist
 
-Update `lesson_6_0_answer.md` when done:
+Keep track of your answers in `lesson_6_0_answer.md`:
 
 - [ ] Created a text map of the backend folder structure with one-sentence descriptions
 - [ ] Traced a full request from a Controller method to a Service method to a DB query
-- [ ] Compared a Model to its DTO and listed 3 differences with explanations
-- [ ] Listed 5 services registered in `Program.cs` and noted the CORS origins
-
----
-
-## Final Score: ___/10
-
-**Summary:**
-- [ ] Activity completed (`backend-notes.md` reviewed)
-- [ ] All 4 tasks answered
-
-**Ready for:** Lesson 6.1 -- C# Fundamentals: Variables, Types & Syntax!
+- [ ] Compared a Model to its DTO and listed differences with explanations
+- [ ] Listed services registered in `Program.cs` and identified CORS settings

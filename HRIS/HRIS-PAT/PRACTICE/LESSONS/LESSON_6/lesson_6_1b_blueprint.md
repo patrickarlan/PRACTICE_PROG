@@ -2,7 +2,7 @@
 
 ## Lesson 6.1b: C# Classes, Methods & Object-Oriented Programming (OOP)
 
-C# is an **Object-Oriented** language from top to bottom. In TypeScript or JavaScript, you can write loose functions floating in a file. In C#, **almost every line of code lives inside a class**.
+C# is an **Object-Oriented** language from top to bottom. In JavaScript, you can write loose functions floating freely in a file. In C#, **every piece of code lives inside a class**.
 
 When you open the HRIS backend, every Controller, Service, Model, and DTO is a C# class. Let's master the mechanics.
 
@@ -21,8 +21,12 @@ When you open the HRIS backend, every Controller, Service, Model, and DTO is a C
       (Only written ONCE)                  (Can make thousands of these!)
 ```
 
-- **Class**: The blueprint or cookie cutter. It specifies *what data and actions* an entity has.
-- **Object / Instance**: The actual cookie created from that cutter, sitting in computer memory.
+- **Class**: The blueprint or cookie cutter. It defines *what properties and actions* exist.
+- **Object / Instance**: The actual physical cookie created from that cutter, occupying computer memory.
+
+---
+
+### Snippet 1: Defining a Class & Creating Instances
 
 ```csharp
 // 1. Defining the blueprint
@@ -32,70 +36,98 @@ public class Employee
     public string Name { get; set; } = string.Empty;
 }
 
-// 2. Creating instances with 'new'
+// 2. Creating instances using the 'new' keyword
 Employee emp1 = new Employee();
 emp1.Id = 101;
 emp1.Name = "Patrick";
 
+// 3. Object initializer syntax (Shorthand):
 Employee emp2 = new Employee { Id = 102, Name = "Alice" };
 ```
+
+#### 🔍 What is happening here? (Line-by-Line Breakdown)
+
+| Line of Code | Plain-English Explanation |
+| :--- | :--- |
+| `public class Employee` | `public` means any file in our project can use this blueprint. `class Employee` declares the new type name. |
+| `public int Id { get; set; }` | An integer property called `Id`. `{ get; set; }` allows reading and writing this value. |
+| `public string Name { get; set; } = string.Empty;` | A string property initialized to an empty string `""` so it never starts as a crash-prone `null`. |
+| `Employee emp1 = new Employee();` | The `new` keyword calls the constructor and allocates memory for `emp1`. |
+| `new Employee { Id = 102, ... }` | **Object Initializer Syntax**: A clean C# shorthand to set properties immediately upon creation without repetitive lines. |
 
 ---
 
 ## Part 2: Properties vs Fields — Why `{ get; set; }` Everywhere?
 
-In older languages like Java or C++, you had to write tedious getters and setters:
+In older languages like Java or C++, you had to write tedious manual getter and setter functions:
 ```java
-// The old, tedious way:
+// The old, verbose way in Java:
 private string name;
 public string getName() { return this.name; }
 public void setName(string value) { this.name = value; }
 ```
 
-In C#, we have **Properties**:
+In C#, Microsoft invented **Properties** to do all of that in one clean line!
+
+---
+
+### Snippet 2: The 3 Types of Properties
+
 ```csharp
 public class Employee
 {
-    // 1. Auto-Property (Standard):
+    // Type 1: Standard Auto-Property (Read & Write)
     public string Name { get; set; } = string.Empty;
 
-    // 2. Init-Only Property:
-    // Can only be set when the object is created! Cannot be modified later (immutable).
+    // Type 2: Init-Only Property (Immutable / Read-Only after creation)
     public int Id { get; init; }
 
-    // 3. Computed Property (Calculated on the fly, no setter!):
+    // Type 3: Computed Property (Calculated on the fly, no setter!)
     public string FirstName { get; set; } = "";
     public string LastName { get; set; } = "";
     public string FullName => $"{FirstName} {LastName}";
 }
 ```
 
+#### 🔍 What is happening here? (Line-by-Line Breakdown)
+
+| Property Style | Plain-English Explanation |
+| :--- | :--- |
+| **`{ get; set; }`** | **Auto-Property**: Anyone can read (`get`) or modify (`set`) this value anytime. |
+| **`{ get; init; }`** | **Init-Only**: You can ONLY set this when creating the object (e.g. `new Employee { Id = 1 }`). After that, it is **locked permanently** and cannot be changed! Great for database primary keys. |
+| **`FullName => $"{FirstName} {LastName}";`** | **Computed Property**: Notice there is no `{ get; set; }`. The fat arrow `=>` means: *"Whenever someone asks for `FullName`, dynamically calculate it right now by combining `FirstName` and `LastName`."* |
+
 ---
 
 ## Part 3: Access Modifiers & `private readonly`
 
-Access modifiers control **who can see or touch your variables**.
+Access modifiers control **who is allowed to see or touch your variables**.
 
 ```
-┌─────────────────┬────────────────────────────────────────────────────────┐
-│ Modifier        │ Who can access it?                                     │
-├─────────────────┼────────────────────────────────────────────────────────┤
-│ public          │ Everyone, from any file or project.                    │
-│ private         │ ONLY inside this exact class (hidden from outside).    │
-│ protected       │ Inside this class AND any child classes that inherit.  │
-│ internal        │ Anywhere within the same project/assembly.             │
-│ private readonly│ Can ONLY be set in the constructor, then locked tight! │
-└─────────────────┴────────────────────────────────────────────────────────┘
+┌──────────────────┬─────────────────────────────────────────────────────────┐
+│ Modifier         │ Who can access it?                                      │
+├──────────────────┼─────────────────────────────────────────────────────────┤
+│ public           │ Anyone, anywhere in the entire solution.                │
+│ private          │ ONLY code inside this exact class (hidden from others). │
+│ protected        │ Inside this class AND any child classes that inherit it.│
+│ internal         │ Anywhere within the same project/assembly.              │
+│ private readonly │ Can ONLY be assigned in the constructor, then locked!   │
+└──────────────────┴─────────────────────────────────────────────────────────┘
 ```
 
-### The Golden Pattern of .NET Services: `private readonly`
+---
+
+### Snippet 3: The Golden Pattern of .NET Services (`private readonly`)
+
 Open ANY service in your HRIS backend (like `backend/Services/EmployeeService.cs`) and you will see this:
+
 ```csharp
 public class EmployeeService
 {
-    // 🔒 Locked dependency. Set once during startup, impossible to overwrite!
+    // 🔒 The locked database link
     private readonly AppDbContext _context;
 
+    // Constructor: ASP.NET injects the database connection here
     public EmployeeService(AppDbContext context)
     {
         _context = context;
@@ -103,21 +135,29 @@ public class EmployeeService
 }
 ```
 
+#### 🔍 Why is `private readonly` used on every service?
+* **`private`**: Prevents outside code or controllers from tampering with `_context`.
+* **`readonly`**: Ensures that once `_context` is set in the constructor, **no one can reassign it or set it to null** anywhere else in the file. It is bulletproof!
+
 ---
 
 ## Part 4: Constructors — Booting Up the Object
 
-A **constructor** is a special method with the **same name as the class** that runs automatically whenever `new` is called.
+A **Constructor** is a method with the **exact same name as the class**. It runs automatically whenever `new` is called.
 
-### 1. Traditional Constructor:
+---
+
+### Snippet 4: Traditional vs Modern Primary Constructors
+
 ```csharp
+// Traditional Constructor
 public class Employee
 {
     public int Id { get; set; }
     public string Name { get; set; }
     public string Department { get; set; }
 
-    // Constructor with default values
+    // Constructor with a default parameter value:
     public Employee(int id, string name, string department = "Unassigned")
     {
         Id = id;
@@ -127,83 +167,109 @@ public class Employee
 }
 
 // Usage:
-var emp = new Employee(1, "Patrick"); // Department automatically becomes "Unassigned"
+var emp = new Employee(1, "Patrick"); 
+// Department automatically becomes "Unassigned"!
 ```
 
-### 2. Modern C# Primary Constructor (C# 12+):
-You'll see this in modern .NET 10 code. You declare the parameters right in the class header:
 ```csharp
+// Modern C# Primary Constructor (C# 12+):
 public class EmployeeService(AppDbContext context)
 {
-    // context is directly available throughout the class without boilerplate!
+    // 'context' is directly available everywhere inside this class!
+    // Zero boilerplate fields or constructor bodies needed!
 }
 ```
 
 ---
 
-## Part 5: Methods & Method Overloading
+## Part 5: Methods — Actions the Object Can Perform
 
-Methods are the **actions** a class can perform.
+---
+
+### Snippet 5: Void Methods vs Methods with Return Values
 
 ```csharp
 public class Employee
 {
     public bool IsActive { get; set; } = true;
+    public double BaseSalary { get; set; } = 50000;
 
-    // Void method: performs an action, returns nothing
+    // 1. Void Method: Performs an action, returns NOTHING
     public void Deactivate()
     {
         IsActive = false;
         Console.WriteLine("Employee account deactivated.");
     }
 
-    // Method with return type:
-    public double CalculateBonus(double percentage)
+    // 2. Method with Return Value: Takes input, returns a number
+    public double CalculateBonus(double bonusPercentage)
     {
-        return 50000 * (percentage / 100);
+        double bonusAmount = BaseSalary * (bonusPercentage / 100);
+        return bonusAmount;
     }
 }
 ```
+
+#### 🔍 What is happening here?
+* **`void`**: Means "empty". The method does something (like changing `IsActive = false`), but doesn't give you back a number or string.
+* **`double CalculateBonus(...)`**: Says "I require a decimal number `bonusPercentage` as input, and I promise to return a `double` calculation back to you."
 
 ---
 
 ## Part 6: Inheritance & Interfaces — The Architecture Backbone
 
-### 1. Inheritance (`:` operator)
-A child class inherits all properties and methods of the parent class:
+---
+
+### Snippet 6: Inheritance (`:` Parent Class)
+
+When a child class inherits from a parent, it gets all the parent's properties for free:
+
 ```csharp
 // Parent Class
 public class Employee
 {
     public int Id { get; set; }
-    public string Name { get; set; } = string.Empty;
+    public string FullName { get; set; } = string.Empty;
 }
 
-// Child Class inherits from Employee
+// Child Class inherits from Employee using the colon ':'
 public class Manager : Employee
 {
-    public int TeamSize { get; set; } // Manager has everything Employee has, PLUS TeamSize!
+    public int TeamSize { get; set; } 
+    // Manager automatically has Id AND FullName, PLUS TeamSize!
 }
 ```
 
-### 2. Interfaces (The `I` Prefix)
-An **Interface** is a **contract**. It doesn't contain code — it only lists what methods and properties a class **promises** to implement.
+---
 
-```
-       INTERFACE (Contract)                   CLASS (Implementation)
-   ┌───────────────────────────┐           ┌───────────────────────────┐
-   │  interface IGreetable     │           │  class Employee :         │
-   │                           │           │       IGreetable          │
-   │  string Greet();          │           │                           │
-   │  (No body, just rules)    │           │  public string Greet() {  │
-   │                           │ ────────> │     return "Hello!";      │
-   │                           │           │  }                        │
-   └───────────────────────────┘           └───────────────────────────┘
+### Snippet 7: Interfaces (The `I` Prefix Contract)
+
+An **Interface** is a **contract**. It contains **no executable code** — only the names of methods and properties a class promises to have.
+
+```csharp
+// 1. The Interface (The Rulebook)
+public interface IGreetable
+{
+    string Greet();
+}
+
+// 2. The Class implementing the Interface
+public class Employee : IGreetable
+{
+    public string FullName { get; set; } = "Patrick";
+
+    // Signs the contract by providing the real implementation:
+    public string Greet()
+    {
+        return $"Hello, my name is {FullName}!";
+    }
+}
 ```
 
-Why do we use interfaces in ASP.NET?
-- Because your Controller doesn't need to know *how* `EmployeeService` talks to PostgreSQL. It only cares that `IEmployeeService` has a method called `GetAllAsync()`.
-- This is the foundation of **Dependency Injection (DI)** and automated unit testing!
+#### 🔍 Why are Interfaces so crucial in ASP.NET Core?
+* In `EmployeesController.cs`, the controller doesn't ask for a concrete `EmployeeService`. It asks for **`IEmployeeService`**.
+* This means the controller doesn't care *how* the service works — it only cares that `GetAllEmployeesAsync()` exists. 
+* This allows you to easily swap the real database service with a fake test service during unit tests without changing a single line of Controller code!
 
 ---
 
