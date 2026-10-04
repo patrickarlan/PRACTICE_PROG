@@ -28,7 +28,7 @@ export function Navbar() {
                 {/* Action Button: Violet to Blossom Gradient */}
                 <div className="flex items-center gap-3">
                     <a
-                        href="https://github.com"
+                        href="https://github.com/patrickarlan"
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold 
