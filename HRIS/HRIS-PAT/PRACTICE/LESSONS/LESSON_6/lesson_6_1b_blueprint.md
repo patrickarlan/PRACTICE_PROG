@@ -125,10 +125,10 @@ Open ANY service in your HRIS backend (like `backend/Services/EmployeeService.cs
 public class EmployeeService
 {
     // 🔒 The locked database link
-    private readonly AppDbContext _context;
+    private readonly ApplicationDbContext _context;
 
     // Constructor: ASP.NET injects the database connection here
-    public EmployeeService(AppDbContext context)
+    public EmployeeService(ApplicationDbContext context)
     {
         _context = context;
     }
@@ -173,7 +173,7 @@ var emp = new Employee(1, "Patrick");
 
 ```csharp
 // Modern C# Primary Constructor (C# 12+):
-public class EmployeeService(AppDbContext context)
+public class EmployeeService(ApplicationDbContext context)
 {
     // 'context' is directly available everywhere inside this class!
     // Zero boilerplate fields or constructor bodies needed!
@@ -289,12 +289,12 @@ Here is your quick **freeCodeCamp-style cheat sheet** for C# Classes & Object-Or
 ### 3. Access Modifiers & `private readonly`
 * `public`: Open to the world.
 * `private`: Restricted strictly to this class.
-* **`private readonly AppDbContext _context;`**: The industry standard for Service classes. Injected once in the constructor, preventing accidental overwriting or null assignments.
+* **`private readonly ApplicationDbContext _context;`**: The industry standard for Service classes. Injected once in the constructor, preventing accidental overwriting or null assignments.
 
 ### 4. Constructors
 * Methods named identically to the class that initialize the object.
 * Support default parameters (`string dept = "General"`).
-* Modern C# 12+ supports **Primary Constructors**: `public class EmployeeService(AppDbContext context)`.
+* Modern C# 12+ supports **Primary Constructors**: `public class EmployeeService(ApplicationDbContext context)`.
 
 ### 5. Inheritance & Interfaces
 * **Inheritance (`: BaseClass`)**: Reuses parent code (`class Manager : Employee`).

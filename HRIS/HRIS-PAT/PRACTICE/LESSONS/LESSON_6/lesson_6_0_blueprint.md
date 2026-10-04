@@ -172,10 +172,10 @@ The Service is the class that **actually does the heavy lifting**: reading from 
 public class EmployeeService : IEmployeeService
 {
     // 1. Storage box for database connection
-    private readonly AppDbContext _context;
+    private readonly ApplicationDbContext _context;
 
     // 2. Constructor: "Injects" the database connection
-    public EmployeeService(AppDbContext context)
+    public EmployeeService(ApplicationDbContext context)
     {
         _context = context;
     }
@@ -199,8 +199,8 @@ public class EmployeeService : IEmployeeService
 | Line of Code | Plain-English Explanation |
 | :--- | :--- |
 | `: IEmployeeService` | The colon `:` means **implements**. It tells C#: "This class is signing the contract to fulfill the `IEmployeeService` job description." |
-| `private readonly AppDbContext _context;` | `AppDbContext` is the master bridge to PostgreSQL. `private readonly` means this database link is locked and cannot be accidentally deleted or overwritten by mistake. |
-| `public EmployeeService(AppDbContext context)` | This is a **Constructor** (runs automatically when the service starts). ASP.NET automatically hands the open database connection to `_context`. This pattern is called **Dependency Injection (DI)**. |
+| `private readonly ApplicationDbContext _context;` | `ApplicationDbContext` is the master bridge to PostgreSQL. `private readonly` means this database link is locked and cannot be accidentally deleted or overwritten by mistake. |
+| `public EmployeeService(ApplicationDbContext context)` | This is a **Constructor** (runs automatically when the service starts). ASP.NET automatically hands the open database connection to `_context`. This pattern is called **Dependency Injection (DI)**. |
 | `public async Task<...>` | Just like in JavaScript `async function()`, this allows us to use `await` so our server never freezes while waiting for PostgreSQL. |
 | `_context.Employees` | Tells Entity Framework: "Go look at the `Employees` table in the database." |
 | `.Select(e => new EmployeeDto { ... })` | This is **LINQ** (Language Integrated Query). It transforms each database row `e` into a safe `EmployeeDto`. In JavaScript, this is identical to `.map(e => ({ id: e.id, ... }))`! |
