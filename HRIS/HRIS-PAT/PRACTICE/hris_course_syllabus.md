@@ -11,6 +11,7 @@
 > - When you finish an activity, ask me to **check your work or explain the next one**.
 > - Do NOT skip activities. They are how you actually learn.
 > - **Professor's Method (🗣️):** I will explain code syntax in plain English sentence form so you can learn to "read" code naturally.
+> - **Lesson Summary Requirement (🏁 freeCodeCamp style):** Every lesson blueprint MUST conclude with a concise **"Lesson Summary & Key Takeaways"** section (bullet points of core concepts, a quick reference cheat sheet, and a "What's Next" preview) before proceeding to the next lesson or test checklist.
 
 ---
 

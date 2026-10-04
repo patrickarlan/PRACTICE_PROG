@@ -283,6 +283,46 @@ When a user submits a form on React, they might send `""` (empty string), `"   "
 
 ---
 
+## 🏁 Lesson Summary & Key Takeaways (Cheat Sheet)
+
+Congratulations on completing the core concepts of C# syntax! Here is your quick **freeCodeCamp-style cheat sheet** to review before tackling the activities:
+
+### 1. The Core Types
+* **`string`**: Text wrapped in **double quotes** `""` (e.g., `"Patrick"`). Single quotes `''` are strictly reserved for single `char` characters (e.g., `'A'`).
+* **`int`**: Whole numbers without decimals (e.g., `25`, `-10`).
+* **`double`**: Floating-point decimal numbers (e.g., `50000.50`).
+* **`bool`**: `true` or `false` (note it is `bool`, not `boolean`).
+* **`var`**: Compile-time type inference. Unlike JS, once inferred, the variable is **strictly typed and locked forever**.
+* **`const`**: Permanent constant in PascalCase (e.g., `const int MaxRetries = 3;`).
+
+### 2. Null Safety & Operators
+* Value types (`int`, `bool`) cannot be null unless marked with `?` (`int? age = null;`).
+* **`?.` (Safe Navigation)**: `employee?.Name` — Stops and returns null if the object is null (prevents runtime crashes).
+* **`??` (Fallback)**: `supervisor ?? "None"` — Uses the fallback value if the left side is null.
+* **`??=` (Assign if null)**: `name ??= "Default"` — Only assigns if the variable is currently null.
+
+### 3. Collections
+* Use **`List<T>`** for dynamic arrays that can grow or shrink:
+  * Add items with **`.Add()`** (replaces JS `.push()`).
+  * Check size with **`.Count`** (replaces JS `.length`).
+* Use **`Dictionary<TKey, TValue>`** for fast key-value lookups (like JS Objects or Maps).
+
+### 4. Modern Control Flow
+* `if`, `else if`, `else` work identically to JavaScript.
+* **Switch Expressions**: Clean functional equations using `=>` and `_`:
+  ```csharp
+  int level = role switch {
+      "Admin" => 1,
+      _       => 99  // default / catch-all
+  };
+  ```
+
+### 5. String Manipulation
+* **Interpolation**: `$"Hello, {name}!"` (note the `$` before double quotes, replacing JS `` `${}` ``).
+* **Safe Check**: `string.IsNullOrWhiteSpace(str)` catches `null`, `""`, and `"   "` safely in one call.
+
+---
+
 ## 📝 Activities: C# Console Sandbox
 
 We will write and run these practice exercises together!

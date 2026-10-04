@@ -273,6 +273,35 @@ public class Employee : IGreetable
 
 ---
 
+## 🏁 Lesson Summary & Key Takeaways (Cheat Sheet)
+
+Here is your quick **freeCodeCamp-style cheat sheet** for C# Classes & Object-Oriented Programming:
+
+### 1. Classes vs Objects
+* **Class**: The blueprint/cookie-cutter (`public class Employee { ... }`).
+* **Object**: The concrete instance allocated in memory with the **`new`** keyword (`new Employee()`).
+
+### 2. Properties (`{ get; set; }`)
+* **Auto-Property**: `public string Name { get; set; }` — Read and write freely.
+* **Init-Only**: `public int Id { get; init; }` — Can only be set during initialization; immutable afterward.
+* **Computed**: `public string FullName => $"{FirstName} {LastName}";` — Dynamically evaluated on access without a setter.
+
+### 3. Access Modifiers & `private readonly`
+* `public`: Open to the world.
+* `private`: Restricted strictly to this class.
+* **`private readonly AppDbContext _context;`**: The industry standard for Service classes. Injected once in the constructor, preventing accidental overwriting or null assignments.
+
+### 4. Constructors
+* Methods named identically to the class that initialize the object.
+* Support default parameters (`string dept = "General"`).
+* Modern C# 12+ supports **Primary Constructors**: `public class EmployeeService(AppDbContext context)`.
+
+### 5. Inheritance & Interfaces
+* **Inheritance (`: BaseClass`)**: Reuses parent code (`class Manager : Employee`).
+* **Interface (`: IInterface`)**: A binding contract with no implementation bodies. Essential for **Dependency Injection** and mocking during tests.
+
+---
+
 ## 📝 Activities: Building Domain Models
 
 ### Task 1: Create an `Employee` Class

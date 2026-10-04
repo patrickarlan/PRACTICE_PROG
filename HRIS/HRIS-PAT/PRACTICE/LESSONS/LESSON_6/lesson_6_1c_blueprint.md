@@ -174,6 +174,39 @@ You write safe, strongly-typed C# with auto-complete in VS Code, and PostgreSQL 
 
 ---
 
+## 🏁 Lesson Summary & Key Takeaways (Cheat Sheet)
+
+Here is your quick **freeCodeCamp-style cheat sheet** for Async/Await and LINQ:
+
+### 1. Synchronous vs Asynchronous
+* **Synchronous**: Blocks the server thread while waiting for the database or network.
+* **Asynchronous (`async` / `await`)**: Frees up the server thread to handle other users while the database query executes in the background.
+
+### 2. `Task` and `Task<T>`
+* C#'s equivalent of JavaScript's **`Promise`**:
+  * `Task` = `Promise<void>` (returns nothing).
+  * `Task<string>` = `Promise<string>` (returns text).
+* **The 2 Rules**:
+  1. Any method using `await` must be marked `async`.
+  2. Always return `Task` or `Task<T>` (never `void` on async methods).
+
+### 3. LINQ Methods Cheat Sheet (vs JavaScript)
+| C# LINQ | JavaScript Equivalent | Purpose |
+| :--- | :--- | :--- |
+| **`.Where(e => ...)`** | `.filter(e => ...)` | Filter records |
+| **`.Select(e => ...)`** | `.map(e => ...)` | Project / transform properties |
+| **`.FirstOrDefault(...)`**| `.find(...)` | Find single match or null |
+| **`.OrderBy(...)`** | `.sort(...)` | Sort ascending |
+| **`.OrderByDescending(...)`** | `.sort(...)` | Sort descending |
+| **`.Any(...)`** | `.some(...)` | Check if at least one exists |
+| **`.Count(...)`** | `.filter(...).length`| Count matching records |
+| **`.ToListAsync()`** | *(Promise resolve)* | Execute SQL asynchronously & load list |
+
+### 4. Entity Framework Core Translation
+* Writing LINQ on `_context.DbSet` does not run in memory — EF Core compiles it into real **PostgreSQL SQL** (`SELECT ... FROM ... WHERE ...`).
+
+---
+
 ## 📝 Activities: Async & LINQ Playground
 
 ### Task 1: Simulated Async Delay
