@@ -1,6 +1,8 @@
+import { Routes, Route } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
-import { Hero } from './components/Hero';
+import { HomePage } from './pages/HomePage';
+import { ProjectsPage } from './pages/ProjectsPage';
 
 export default function App() {
   return (
@@ -8,7 +10,10 @@ export default function App() {
       <Navbar />
       {/* Main Content Area */}
       <main className="flex-1">
-        <Hero />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+        </Routes>
       </main>
       <Footer />
     </div>
