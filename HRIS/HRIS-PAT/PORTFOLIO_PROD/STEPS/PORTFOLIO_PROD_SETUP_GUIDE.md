@@ -104,11 +104,27 @@ Vite ships with demo styles and SVG files that we don't need and will only cause
 ```css
 @import "tailwindcss";
 
+/* ─── Semantic Design Tokens ─────────────────────────────────────────────
+   Edit ONLY these 5 values to change your entire portfolio's color theme.
+   These map to utility classes: bg-brand-bg, text-brand-text, etc.
+──────────────────────────────────────────────────────────────────────── */
+@theme {
+  --color-brand-bg:      #2D0B59;   /* Main background */
+  --color-brand-surface: #5B2A86;   /* Cards, borders & surfaces */
+  --color-brand-muted:   #9B6DCC;   /* Secondary text & badges */
+  --color-brand-text:    #F2D7FF;   /* Headings & body text */
+  --color-brand-accent:  #FFD1E8;   /* Glowing dots & buttons */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   body {
-    background-color: #09090b; /* zinc-950 */
-    color: #f4f4f5;            /* zinc-100 */
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background-color: var(--color-brand-bg);
+    color: var(--color-brand-text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     min-height: 100vh;
     margin: 0;
     -webkit-font-smoothing: antialiased;
@@ -162,16 +178,16 @@ Replace `src/App.tsx` with this clean test placeholder:
 ```tsx
 export default function App() {
   return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 flex flex-col items-center justify-center p-6">
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-4">
-        <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+    <div className="min-h-screen bg-brand-bg text-brand-text flex flex-col items-center justify-center p-6">
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-brand-surface/40 text-brand-accent border border-brand-muted/30 mb-4">
+        <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
         PORTFOLIO_PROD Online
       </div>
-      <h1 className="text-4xl font-extrabold tracking-tight text-white mb-2">
-        Patrick's Production Portfolio
+      <h1 className="text-4xl font-extrabold tracking-tight text-brand-text mb-2">
+        Patrick Arlan — Production Portfolio
       </h1>
-      <p className="text-zinc-400 max-w-md text-center text-sm">
-        Vite 6 + React 19 + TypeScript + Tailwind CSS v4 setup is clean and ready for Bento Grid architecture.
+      <p className="text-brand-muted max-w-md text-center text-sm">
+        Vite 6 + React 19 + TypeScript + Tailwind CSS v4 — semantic tokens active, ready for Bento Grid architecture.
       </p>
     </div>
   )
@@ -191,9 +207,9 @@ npm run dev
 Open the local URL shown in your terminal (e.g. `http://localhost:5173`).
 
 ### What you should see:
-* A deep dark background (`#09090b`).
-* A glowing green pulsing badge saying **"PORTFOLIO_PROD Online"**.
-* Crisp white typography with zero centering bugs or weird borders.
+* A deep purple-dark background (your `brand-bg` token).
+* A glowing **"PORTFOLIO_PROD Online"** pulse badge in `brand-accent` color.
+* Crisp typography reading **"Patrick Arlan — Production Portfolio"** with zero centering bugs or weird borders.
 
 ---
 

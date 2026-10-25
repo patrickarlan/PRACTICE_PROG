@@ -12,6 +12,8 @@ export function Footer() {
                 <div className="flex items-center gap-3">
                     <a
                         href="/Patrick_Arlan_Resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         download
                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-brand-surface/40 border border-brand-muted/30 hover:border-brand-accent/50 hover:text-brand-accent transition-all cursor-pointer"
                     >

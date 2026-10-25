@@ -187,8 +187,8 @@ interface SocialLinksProps {
 
 export function SocialLinks({ className = '' }: SocialLinksProps) {
   const socials = [
-    { name: 'GitHub', href: 'https://github.com', icon: Github },
-    { name: 'LinkedIn', href: 'https://linkedin.com', icon: Linkedin },
+    { name: 'GitHub', href: 'https://github.com/patrickarlan', icon: Github },
+    { name: 'LinkedIn', href: 'https://linkedin.com/in/pab28th', icon: Linkedin },
     { name: 'Facebook', href: 'https://facebook.com', icon: Facebook },
     { name: 'Instagram', href: 'https://instagram.com', icon: Instagram },
   ];
@@ -605,10 +605,20 @@ export function SkillsSection() {
             </div>
             <div className="border-l-2 border-brand-muted/40 pl-4 space-y-4">
               <div>
-                <span className="text-xs text-brand-accent font-semibold">2022 — Present</span>
+                <span className="text-xs text-brand-accent font-semibold">2021 — Present</span>
                 <h4 className="text-base font-bold text-brand-text">Bachelor of Science in Computer Engineering</h4>
                 <p className="text-xs text-brand-text/70 mt-1">
-                  Focus on software architectures, digital logic, embedded systems, and enterprise web solutions.
+                  Rizal Technological University – Pasig • Dean's List Awardee
+                </p>
+                <p className="text-xs text-brand-text/50 mt-1">
+                  Focus: embedded systems, digital logic, enterprise web solutions, and image recognition (CNN).
+                </p>
+              </div>
+              <div>
+                <span className="text-xs text-brand-muted font-semibold">2024 — 2025 • Internship</span>
+                <h4 className="text-base font-bold text-brand-text">Developer Intern — Finteq Solutions Inc.</h4>
+                <p className="text-xs text-brand-text/70 mt-1">
+                  Built internal tools using C#, ASP.NET Core, and PostgreSQL. Contributed to production API endpoints and database schema design.
                 </p>
               </div>
             </div>
@@ -672,7 +682,7 @@ import { useInView } from '../hooks/useInView';
 export function ContactSection() {
   const { ref, isVisible } = useInView(0.1);
   const [copied, setCopied] = useState(false);
-  const email = 'patrick.arlan.dev@gmail.com'; // replace with your real email
+  const email = 'patrickAB28th@gmail.com';
 
   const handleCopy = () => {
     navigator.clipboard.writeText(email);

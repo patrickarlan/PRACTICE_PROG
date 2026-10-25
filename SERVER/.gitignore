@@ -1,0 +1,21 @@
+# Secrets and Environment Variables
+.env
+*.env
+**/.env
+
+# Server Essentials and sensitive configurations
+ESSENTIALS/
+**/ESSENTIALS/
+
+# Node dependencies (for when bot packages are installed)
+node_modules/
+**/node_modules/
+package-lock.json
+
+# Logs & temp files
+*.log
+npm-debug.log*
+
+#Guides
+GUIDES/
+**/GUIDES/
